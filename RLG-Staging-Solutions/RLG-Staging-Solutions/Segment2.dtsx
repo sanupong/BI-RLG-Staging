@@ -1,0 +1,1824 @@
+﻿<?xml version="1.0"?>
+<DTS:Executable xmlns:DTS="www.microsoft.com/SqlServer/Dts"
+  DTS:refId="Package"
+  DTS:CreationDate="11/12/2013 5:37:41 PM"
+  DTS:CreationName="SSIS.Package.3"
+  DTS:CreatorComputerName="BI-SERVER"
+  DTS:CreatorName="AD-RLG\changepoint"
+  DTS:DTSID="{4916263C-F07E-4AC2-9E6A-330A0F532C0B}"
+  DTS:EnableConfig="True"
+  DTS:ExecutableType="SSIS.Package.3"
+  DTS:LastModifiedProductVersion="11.0.2100.60"
+  DTS:LocaleID="1054"
+  DTS:ObjectName="Segment2"
+  DTS:PackageType="5"
+  DTS:ProtectionLevel="0"
+  DTS:VersionBuild="77"
+  DTS:VersionGUID="{09A3436C-9508-4FD3-B0D7-D5DD031DBE66}">
+  <DTS:Property
+    DTS:Name="PackageFormatVersion">6</DTS:Property>
+  <DTS:ConnectionManagers>
+    <DTS:ConnectionManager
+      DTS:refId="Package.ConnectionManagers[ORACLE_orcl_rlg.apps]"
+      DTS:CreationName="OLEDB"
+      DTS:DTSID="{52EE532F-4B97-491A-BCD1-5EBCDE870F92}"
+      DTS:ObjectName="ORACLE_orcl_rlg.apps">
+      <DTS:ObjectData>
+        <DTS:ConnectionManager
+          DTS:ConnectionString="Data Source=RLG_PROD;User ID=apps;Provider=OraOLEDB.Oracle.1;Persist Security Info=True;Locale Identifier=874;">
+          <DTS:Password
+            DTS:Name="Password"
+            Sensitive="1"></DTS:Password>
+        </DTS:ConnectionManager>
+      </DTS:ObjectData>
+    </DTS:ConnectionManager>
+    <DTS:ConnectionManager
+      DTS:refId="Package.ConnectionManagers[SQL_Staging]"
+      DTS:CreationName="OLEDB"
+      DTS:DTSID="{F45C0868-1FCC-41D9-9780-D9B41DC87E49}"
+      DTS:ObjectName="SQL_Staging">
+      <DTS:ObjectData>
+        <DTS:ConnectionManager
+          DTS:ConnectionString="Data Source=BI-SERVER;Initial Catalog=RLG_Staging;Provider=SQLNCLI11.1;Integrated Security=SSPI;Auto Translate=False;" />
+      </DTS:ObjectData>
+    </DTS:ConnectionManager>
+  </DTS:ConnectionManagers>
+  <DTS:Configurations>
+    <DTS:Configuration
+      DTS:ConfigurationString="RLG_Staging_XML Configuration"
+      DTS:ConfigurationType="5"
+      DTS:CreationName=""
+      DTS:DTSID="{505A7CD3-DC5B-4920-977A-FF3362405B2B}"
+      DTS:ObjectName="RLG_Staging_XML Configuration" />
+    <DTS:Configuration
+      DTS:ConfigurationString="ParentPackageId"
+      DTS:ConfigurationVariable="\Package.Variables[User::ParentPackageId].Properties[Value]"
+      DTS:CreationName=""
+      DTS:DTSID="{697A9174-D779-45E3-97AE-855B56CAD32A}"
+      DTS:ObjectName="ParentPackageId" />
+    <DTS:Configuration
+      DTS:ConfigurationString="&quot;SQL_Staging&quot;;&quot;[dbo].[SSIS Configurations]&quot;;&quot;Staging Connection&quot;;"
+      DTS:ConfigurationType="7"
+      DTS:CreationName=""
+      DTS:DTSID="{B14877E3-794D-42B8-BFF1-1CAE4F580678}"
+      DTS:ObjectName="Staging Connection" />
+    <DTS:Configuration
+      DTS:ConfigurationString="&quot;SQL_Staging&quot;;&quot;[dbo].[SSIS Configurations]&quot;;&quot;Oracle Connection&quot;;"
+      DTS:ConfigurationType="7"
+      DTS:CreationName=""
+      DTS:DTSID="{993AFF73-6287-48B9-8BC1-04EA0D6DF5B2}"
+      DTS:ObjectName="Oracle Connection" />
+    <DTS:Configuration
+      DTS:ConfigurationString="&quot;SQL_Staging&quot;;&quot;[dbo].[SSIS Configurations]&quot;;&quot;Log Path&quot;;"
+      DTS:ConfigurationType="7"
+      DTS:CreationName=""
+      DTS:DTSID="{90D981F5-259B-44F6-8B3C-4477ECD08EDC}"
+      DTS:ObjectName="Log Path" />
+    <DTS:Configuration
+      DTS:ConfigurationString="&quot;SQL_Staging&quot;;&quot;[dbo].[SSIS Configurations]&quot;;&quot;ETLCriteriaDate&quot;;"
+      DTS:ConfigurationType="7"
+      DTS:CreationName=""
+      DTS:DTSID="{E9480BEF-C64F-4040-A40E-8BCF223EE7B7}"
+      DTS:ObjectName="ETLCriteriaDate" />
+  </DTS:Configurations>
+  <DTS:Variables>
+    <DTS:Variable
+      DTS:CreationName=""
+      DTS:DTSID="{585E11C9-73C3-4235-BA12-5A0BED089673}"
+      DTS:IncludeInDebugDump="2345"
+      DTS:Namespace="User"
+      DTS:ObjectName="ETLCriteriaDate">
+      <DTS:VariableValue
+        DTS:DataType="8">20090101,20161231</DTS:VariableValue>
+    </DTS:Variable>
+    <DTS:Variable
+      DTS:CreationName=""
+      DTS:DTSID="{E94CCAAE-9D9C-4D7F-9BE0-7F1155CA4F4F}"
+      DTS:IncludeInDebugDump="2345"
+      DTS:Namespace="User"
+      DTS:ObjectName="ETLEndDate">
+      <DTS:VariableValue
+        DTS:DataType="8">20131231</DTS:VariableValue>
+    </DTS:Variable>
+    <DTS:Variable
+      DTS:CreationName=""
+      DTS:DTSID="{B5CE6899-8D6A-4EEF-93E9-7C7283C1CDD4}"
+      DTS:IncludeInDebugDump="2345"
+      DTS:Namespace="User"
+      DTS:ObjectName="ETLStartDate">
+      <DTS:VariableValue
+        DTS:DataType="8">20110101</DTS:VariableValue>
+    </DTS:Variable>
+    <DTS:Variable
+      DTS:CreationName=""
+      DTS:DTSID="{A5C61010-44CB-4B27-A75D-49033863EE25}"
+      DTS:IncludeInDebugDump="6789"
+      DTS:Namespace="User"
+      DTS:ObjectName="ExecutionId">
+      <DTS:VariableValue
+        DTS:DataType="3">0</DTS:VariableValue>
+    </DTS:Variable>
+    <DTS:Variable
+      DTS:CreationName=""
+      DTS:DTSID="{7166A5F1-842D-4D25-9B77-A4AED220C49E}"
+      DTS:IncludeInDebugDump="2345"
+      DTS:Namespace="User"
+      DTS:ObjectName="LogPath">
+      <DTS:VariableValue
+        DTS:DataType="8">D:\Log\RLG-Staging\</DTS:VariableValue>
+    </DTS:Variable>
+    <DTS:Variable
+      DTS:CreationName=""
+      DTS:DTSID="{21C364C7-F44D-4473-9F67-E08D5C026451}"
+      DTS:IncludeInDebugDump="6789"
+      DTS:Namespace="User"
+      DTS:ObjectName="ParentPackageId">
+      <DTS:VariableValue
+        DTS:DataType="3">0</DTS:VariableValue>
+    </DTS:Variable>
+    <DTS:Variable
+      DTS:CreationName=""
+      DTS:DTSID="{9CFE9B63-FA0E-40CA-8B68-A5F7DE4F5A0F}"
+      DTS:IncludeInDebugDump="6789"
+      DTS:Namespace="User"
+      DTS:ObjectName="RowDelete">
+      <DTS:VariableValue
+        DTS:DataType="20">0</DTS:VariableValue>
+    </DTS:Variable>
+    <DTS:Variable
+      DTS:CreationName=""
+      DTS:DTSID="{D323D49E-838D-4348-9C4D-364C486191D3}"
+      DTS:IncludeInDebugDump="6789"
+      DTS:Namespace="User"
+      DTS:ObjectName="RowError">
+      <DTS:VariableValue
+        DTS:DataType="20">0</DTS:VariableValue>
+    </DTS:Variable>
+    <DTS:Variable
+      DTS:CreationName=""
+      DTS:DTSID="{0B2E3A55-939F-4B66-8508-2B4839475A35}"
+      DTS:IncludeInDebugDump="6789"
+      DTS:Namespace="User"
+      DTS:ObjectName="RowInsert">
+      <DTS:VariableValue
+        DTS:DataType="20">0</DTS:VariableValue>
+    </DTS:Variable>
+    <DTS:Variable
+      DTS:CreationName=""
+      DTS:DTSID="{65432111-D2A8-40D6-B6C1-2ED194F42294}"
+      DTS:IncludeInDebugDump="6789"
+      DTS:Namespace="User"
+      DTS:ObjectName="RowSource">
+      <DTS:VariableValue
+        DTS:DataType="3">0</DTS:VariableValue>
+    </DTS:Variable>
+    <DTS:Variable
+      DTS:CreationName=""
+      DTS:DTSID="{796BEA74-79FC-4049-AB2D-280CE64EBEE0}"
+      DTS:IncludeInDebugDump="6789"
+      DTS:Namespace="User"
+      DTS:ObjectName="RowUpdate">
+      <DTS:VariableValue
+        DTS:DataType="20">0</DTS:VariableValue>
+    </DTS:Variable>
+    <DTS:Variable
+      DTS:CreationName=""
+      DTS:DTSID="{3C947E59-67FF-46CF-B80A-9FA3AFAB9A87}"
+      DTS:Expression="&quot;Select * From \&quot;APPS\&quot;.\&quot;XXBI_D_SEGMENT2\&quot; &#xA;Where Convert(varchar(8), LAST_UPDATE_DATE, 112) Between &quot; + @[User::ETLStartDate] + &quot; And  &quot; + @[User::ETLEndDate] + &quot; Or Convert(varchar(8), CREATION_DATE, 112) Between &quot; + @[User::ETLStartDate] + &quot; And  &quot; + @[User::ETLEndDate] + &quot;;&quot;"
+      DTS:IncludeInDebugDump="2345"
+      DTS:Namespace="User"
+      DTS:ObjectName="SQL">
+      <DTS:VariableValue
+        DTS:DataType="8">Select * from "APPS"."XXBI_D_SEGMENT2"</DTS:VariableValue>
+    </DTS:Variable>
+  </DTS:Variables>
+  <DTS:Executables>
+    <DTS:Executable
+      DTS:refId="Package\Data Flow Task"
+      DTS:CreationName="SSIS.Pipeline.3"
+      DTS:Description="Data Flow Task"
+      DTS:DTSID="{EB40AF1E-A638-457F-82F8-24C6930D6D39}"
+      DTS:ExecutableType="SSIS.Pipeline.3"
+      DTS:LocaleID="-1"
+      DTS:ObjectName="Data Flow Task"
+      DTS:TaskContact="Performs high-performance data extraction, transformation and loading;Microsoft Corporation; Microsoft SQL Server; (C) 2007 Microsoft Corporation; All Rights Reserved;http://www.microsoft.com/sql/support/default.asp;1">
+      <DTS:Variables />
+      <DTS:ObjectData>
+        <pipeline
+          version="1">
+          <components>
+            <component
+              refId="Package\Data Flow Task\Data Conversion"
+              componentClassID="{62B1106C-7DB8-4EC8-ADD6-4C664DFFC54A}"
+              contactInfo="Data Conversion;Microsoft Corporation; Microsoft SQL Server; (C) Microsoft Corporation; All Rights Reserved; http://www.microsoft.com/sql/support;0"
+              description="Data Conversion"
+              name="Data Conversion"
+              usesDispositions="true">
+              <inputs>
+                <input
+                  refId="Package\Data Flow Task\Data Conversion.Inputs[Data Conversion Input]"
+                  name="Data Conversion Input">
+                  <inputColumns>
+                    <inputColumn
+                      refId="Package\Data Flow Task\Data Conversion.Inputs[Data Conversion Input].Columns[CODE]"
+                      cachedDataType="wstr"
+                      cachedLength="150"
+                      cachedName="CODE"
+                      lineageId="Package\Data Flow Task\OLEDB_SRC Oracle.Outputs[OLE DB Source Output].Columns[CODE]" />
+                    <inputColumn
+                      refId="Package\Data Flow Task\Data Conversion.Inputs[Data Conversion Input].Columns[DESCRIPTION]"
+                      cachedDataType="wstr"
+                      cachedLength="240"
+                      cachedName="DESCRIPTION"
+                      lineageId="Package\Data Flow Task\OLEDB_SRC Oracle.Outputs[OLE DB Source Output].Columns[DESCRIPTION]" />
+                    <inputColumn
+                      refId="Package\Data Flow Task\Data Conversion.Inputs[Data Conversion Input].Columns[START_DATE_ACTIVE]"
+                      cachedDataType="dbTimeStamp"
+                      cachedName="START_DATE_ACTIVE"
+                      lineageId="Package\Data Flow Task\OLEDB_SRC Oracle.Outputs[OLE DB Source Output].Columns[START_DATE_ACTIVE]" />
+                    <inputColumn
+                      refId="Package\Data Flow Task\Data Conversion.Inputs[Data Conversion Input].Columns[END_DATE_ACTIVE]"
+                      cachedDataType="dbTimeStamp"
+                      cachedName="END_DATE_ACTIVE"
+                      lineageId="Package\Data Flow Task\OLEDB_SRC Oracle.Outputs[OLE DB Source Output].Columns[END_DATE_ACTIVE]" />
+                    <inputColumn
+                      refId="Package\Data Flow Task\Data Conversion.Inputs[Data Conversion Input].Columns[ACCOUNT_TYPE]"
+                      cachedDataType="wstr"
+                      cachedLength="1"
+                      cachedName="ACCOUNT_TYPE"
+                      lineageId="Package\Data Flow Task\OLEDB_SRC Oracle.Outputs[OLE DB Source Output].Columns[ACCOUNT_TYPE]" />
+                    <inputColumn
+                      refId="Package\Data Flow Task\Data Conversion.Inputs[Data Conversion Input].Columns[PARENT_CODE]"
+                      cachedDataType="wstr"
+                      cachedLength="4000"
+                      cachedName="PARENT_CODE"
+                      lineageId="Package\Data Flow Task\OLEDB_SRC Oracle.Outputs[OLE DB Source Output].Columns[PARENT_CODE]" />
+                    <inputColumn
+                      refId="Package\Data Flow Task\Data Conversion.Inputs[Data Conversion Input].Columns[H1]"
+                      cachedDataType="wstr"
+                      cachedLength="1"
+                      cachedName="H1"
+                      lineageId="Package\Data Flow Task\OLEDB_SRC Oracle.Outputs[OLE DB Source Output].Columns[H1]" />
+                    <inputColumn
+                      refId="Package\Data Flow Task\Data Conversion.Inputs[Data Conversion Input].Columns[H2]"
+                      cachedDataType="wstr"
+                      cachedLength="1"
+                      cachedName="H2"
+                      lineageId="Package\Data Flow Task\OLEDB_SRC Oracle.Outputs[OLE DB Source Output].Columns[H2]" />
+                    <inputColumn
+                      refId="Package\Data Flow Task\Data Conversion.Inputs[Data Conversion Input].Columns[H3]"
+                      cachedDataType="wstr"
+                      cachedLength="1"
+                      cachedName="H3"
+                      lineageId="Package\Data Flow Task\OLEDB_SRC Oracle.Outputs[OLE DB Source Output].Columns[H3]" />
+                    <inputColumn
+                      refId="Package\Data Flow Task\Data Conversion.Inputs[Data Conversion Input].Columns[H4]"
+                      cachedDataType="wstr"
+                      cachedLength="1"
+                      cachedName="H4"
+                      lineageId="Package\Data Flow Task\OLEDB_SRC Oracle.Outputs[OLE DB Source Output].Columns[H4]" />
+                    <inputColumn
+                      refId="Package\Data Flow Task\Data Conversion.Inputs[Data Conversion Input].Columns[H5]"
+                      cachedDataType="wstr"
+                      cachedLength="1"
+                      cachedName="H5"
+                      lineageId="Package\Data Flow Task\OLEDB_SRC Oracle.Outputs[OLE DB Source Output].Columns[H5]" />
+                    <inputColumn
+                      refId="Package\Data Flow Task\Data Conversion.Inputs[Data Conversion Input].Columns[H6]"
+                      cachedDataType="wstr"
+                      cachedLength="1"
+                      cachedName="H6"
+                      lineageId="Package\Data Flow Task\OLEDB_SRC Oracle.Outputs[OLE DB Source Output].Columns[H6]" />
+                    <inputColumn
+                      refId="Package\Data Flow Task\Data Conversion.Inputs[Data Conversion Input].Columns[LAST_UPDATE_DATE]"
+                      cachedDataType="dbTimeStamp"
+                      cachedName="LAST_UPDATE_DATE"
+                      lineageId="Package\Data Flow Task\OLEDB_SRC Oracle.Outputs[OLE DB Source Output].Columns[LAST_UPDATE_DATE]" />
+                    <inputColumn
+                      refId="Package\Data Flow Task\Data Conversion.Inputs[Data Conversion Input].Columns[CREATION_DATE]"
+                      cachedDataType="dbTimeStamp"
+                      cachedName="CREATION_DATE"
+                      lineageId="Package\Data Flow Task\OLEDB_SRC Oracle.Outputs[OLE DB Source Output].Columns[CREATION_DATE]" />
+                  </inputColumns>
+                  <externalMetadataColumns />
+                </input>
+              </inputs>
+              <outputs>
+                <output
+                  refId="Package\Data Flow Task\Data Conversion.Outputs[Data Conversion Output]"
+                  exclusionGroup="1"
+                  name="Data Conversion Output"
+                  synchronousInputId="Package\Data Flow Task\Data Conversion.Inputs[Data Conversion Input]">
+                  <outputColumns>
+                    <outputColumn
+                      refId="Package\Data Flow Task\Data Conversion.Outputs[Data Conversion Output].Columns[Copy of CODE]"
+                      codePage="874"
+                      dataType="str"
+                      errorOrTruncationOperation="Conversion"
+                      errorRowDisposition="FailComponent"
+                      length="150"
+                      lineageId="Package\Data Flow Task\Data Conversion.Outputs[Data Conversion Output].Columns[Copy of CODE]"
+                      name="Copy of CODE"
+                      truncationRowDisposition="FailComponent">
+                      <properties>
+                        <property
+                          containsID="true"
+                          dataType="System.Int32"
+                          description="Specifies the input column used as the source of data for the conversion."
+                          name="SourceInputColumnLineageID">#{Package\Data Flow Task\OLEDB_SRC Oracle.Outputs[OLE DB Source Output].Columns[CODE]}</property>
+                        <property
+                          dataType="System.Boolean"
+                          description="Indicates whether the column uses the faster, locale-neutral parsing routines."
+                          name="FastParse">false</property>
+                      </properties>
+                    </outputColumn>
+                    <outputColumn
+                      refId="Package\Data Flow Task\Data Conversion.Outputs[Data Conversion Output].Columns[Copy of DESCRIPTION]"
+                      codePage="874"
+                      dataType="str"
+                      errorOrTruncationOperation="Conversion"
+                      errorRowDisposition="FailComponent"
+                      length="240"
+                      lineageId="Package\Data Flow Task\Data Conversion.Outputs[Data Conversion Output].Columns[Copy of DESCRIPTION]"
+                      name="Copy of DESCRIPTION"
+                      truncationRowDisposition="FailComponent">
+                      <properties>
+                        <property
+                          containsID="true"
+                          dataType="System.Int32"
+                          description="Specifies the input column used as the source of data for the conversion."
+                          name="SourceInputColumnLineageID">#{Package\Data Flow Task\OLEDB_SRC Oracle.Outputs[OLE DB Source Output].Columns[DESCRIPTION]}</property>
+                        <property
+                          dataType="System.Boolean"
+                          description="Indicates whether the column uses the faster, locale-neutral parsing routines."
+                          name="FastParse">false</property>
+                      </properties>
+                    </outputColumn>
+                    <outputColumn
+                      refId="Package\Data Flow Task\Data Conversion.Outputs[Data Conversion Output].Columns[Copy of START_DATE_ACTIVE]"
+                      dataType="dbTimeStamp"
+                      errorOrTruncationOperation="Conversion"
+                      errorRowDisposition="FailComponent"
+                      lineageId="Package\Data Flow Task\Data Conversion.Outputs[Data Conversion Output].Columns[Copy of START_DATE_ACTIVE]"
+                      name="Copy of START_DATE_ACTIVE"
+                      truncationRowDisposition="FailComponent">
+                      <properties>
+                        <property
+                          containsID="true"
+                          dataType="System.Int32"
+                          description="Specifies the input column used as the source of data for the conversion."
+                          name="SourceInputColumnLineageID">#{Package\Data Flow Task\OLEDB_SRC Oracle.Outputs[OLE DB Source Output].Columns[START_DATE_ACTIVE]}</property>
+                        <property
+                          dataType="System.Boolean"
+                          description="Indicates whether the column uses the faster, locale-neutral parsing routines."
+                          name="FastParse">false</property>
+                      </properties>
+                    </outputColumn>
+                    <outputColumn
+                      refId="Package\Data Flow Task\Data Conversion.Outputs[Data Conversion Output].Columns[Copy of END_DATE_ACTIVE]"
+                      dataType="dbTimeStamp"
+                      errorOrTruncationOperation="Conversion"
+                      errorRowDisposition="FailComponent"
+                      lineageId="Package\Data Flow Task\Data Conversion.Outputs[Data Conversion Output].Columns[Copy of END_DATE_ACTIVE]"
+                      name="Copy of END_DATE_ACTIVE"
+                      truncationRowDisposition="FailComponent">
+                      <properties>
+                        <property
+                          containsID="true"
+                          dataType="System.Int32"
+                          description="Specifies the input column used as the source of data for the conversion."
+                          name="SourceInputColumnLineageID">#{Package\Data Flow Task\OLEDB_SRC Oracle.Outputs[OLE DB Source Output].Columns[END_DATE_ACTIVE]}</property>
+                        <property
+                          dataType="System.Boolean"
+                          description="Indicates whether the column uses the faster, locale-neutral parsing routines."
+                          name="FastParse">false</property>
+                      </properties>
+                    </outputColumn>
+                    <outputColumn
+                      refId="Package\Data Flow Task\Data Conversion.Outputs[Data Conversion Output].Columns[Copy of ACCOUNT_TYPE]"
+                      codePage="874"
+                      dataType="str"
+                      errorOrTruncationOperation="Conversion"
+                      errorRowDisposition="FailComponent"
+                      length="1"
+                      lineageId="Package\Data Flow Task\Data Conversion.Outputs[Data Conversion Output].Columns[Copy of ACCOUNT_TYPE]"
+                      name="Copy of ACCOUNT_TYPE"
+                      truncationRowDisposition="FailComponent">
+                      <properties>
+                        <property
+                          containsID="true"
+                          dataType="System.Int32"
+                          description="Specifies the input column used as the source of data for the conversion."
+                          name="SourceInputColumnLineageID">#{Package\Data Flow Task\OLEDB_SRC Oracle.Outputs[OLE DB Source Output].Columns[ACCOUNT_TYPE]}</property>
+                        <property
+                          dataType="System.Boolean"
+                          description="Indicates whether the column uses the faster, locale-neutral parsing routines."
+                          name="FastParse">false</property>
+                      </properties>
+                    </outputColumn>
+                    <outputColumn
+                      refId="Package\Data Flow Task\Data Conversion.Outputs[Data Conversion Output].Columns[Copy of PARENT_CODE]"
+                      codePage="874"
+                      dataType="str"
+                      errorOrTruncationOperation="Conversion"
+                      errorRowDisposition="FailComponent"
+                      length="4000"
+                      lineageId="Package\Data Flow Task\Data Conversion.Outputs[Data Conversion Output].Columns[Copy of PARENT_CODE]"
+                      name="Copy of PARENT_CODE"
+                      truncationRowDisposition="FailComponent">
+                      <properties>
+                        <property
+                          containsID="true"
+                          dataType="System.Int32"
+                          description="Specifies the input column used as the source of data for the conversion."
+                          name="SourceInputColumnLineageID">#{Package\Data Flow Task\OLEDB_SRC Oracle.Outputs[OLE DB Source Output].Columns[PARENT_CODE]}</property>
+                        <property
+                          dataType="System.Boolean"
+                          description="Indicates whether the column uses the faster, locale-neutral parsing routines."
+                          name="FastParse">false</property>
+                      </properties>
+                    </outputColumn>
+                    <outputColumn
+                      refId="Package\Data Flow Task\Data Conversion.Outputs[Data Conversion Output].Columns[Copy of H1]"
+                      codePage="874"
+                      dataType="str"
+                      errorOrTruncationOperation="Conversion"
+                      errorRowDisposition="FailComponent"
+                      length="1"
+                      lineageId="Package\Data Flow Task\Data Conversion.Outputs[Data Conversion Output].Columns[Copy of H1]"
+                      name="Copy of H1"
+                      truncationRowDisposition="FailComponent">
+                      <properties>
+                        <property
+                          containsID="true"
+                          dataType="System.Int32"
+                          description="Specifies the input column used as the source of data for the conversion."
+                          name="SourceInputColumnLineageID">#{Package\Data Flow Task\OLEDB_SRC Oracle.Outputs[OLE DB Source Output].Columns[H1]}</property>
+                        <property
+                          dataType="System.Boolean"
+                          description="Indicates whether the column uses the faster, locale-neutral parsing routines."
+                          name="FastParse">false</property>
+                      </properties>
+                    </outputColumn>
+                    <outputColumn
+                      refId="Package\Data Flow Task\Data Conversion.Outputs[Data Conversion Output].Columns[Copy of H2]"
+                      codePage="874"
+                      dataType="str"
+                      errorOrTruncationOperation="Conversion"
+                      errorRowDisposition="FailComponent"
+                      length="1"
+                      lineageId="Package\Data Flow Task\Data Conversion.Outputs[Data Conversion Output].Columns[Copy of H2]"
+                      name="Copy of H2"
+                      truncationRowDisposition="FailComponent">
+                      <properties>
+                        <property
+                          containsID="true"
+                          dataType="System.Int32"
+                          description="Specifies the input column used as the source of data for the conversion."
+                          name="SourceInputColumnLineageID">#{Package\Data Flow Task\OLEDB_SRC Oracle.Outputs[OLE DB Source Output].Columns[H2]}</property>
+                        <property
+                          dataType="System.Boolean"
+                          description="Indicates whether the column uses the faster, locale-neutral parsing routines."
+                          name="FastParse">false</property>
+                      </properties>
+                    </outputColumn>
+                    <outputColumn
+                      refId="Package\Data Flow Task\Data Conversion.Outputs[Data Conversion Output].Columns[Copy of H3]"
+                      codePage="874"
+                      dataType="str"
+                      errorOrTruncationOperation="Conversion"
+                      errorRowDisposition="FailComponent"
+                      length="1"
+                      lineageId="Package\Data Flow Task\Data Conversion.Outputs[Data Conversion Output].Columns[Copy of H3]"
+                      name="Copy of H3"
+                      truncationRowDisposition="FailComponent">
+                      <properties>
+                        <property
+                          containsID="true"
+                          dataType="System.Int32"
+                          description="Specifies the input column used as the source of data for the conversion."
+                          name="SourceInputColumnLineageID">#{Package\Data Flow Task\OLEDB_SRC Oracle.Outputs[OLE DB Source Output].Columns[H3]}</property>
+                        <property
+                          dataType="System.Boolean"
+                          description="Indicates whether the column uses the faster, locale-neutral parsing routines."
+                          name="FastParse">false</property>
+                      </properties>
+                    </outputColumn>
+                    <outputColumn
+                      refId="Package\Data Flow Task\Data Conversion.Outputs[Data Conversion Output].Columns[Copy of H4]"
+                      codePage="874"
+                      dataType="str"
+                      errorOrTruncationOperation="Conversion"
+                      errorRowDisposition="FailComponent"
+                      length="1"
+                      lineageId="Package\Data Flow Task\Data Conversion.Outputs[Data Conversion Output].Columns[Copy of H4]"
+                      name="Copy of H4"
+                      truncationRowDisposition="FailComponent">
+                      <properties>
+                        <property
+                          containsID="true"
+                          dataType="System.Int32"
+                          description="Specifies the input column used as the source of data for the conversion."
+                          name="SourceInputColumnLineageID">#{Package\Data Flow Task\OLEDB_SRC Oracle.Outputs[OLE DB Source Output].Columns[H4]}</property>
+                        <property
+                          dataType="System.Boolean"
+                          description="Indicates whether the column uses the faster, locale-neutral parsing routines."
+                          name="FastParse">false</property>
+                      </properties>
+                    </outputColumn>
+                    <outputColumn
+                      refId="Package\Data Flow Task\Data Conversion.Outputs[Data Conversion Output].Columns[Copy of H5]"
+                      codePage="874"
+                      dataType="str"
+                      errorOrTruncationOperation="Conversion"
+                      errorRowDisposition="FailComponent"
+                      length="1"
+                      lineageId="Package\Data Flow Task\Data Conversion.Outputs[Data Conversion Output].Columns[Copy of H5]"
+                      name="Copy of H5"
+                      truncationRowDisposition="FailComponent">
+                      <properties>
+                        <property
+                          containsID="true"
+                          dataType="System.Int32"
+                          description="Specifies the input column used as the source of data for the conversion."
+                          name="SourceInputColumnLineageID">#{Package\Data Flow Task\OLEDB_SRC Oracle.Outputs[OLE DB Source Output].Columns[H5]}</property>
+                        <property
+                          dataType="System.Boolean"
+                          description="Indicates whether the column uses the faster, locale-neutral parsing routines."
+                          name="FastParse">false</property>
+                      </properties>
+                    </outputColumn>
+                    <outputColumn
+                      refId="Package\Data Flow Task\Data Conversion.Outputs[Data Conversion Output].Columns[Copy of H6]"
+                      codePage="874"
+                      dataType="str"
+                      errorOrTruncationOperation="Conversion"
+                      errorRowDisposition="FailComponent"
+                      length="1"
+                      lineageId="Package\Data Flow Task\Data Conversion.Outputs[Data Conversion Output].Columns[Copy of H6]"
+                      name="Copy of H6"
+                      truncationRowDisposition="FailComponent">
+                      <properties>
+                        <property
+                          containsID="true"
+                          dataType="System.Int32"
+                          description="Specifies the input column used as the source of data for the conversion."
+                          name="SourceInputColumnLineageID">#{Package\Data Flow Task\OLEDB_SRC Oracle.Outputs[OLE DB Source Output].Columns[H6]}</property>
+                        <property
+                          dataType="System.Boolean"
+                          description="Indicates whether the column uses the faster, locale-neutral parsing routines."
+                          name="FastParse">false</property>
+                      </properties>
+                    </outputColumn>
+                    <outputColumn
+                      refId="Package\Data Flow Task\Data Conversion.Outputs[Data Conversion Output].Columns[Copy of LAST_UPDATE_DATE]"
+                      dataType="dbTimeStamp"
+                      errorOrTruncationOperation="Conversion"
+                      errorRowDisposition="FailComponent"
+                      lineageId="Package\Data Flow Task\Data Conversion.Outputs[Data Conversion Output].Columns[Copy of LAST_UPDATE_DATE]"
+                      name="Copy of LAST_UPDATE_DATE"
+                      truncationRowDisposition="FailComponent">
+                      <properties>
+                        <property
+                          containsID="true"
+                          dataType="System.Int32"
+                          description="Specifies the input column used as the source of data for the conversion."
+                          name="SourceInputColumnLineageID">#{Package\Data Flow Task\OLEDB_SRC Oracle.Outputs[OLE DB Source Output].Columns[LAST_UPDATE_DATE]}</property>
+                        <property
+                          dataType="System.Boolean"
+                          description="Indicates whether the column uses the faster, locale-neutral parsing routines."
+                          name="FastParse">false</property>
+                      </properties>
+                    </outputColumn>
+                    <outputColumn
+                      refId="Package\Data Flow Task\Data Conversion.Outputs[Data Conversion Output].Columns[Copy of CREATION_DATE]"
+                      dataType="dbTimeStamp"
+                      errorOrTruncationOperation="Conversion"
+                      errorRowDisposition="FailComponent"
+                      lineageId="Package\Data Flow Task\Data Conversion.Outputs[Data Conversion Output].Columns[Copy of CREATION_DATE]"
+                      name="Copy of CREATION_DATE"
+                      truncationRowDisposition="FailComponent">
+                      <properties>
+                        <property
+                          containsID="true"
+                          dataType="System.Int32"
+                          description="Specifies the input column used as the source of data for the conversion."
+                          name="SourceInputColumnLineageID">#{Package\Data Flow Task\OLEDB_SRC Oracle.Outputs[OLE DB Source Output].Columns[CREATION_DATE]}</property>
+                        <property
+                          dataType="System.Boolean"
+                          description="Indicates whether the column uses the faster, locale-neutral parsing routines."
+                          name="FastParse">false</property>
+                      </properties>
+                    </outputColumn>
+                  </outputColumns>
+                  <externalMetadataColumns />
+                </output>
+                <output
+                  refId="Package\Data Flow Task\Data Conversion.Outputs[Data Conversion Error Output]"
+                  exclusionGroup="1"
+                  isErrorOut="true"
+                  name="Data Conversion Error Output"
+                  synchronousInputId="Package\Data Flow Task\Data Conversion.Inputs[Data Conversion Input]">
+                  <outputColumns>
+                    <outputColumn
+                      refId="Package\Data Flow Task\Data Conversion.Outputs[Data Conversion Error Output].Columns[ErrorCode]"
+                      dataType="i4"
+                      lineageId="Package\Data Flow Task\Data Conversion.Outputs[Data Conversion Error Output].Columns[ErrorCode]"
+                      name="ErrorCode"
+                      specialFlags="1" />
+                    <outputColumn
+                      refId="Package\Data Flow Task\Data Conversion.Outputs[Data Conversion Error Output].Columns[ErrorColumn]"
+                      dataType="i4"
+                      lineageId="Package\Data Flow Task\Data Conversion.Outputs[Data Conversion Error Output].Columns[ErrorColumn]"
+                      name="ErrorColumn"
+                      specialFlags="2" />
+                  </outputColumns>
+                  <externalMetadataColumns />
+                </output>
+              </outputs>
+            </component>
+            <component
+              refId="Package\Data Flow Task\OLEDB_DST"
+              componentClassID="{4ADA7EAA-136C-4215-8098-D7A7C27FC0D1}"
+              contactInfo="OLE DB Destination;Microsoft Corporation; Microsoft SQL Server; (C) Microsoft Corporation; All Rights Reserved; http://www.microsoft.com/sql/support;4"
+              description="OLE DB Destination"
+              name="OLEDB_DST"
+              usesDispositions="true"
+              version="4">
+              <properties>
+                <property
+                  dataType="System.Int32"
+                  description="The number of seconds before a command times out.  A value of 0 indicates an infinite time-out."
+                  name="CommandTimeout">0</property>
+                <property
+                  dataType="System.String"
+                  description="Specifies the name of the database object used to open a rowset."
+                  name="OpenRowset">[Segment2]</property>
+                <property
+                  dataType="System.String"
+                  description="Specifies the variable that contains the name of the database object used to open a rowset."
+                  name="OpenRowsetVariable"></property>
+                <property
+                  dataType="System.String"
+                  description="The SQL command to be executed."
+                  name="SqlCommand"
+                  UITypeEditor="Microsoft.DataTransformationServices.Controls.ModalMultilineStringEditor, Microsoft.DataTransformationServices.Controls, Version=11.0.0.0, Culture=neutral, PublicKeyToken=89845dcd8080cc91"></property>
+                <property
+                  dataType="System.Int32"
+                  description="Specifies the column code page to use when code page information is unavailable from the data source."
+                  name="DefaultCodePage">874</property>
+                <property
+                  dataType="System.Boolean"
+                  description="Forces the use of the DefaultCodePage property value when describing character data."
+                  name="AlwaysUseDefaultCodePage">false</property>
+                <property
+                  dataType="System.Int32"
+                  description="Specifies the mode used to access the database."
+                  name="AccessMode"
+                  typeConverter="AccessMode">0</property>
+                <property
+                  dataType="System.Boolean"
+                  description="Indicates whether the values supplied for identity columns will be copied to the destination. If false, values for identity columns will be auto-generated at the destination. Applies only if fast load is turned on."
+                  name="FastLoadKeepIdentity">false</property>
+                <property
+                  dataType="System.Boolean"
+                  description="Indicates whether the columns containing null will have null inserted in the destination. If false, columns containing null will have their default values inserted at the destination. Applies only if fast load is turned on."
+                  name="FastLoadKeepNulls">false</property>
+                <property
+                  dataType="System.String"
+                  description="Specifies options to be used with fast load.  Applies only if fast load is turned on."
+                  name="FastLoadOptions"></property>
+                <property
+                  dataType="System.Int32"
+                  description="Specifies when commits are issued during data insertion.  A value of 0 specifies that one commit will be issued at the end of data insertion.  Applies only if fast load is turned on."
+                  name="FastLoadMaxInsertCommitSize">2147483647</property>
+              </properties>
+              <connections>
+                <connection
+                  refId="Package\Data Flow Task\OLEDB_DST.Connections[OleDbConnection]"
+                  connectionManagerID="Package.ConnectionManagers[SQL_Staging]"
+                  connectionManagerRefId="Package.ConnectionManagers[SQL_Staging]"
+                  description="The OLE DB runtime connection used to access the database."
+                  name="OleDbConnection" />
+              </connections>
+              <inputs>
+                <input
+                  refId="Package\Data Flow Task\OLEDB_DST.Inputs[OLE DB Destination Input]"
+                  errorOrTruncationOperation="Insert"
+                  errorRowDisposition="FailComponent"
+                  hasSideEffects="true"
+                  name="OLE DB Destination Input">
+                  <inputColumns>
+                    <inputColumn
+                      refId="Package\Data Flow Task\OLEDB_DST.Inputs[OLE DB Destination Input].Columns[START_DATE_ACTIVE]"
+                      cachedDataType="dbTimeStamp"
+                      cachedName="START_DATE_ACTIVE"
+                      externalMetadataColumnId="Package\Data Flow Task\OLEDB_DST.Inputs[OLE DB Destination Input].ExternalColumns[START_DATE_ACTIVE]"
+                      lineageId="Package\Data Flow Task\OLEDB_SRC Oracle.Outputs[OLE DB Source Output].Columns[START_DATE_ACTIVE]" />
+                    <inputColumn
+                      refId="Package\Data Flow Task\OLEDB_DST.Inputs[OLE DB Destination Input].Columns[END_DATE_ACTIVE]"
+                      cachedDataType="dbTimeStamp"
+                      cachedName="END_DATE_ACTIVE"
+                      externalMetadataColumnId="Package\Data Flow Task\OLEDB_DST.Inputs[OLE DB Destination Input].ExternalColumns[END_DATE_ACTIVE]"
+                      lineageId="Package\Data Flow Task\OLEDB_SRC Oracle.Outputs[OLE DB Source Output].Columns[END_DATE_ACTIVE]" />
+                    <inputColumn
+                      refId="Package\Data Flow Task\OLEDB_DST.Inputs[OLE DB Destination Input].Columns[LAST_UPDATE_DATE]"
+                      cachedDataType="dbTimeStamp"
+                      cachedName="LAST_UPDATE_DATE"
+                      externalMetadataColumnId="Package\Data Flow Task\OLEDB_DST.Inputs[OLE DB Destination Input].ExternalColumns[LAST_UPDATE_DATE]"
+                      lineageId="Package\Data Flow Task\OLEDB_SRC Oracle.Outputs[OLE DB Source Output].Columns[LAST_UPDATE_DATE]" />
+                    <inputColumn
+                      refId="Package\Data Flow Task\OLEDB_DST.Inputs[OLE DB Destination Input].Columns[CREATION_DATE]"
+                      cachedDataType="dbTimeStamp"
+                      cachedName="CREATION_DATE"
+                      externalMetadataColumnId="Package\Data Flow Task\OLEDB_DST.Inputs[OLE DB Destination Input].ExternalColumns[CREATION_DATE]"
+                      lineageId="Package\Data Flow Task\OLEDB_SRC Oracle.Outputs[OLE DB Source Output].Columns[CREATION_DATE]" />
+                    <inputColumn
+                      refId="Package\Data Flow Task\OLEDB_DST.Inputs[OLE DB Destination Input].Columns[Copy of CODE]"
+                      cachedCodepage="874"
+                      cachedDataType="str"
+                      cachedLength="150"
+                      cachedName="Copy of CODE"
+                      externalMetadataColumnId="Package\Data Flow Task\OLEDB_DST.Inputs[OLE DB Destination Input].ExternalColumns[CODE]"
+                      lineageId="Package\Data Flow Task\Data Conversion.Outputs[Data Conversion Output].Columns[Copy of CODE]" />
+                    <inputColumn
+                      refId="Package\Data Flow Task\OLEDB_DST.Inputs[OLE DB Destination Input].Columns[Copy of DESCRIPTION]"
+                      cachedCodepage="874"
+                      cachedDataType="str"
+                      cachedLength="240"
+                      cachedName="Copy of DESCRIPTION"
+                      externalMetadataColumnId="Package\Data Flow Task\OLEDB_DST.Inputs[OLE DB Destination Input].ExternalColumns[DESCRIPTION]"
+                      lineageId="Package\Data Flow Task\Data Conversion.Outputs[Data Conversion Output].Columns[Copy of DESCRIPTION]" />
+                    <inputColumn
+                      refId="Package\Data Flow Task\OLEDB_DST.Inputs[OLE DB Destination Input].Columns[Copy of PARENT_CODE]"
+                      cachedCodepage="874"
+                      cachedDataType="str"
+                      cachedLength="4000"
+                      cachedName="Copy of PARENT_CODE"
+                      externalMetadataColumnId="Package\Data Flow Task\OLEDB_DST.Inputs[OLE DB Destination Input].ExternalColumns[PARENT_CODE]"
+                      lineageId="Package\Data Flow Task\Data Conversion.Outputs[Data Conversion Output].Columns[Copy of PARENT_CODE]" />
+                    <inputColumn
+                      refId="Package\Data Flow Task\OLEDB_DST.Inputs[OLE DB Destination Input].Columns[Copy of H1]"
+                      cachedCodepage="874"
+                      cachedDataType="str"
+                      cachedLength="1"
+                      cachedName="Copy of H1"
+                      externalMetadataColumnId="Package\Data Flow Task\OLEDB_DST.Inputs[OLE DB Destination Input].ExternalColumns[H1]"
+                      lineageId="Package\Data Flow Task\Data Conversion.Outputs[Data Conversion Output].Columns[Copy of H1]" />
+                    <inputColumn
+                      refId="Package\Data Flow Task\OLEDB_DST.Inputs[OLE DB Destination Input].Columns[Copy of H2]"
+                      cachedCodepage="874"
+                      cachedDataType="str"
+                      cachedLength="1"
+                      cachedName="Copy of H2"
+                      externalMetadataColumnId="Package\Data Flow Task\OLEDB_DST.Inputs[OLE DB Destination Input].ExternalColumns[H2]"
+                      lineageId="Package\Data Flow Task\Data Conversion.Outputs[Data Conversion Output].Columns[Copy of H2]" />
+                    <inputColumn
+                      refId="Package\Data Flow Task\OLEDB_DST.Inputs[OLE DB Destination Input].Columns[Copy of H3]"
+                      cachedCodepage="874"
+                      cachedDataType="str"
+                      cachedLength="1"
+                      cachedName="Copy of H3"
+                      externalMetadataColumnId="Package\Data Flow Task\OLEDB_DST.Inputs[OLE DB Destination Input].ExternalColumns[H3]"
+                      lineageId="Package\Data Flow Task\Data Conversion.Outputs[Data Conversion Output].Columns[Copy of H3]" />
+                    <inputColumn
+                      refId="Package\Data Flow Task\OLEDB_DST.Inputs[OLE DB Destination Input].Columns[Copy of H4]"
+                      cachedCodepage="874"
+                      cachedDataType="str"
+                      cachedLength="1"
+                      cachedName="Copy of H4"
+                      externalMetadataColumnId="Package\Data Flow Task\OLEDB_DST.Inputs[OLE DB Destination Input].ExternalColumns[H4]"
+                      lineageId="Package\Data Flow Task\Data Conversion.Outputs[Data Conversion Output].Columns[Copy of H4]" />
+                    <inputColumn
+                      refId="Package\Data Flow Task\OLEDB_DST.Inputs[OLE DB Destination Input].Columns[Copy of H5]"
+                      cachedCodepage="874"
+                      cachedDataType="str"
+                      cachedLength="1"
+                      cachedName="Copy of H5"
+                      externalMetadataColumnId="Package\Data Flow Task\OLEDB_DST.Inputs[OLE DB Destination Input].ExternalColumns[H5]"
+                      lineageId="Package\Data Flow Task\Data Conversion.Outputs[Data Conversion Output].Columns[Copy of H5]" />
+                    <inputColumn
+                      refId="Package\Data Flow Task\OLEDB_DST.Inputs[OLE DB Destination Input].Columns[Copy of H6]"
+                      cachedCodepage="874"
+                      cachedDataType="str"
+                      cachedLength="1"
+                      cachedName="Copy of H6"
+                      externalMetadataColumnId="Package\Data Flow Task\OLEDB_DST.Inputs[OLE DB Destination Input].ExternalColumns[H6]"
+                      lineageId="Package\Data Flow Task\Data Conversion.Outputs[Data Conversion Output].Columns[Copy of H6]" />
+                    <inputColumn
+                      refId="Package\Data Flow Task\OLEDB_DST.Inputs[OLE DB Destination Input].Columns[Copy of ACCOUNT_TYPE]"
+                      cachedCodepage="874"
+                      cachedDataType="str"
+                      cachedLength="1"
+                      cachedName="Copy of ACCOUNT_TYPE"
+                      externalMetadataColumnId="Package\Data Flow Task\OLEDB_DST.Inputs[OLE DB Destination Input].ExternalColumns[ACCOUNT_TYPE]"
+                      lineageId="Package\Data Flow Task\Data Conversion.Outputs[Data Conversion Output].Columns[Copy of ACCOUNT_TYPE]" />
+                  </inputColumns>
+                  <externalMetadataColumns
+                    isUsed="True">
+                    <externalMetadataColumn
+                      refId="Package\Data Flow Task\OLEDB_DST.Inputs[OLE DB Destination Input].ExternalColumns[CODE]"
+                      codePage="874"
+                      dataType="str"
+                      length="150"
+                      name="CODE" />
+                    <externalMetadataColumn
+                      refId="Package\Data Flow Task\OLEDB_DST.Inputs[OLE DB Destination Input].ExternalColumns[DESCRIPTION]"
+                      codePage="874"
+                      dataType="str"
+                      length="240"
+                      name="DESCRIPTION" />
+                    <externalMetadataColumn
+                      refId="Package\Data Flow Task\OLEDB_DST.Inputs[OLE DB Destination Input].ExternalColumns[START_DATE_ACTIVE]"
+                      dataType="dbTimeStamp"
+                      name="START_DATE_ACTIVE" />
+                    <externalMetadataColumn
+                      refId="Package\Data Flow Task\OLEDB_DST.Inputs[OLE DB Destination Input].ExternalColumns[END_DATE_ACTIVE]"
+                      dataType="dbTimeStamp"
+                      name="END_DATE_ACTIVE" />
+                    <externalMetadataColumn
+                      refId="Package\Data Flow Task\OLEDB_DST.Inputs[OLE DB Destination Input].ExternalColumns[ACCOUNT_TYPE]"
+                      codePage="874"
+                      dataType="str"
+                      length="1"
+                      name="ACCOUNT_TYPE" />
+                    <externalMetadataColumn
+                      refId="Package\Data Flow Task\OLEDB_DST.Inputs[OLE DB Destination Input].ExternalColumns[PARENT_CODE]"
+                      codePage="874"
+                      dataType="str"
+                      length="4000"
+                      name="PARENT_CODE" />
+                    <externalMetadataColumn
+                      refId="Package\Data Flow Task\OLEDB_DST.Inputs[OLE DB Destination Input].ExternalColumns[H1]"
+                      codePage="874"
+                      dataType="str"
+                      length="1"
+                      name="H1" />
+                    <externalMetadataColumn
+                      refId="Package\Data Flow Task\OLEDB_DST.Inputs[OLE DB Destination Input].ExternalColumns[H2]"
+                      codePage="874"
+                      dataType="str"
+                      length="1"
+                      name="H2" />
+                    <externalMetadataColumn
+                      refId="Package\Data Flow Task\OLEDB_DST.Inputs[OLE DB Destination Input].ExternalColumns[H3]"
+                      codePage="874"
+                      dataType="str"
+                      length="1"
+                      name="H3" />
+                    <externalMetadataColumn
+                      refId="Package\Data Flow Task\OLEDB_DST.Inputs[OLE DB Destination Input].ExternalColumns[H4]"
+                      codePage="874"
+                      dataType="str"
+                      length="1"
+                      name="H4" />
+                    <externalMetadataColumn
+                      refId="Package\Data Flow Task\OLEDB_DST.Inputs[OLE DB Destination Input].ExternalColumns[H5]"
+                      codePage="874"
+                      dataType="str"
+                      length="1"
+                      name="H5" />
+                    <externalMetadataColumn
+                      refId="Package\Data Flow Task\OLEDB_DST.Inputs[OLE DB Destination Input].ExternalColumns[H6]"
+                      codePage="874"
+                      dataType="str"
+                      length="1"
+                      name="H6" />
+                    <externalMetadataColumn
+                      refId="Package\Data Flow Task\OLEDB_DST.Inputs[OLE DB Destination Input].ExternalColumns[LAST_UPDATE_DATE]"
+                      dataType="dbTimeStamp"
+                      name="LAST_UPDATE_DATE" />
+                    <externalMetadataColumn
+                      refId="Package\Data Flow Task\OLEDB_DST.Inputs[OLE DB Destination Input].ExternalColumns[CREATION_DATE]"
+                      dataType="dbTimeStamp"
+                      name="CREATION_DATE" />
+                  </externalMetadataColumns>
+                </input>
+              </inputs>
+              <outputs>
+                <output
+                  refId="Package\Data Flow Task\OLEDB_DST.Outputs[OLE DB Destination Error Output]"
+                  exclusionGroup="1"
+                  isErrorOut="true"
+                  name="OLE DB Destination Error Output"
+                  synchronousInputId="Package\Data Flow Task\OLEDB_DST.Inputs[OLE DB Destination Input]">
+                  <outputColumns>
+                    <outputColumn
+                      refId="Package\Data Flow Task\OLEDB_DST.Outputs[OLE DB Destination Error Output].Columns[ErrorCode]"
+                      dataType="i4"
+                      lineageId="Package\Data Flow Task\OLEDB_DST.Outputs[OLE DB Destination Error Output].Columns[ErrorCode]"
+                      name="ErrorCode"
+                      specialFlags="1" />
+                    <outputColumn
+                      refId="Package\Data Flow Task\OLEDB_DST.Outputs[OLE DB Destination Error Output].Columns[ErrorColumn]"
+                      dataType="i4"
+                      lineageId="Package\Data Flow Task\OLEDB_DST.Outputs[OLE DB Destination Error Output].Columns[ErrorColumn]"
+                      name="ErrorColumn"
+                      specialFlags="2" />
+                  </outputColumns>
+                  <externalMetadataColumns />
+                </output>
+              </outputs>
+            </component>
+            <component
+              refId="Package\Data Flow Task\OLEDB_SRC Oracle"
+              componentClassID="{165A526D-D5DE-47FF-96A6-F8274C19826B}"
+              contactInfo="OLE DB Source;Microsoft Corporation; Microsoft SQL Server; (C) Microsoft Corporation; All Rights Reserved; http://www.microsoft.com/sql/support;7"
+              description="OLE DB Source"
+              name="OLEDB_SRC Oracle"
+              usesDispositions="true"
+              version="7">
+              <properties>
+                <property
+                  dataType="System.Int32"
+                  description="The number of seconds before a command times out.  A value of 0 indicates an infinite time-out."
+                  name="CommandTimeout">0</property>
+                <property
+                  dataType="System.String"
+                  description="Specifies the name of the database object used to open a rowset."
+                  name="OpenRowset">"APPS"."XXBI_D_SEGMENT2"</property>
+                <property
+                  dataType="System.String"
+                  description="Specifies the variable that contains the name of the database object used to open a rowset."
+                  name="OpenRowsetVariable"></property>
+                <property
+                  dataType="System.String"
+                  description="The SQL command to be executed."
+                  name="SqlCommand"
+                  UITypeEditor="Microsoft.DataTransformationServices.Controls.ModalMultilineStringEditor, Microsoft.DataTransformationServices.Controls, Version=11.0.0.0, Culture=neutral, PublicKeyToken=89845dcd8080cc91">Select * from "APPS"."XXBI_D_SEGMENT2"</property>
+                <property
+                  dataType="System.String"
+                  description="The variable that contains the SQL command to be executed."
+                  name="SqlCommandVariable">User::SQL</property>
+                <property
+                  dataType="System.Int32"
+                  description="Specifies the column code page to use when code page information is unavailable from the data source."
+                  name="DefaultCodePage">874</property>
+                <property
+                  dataType="System.Boolean"
+                  description="Forces the use of the DefaultCodePage property value when describing character data."
+                  name="AlwaysUseDefaultCodePage">false</property>
+                <property
+                  dataType="System.Int32"
+                  description="Specifies the mode used to access the database."
+                  name="AccessMode"
+                  typeConverter="AccessMode">2</property>
+                <property
+                  dataType="System.String"
+                  description="The mappings between the parameters in the SQL command and variables."
+                  name="ParameterMapping"></property>
+              </properties>
+              <connections>
+                <connection
+                  refId="Package\Data Flow Task\OLEDB_SRC Oracle.Connections[OleDbConnection]"
+                  connectionManagerID="Package.ConnectionManagers[ORACLE_orcl_rlg.apps]"
+                  connectionManagerRefId="Package.ConnectionManagers[ORACLE_orcl_rlg.apps]"
+                  description="The OLE DB runtime connection used to access the database."
+                  name="OleDbConnection" />
+              </connections>
+              <outputs>
+                <output
+                  refId="Package\Data Flow Task\OLEDB_SRC Oracle.Outputs[OLE DB Source Output]"
+                  name="OLE DB Source Output">
+                  <outputColumns>
+                    <outputColumn
+                      refId="Package\Data Flow Task\OLEDB_SRC Oracle.Outputs[OLE DB Source Output].Columns[CODE]"
+                      dataType="wstr"
+                      errorOrTruncationOperation="Conversion"
+                      errorRowDisposition="FailComponent"
+                      externalMetadataColumnId="Package\Data Flow Task\OLEDB_SRC Oracle.Outputs[OLE DB Source Output].ExternalColumns[CODE]"
+                      length="150"
+                      lineageId="Package\Data Flow Task\OLEDB_SRC Oracle.Outputs[OLE DB Source Output].Columns[CODE]"
+                      name="CODE"
+                      truncationRowDisposition="FailComponent" />
+                    <outputColumn
+                      refId="Package\Data Flow Task\OLEDB_SRC Oracle.Outputs[OLE DB Source Output].Columns[DESCRIPTION]"
+                      dataType="wstr"
+                      errorOrTruncationOperation="Conversion"
+                      errorRowDisposition="FailComponent"
+                      externalMetadataColumnId="Package\Data Flow Task\OLEDB_SRC Oracle.Outputs[OLE DB Source Output].ExternalColumns[DESCRIPTION]"
+                      length="240"
+                      lineageId="Package\Data Flow Task\OLEDB_SRC Oracle.Outputs[OLE DB Source Output].Columns[DESCRIPTION]"
+                      name="DESCRIPTION"
+                      truncationRowDisposition="FailComponent" />
+                    <outputColumn
+                      refId="Package\Data Flow Task\OLEDB_SRC Oracle.Outputs[OLE DB Source Output].Columns[START_DATE_ACTIVE]"
+                      dataType="dbTimeStamp"
+                      errorOrTruncationOperation="Conversion"
+                      errorRowDisposition="FailComponent"
+                      externalMetadataColumnId="Package\Data Flow Task\OLEDB_SRC Oracle.Outputs[OLE DB Source Output].ExternalColumns[START_DATE_ACTIVE]"
+                      lineageId="Package\Data Flow Task\OLEDB_SRC Oracle.Outputs[OLE DB Source Output].Columns[START_DATE_ACTIVE]"
+                      name="START_DATE_ACTIVE"
+                      truncationRowDisposition="FailComponent" />
+                    <outputColumn
+                      refId="Package\Data Flow Task\OLEDB_SRC Oracle.Outputs[OLE DB Source Output].Columns[END_DATE_ACTIVE]"
+                      dataType="dbTimeStamp"
+                      errorOrTruncationOperation="Conversion"
+                      errorRowDisposition="FailComponent"
+                      externalMetadataColumnId="Package\Data Flow Task\OLEDB_SRC Oracle.Outputs[OLE DB Source Output].ExternalColumns[END_DATE_ACTIVE]"
+                      lineageId="Package\Data Flow Task\OLEDB_SRC Oracle.Outputs[OLE DB Source Output].Columns[END_DATE_ACTIVE]"
+                      name="END_DATE_ACTIVE"
+                      truncationRowDisposition="FailComponent" />
+                    <outputColumn
+                      refId="Package\Data Flow Task\OLEDB_SRC Oracle.Outputs[OLE DB Source Output].Columns[ACCOUNT_TYPE]"
+                      dataType="wstr"
+                      errorOrTruncationOperation="Conversion"
+                      errorRowDisposition="FailComponent"
+                      externalMetadataColumnId="Package\Data Flow Task\OLEDB_SRC Oracle.Outputs[OLE DB Source Output].ExternalColumns[ACCOUNT_TYPE]"
+                      length="1"
+                      lineageId="Package\Data Flow Task\OLEDB_SRC Oracle.Outputs[OLE DB Source Output].Columns[ACCOUNT_TYPE]"
+                      name="ACCOUNT_TYPE"
+                      truncationRowDisposition="FailComponent" />
+                    <outputColumn
+                      refId="Package\Data Flow Task\OLEDB_SRC Oracle.Outputs[OLE DB Source Output].Columns[PARENT_CODE]"
+                      dataType="wstr"
+                      errorOrTruncationOperation="Conversion"
+                      errorRowDisposition="FailComponent"
+                      externalMetadataColumnId="Package\Data Flow Task\OLEDB_SRC Oracle.Outputs[OLE DB Source Output].ExternalColumns[PARENT_CODE]"
+                      length="4000"
+                      lineageId="Package\Data Flow Task\OLEDB_SRC Oracle.Outputs[OLE DB Source Output].Columns[PARENT_CODE]"
+                      name="PARENT_CODE"
+                      truncationRowDisposition="FailComponent" />
+                    <outputColumn
+                      refId="Package\Data Flow Task\OLEDB_SRC Oracle.Outputs[OLE DB Source Output].Columns[H1]"
+                      dataType="wstr"
+                      errorOrTruncationOperation="Conversion"
+                      errorRowDisposition="FailComponent"
+                      externalMetadataColumnId="Package\Data Flow Task\OLEDB_SRC Oracle.Outputs[OLE DB Source Output].ExternalColumns[H1]"
+                      length="1"
+                      lineageId="Package\Data Flow Task\OLEDB_SRC Oracle.Outputs[OLE DB Source Output].Columns[H1]"
+                      name="H1"
+                      truncationRowDisposition="FailComponent" />
+                    <outputColumn
+                      refId="Package\Data Flow Task\OLEDB_SRC Oracle.Outputs[OLE DB Source Output].Columns[H2]"
+                      dataType="wstr"
+                      errorOrTruncationOperation="Conversion"
+                      errorRowDisposition="FailComponent"
+                      externalMetadataColumnId="Package\Data Flow Task\OLEDB_SRC Oracle.Outputs[OLE DB Source Output].ExternalColumns[H2]"
+                      length="1"
+                      lineageId="Package\Data Flow Task\OLEDB_SRC Oracle.Outputs[OLE DB Source Output].Columns[H2]"
+                      name="H2"
+                      truncationRowDisposition="FailComponent" />
+                    <outputColumn
+                      refId="Package\Data Flow Task\OLEDB_SRC Oracle.Outputs[OLE DB Source Output].Columns[H3]"
+                      dataType="wstr"
+                      errorOrTruncationOperation="Conversion"
+                      errorRowDisposition="FailComponent"
+                      externalMetadataColumnId="Package\Data Flow Task\OLEDB_SRC Oracle.Outputs[OLE DB Source Output].ExternalColumns[H3]"
+                      length="1"
+                      lineageId="Package\Data Flow Task\OLEDB_SRC Oracle.Outputs[OLE DB Source Output].Columns[H3]"
+                      name="H3"
+                      truncationRowDisposition="FailComponent" />
+                    <outputColumn
+                      refId="Package\Data Flow Task\OLEDB_SRC Oracle.Outputs[OLE DB Source Output].Columns[H4]"
+                      dataType="wstr"
+                      errorOrTruncationOperation="Conversion"
+                      errorRowDisposition="FailComponent"
+                      externalMetadataColumnId="Package\Data Flow Task\OLEDB_SRC Oracle.Outputs[OLE DB Source Output].ExternalColumns[H4]"
+                      length="1"
+                      lineageId="Package\Data Flow Task\OLEDB_SRC Oracle.Outputs[OLE DB Source Output].Columns[H4]"
+                      name="H4"
+                      truncationRowDisposition="FailComponent" />
+                    <outputColumn
+                      refId="Package\Data Flow Task\OLEDB_SRC Oracle.Outputs[OLE DB Source Output].Columns[H5]"
+                      dataType="wstr"
+                      errorOrTruncationOperation="Conversion"
+                      errorRowDisposition="FailComponent"
+                      externalMetadataColumnId="Package\Data Flow Task\OLEDB_SRC Oracle.Outputs[OLE DB Source Output].ExternalColumns[H5]"
+                      length="1"
+                      lineageId="Package\Data Flow Task\OLEDB_SRC Oracle.Outputs[OLE DB Source Output].Columns[H5]"
+                      name="H5"
+                      truncationRowDisposition="FailComponent" />
+                    <outputColumn
+                      refId="Package\Data Flow Task\OLEDB_SRC Oracle.Outputs[OLE DB Source Output].Columns[H6]"
+                      dataType="wstr"
+                      errorOrTruncationOperation="Conversion"
+                      errorRowDisposition="FailComponent"
+                      externalMetadataColumnId="Package\Data Flow Task\OLEDB_SRC Oracle.Outputs[OLE DB Source Output].ExternalColumns[H6]"
+                      length="1"
+                      lineageId="Package\Data Flow Task\OLEDB_SRC Oracle.Outputs[OLE DB Source Output].Columns[H6]"
+                      name="H6"
+                      truncationRowDisposition="FailComponent" />
+                    <outputColumn
+                      refId="Package\Data Flow Task\OLEDB_SRC Oracle.Outputs[OLE DB Source Output].Columns[LAST_UPDATE_DATE]"
+                      dataType="dbTimeStamp"
+                      errorOrTruncationOperation="Conversion"
+                      errorRowDisposition="FailComponent"
+                      externalMetadataColumnId="Package\Data Flow Task\OLEDB_SRC Oracle.Outputs[OLE DB Source Output].ExternalColumns[LAST_UPDATE_DATE]"
+                      lineageId="Package\Data Flow Task\OLEDB_SRC Oracle.Outputs[OLE DB Source Output].Columns[LAST_UPDATE_DATE]"
+                      name="LAST_UPDATE_DATE"
+                      truncationRowDisposition="FailComponent" />
+                    <outputColumn
+                      refId="Package\Data Flow Task\OLEDB_SRC Oracle.Outputs[OLE DB Source Output].Columns[CREATION_DATE]"
+                      dataType="dbTimeStamp"
+                      errorOrTruncationOperation="Conversion"
+                      errorRowDisposition="FailComponent"
+                      externalMetadataColumnId="Package\Data Flow Task\OLEDB_SRC Oracle.Outputs[OLE DB Source Output].ExternalColumns[CREATION_DATE]"
+                      lineageId="Package\Data Flow Task\OLEDB_SRC Oracle.Outputs[OLE DB Source Output].Columns[CREATION_DATE]"
+                      name="CREATION_DATE"
+                      truncationRowDisposition="FailComponent" />
+                  </outputColumns>
+                  <externalMetadataColumns
+                    isUsed="True">
+                    <externalMetadataColumn
+                      refId="Package\Data Flow Task\OLEDB_SRC Oracle.Outputs[OLE DB Source Output].ExternalColumns[CODE]"
+                      dataType="wstr"
+                      length="150"
+                      name="CODE" />
+                    <externalMetadataColumn
+                      refId="Package\Data Flow Task\OLEDB_SRC Oracle.Outputs[OLE DB Source Output].ExternalColumns[DESCRIPTION]"
+                      dataType="wstr"
+                      length="240"
+                      name="DESCRIPTION" />
+                    <externalMetadataColumn
+                      refId="Package\Data Flow Task\OLEDB_SRC Oracle.Outputs[OLE DB Source Output].ExternalColumns[START_DATE_ACTIVE]"
+                      dataType="dbTimeStamp"
+                      name="START_DATE_ACTIVE" />
+                    <externalMetadataColumn
+                      refId="Package\Data Flow Task\OLEDB_SRC Oracle.Outputs[OLE DB Source Output].ExternalColumns[END_DATE_ACTIVE]"
+                      dataType="dbTimeStamp"
+                      name="END_DATE_ACTIVE" />
+                    <externalMetadataColumn
+                      refId="Package\Data Flow Task\OLEDB_SRC Oracle.Outputs[OLE DB Source Output].ExternalColumns[ACCOUNT_TYPE]"
+                      dataType="wstr"
+                      length="1"
+                      name="ACCOUNT_TYPE" />
+                    <externalMetadataColumn
+                      refId="Package\Data Flow Task\OLEDB_SRC Oracle.Outputs[OLE DB Source Output].ExternalColumns[PARENT_CODE]"
+                      dataType="wstr"
+                      length="4000"
+                      name="PARENT_CODE" />
+                    <externalMetadataColumn
+                      refId="Package\Data Flow Task\OLEDB_SRC Oracle.Outputs[OLE DB Source Output].ExternalColumns[H1]"
+                      dataType="wstr"
+                      length="1"
+                      name="H1" />
+                    <externalMetadataColumn
+                      refId="Package\Data Flow Task\OLEDB_SRC Oracle.Outputs[OLE DB Source Output].ExternalColumns[H2]"
+                      dataType="wstr"
+                      length="1"
+                      name="H2" />
+                    <externalMetadataColumn
+                      refId="Package\Data Flow Task\OLEDB_SRC Oracle.Outputs[OLE DB Source Output].ExternalColumns[H3]"
+                      dataType="wstr"
+                      length="1"
+                      name="H3" />
+                    <externalMetadataColumn
+                      refId="Package\Data Flow Task\OLEDB_SRC Oracle.Outputs[OLE DB Source Output].ExternalColumns[H4]"
+                      dataType="wstr"
+                      length="1"
+                      name="H4" />
+                    <externalMetadataColumn
+                      refId="Package\Data Flow Task\OLEDB_SRC Oracle.Outputs[OLE DB Source Output].ExternalColumns[H5]"
+                      dataType="wstr"
+                      length="1"
+                      name="H5" />
+                    <externalMetadataColumn
+                      refId="Package\Data Flow Task\OLEDB_SRC Oracle.Outputs[OLE DB Source Output].ExternalColumns[H6]"
+                      dataType="wstr"
+                      length="1"
+                      name="H6" />
+                    <externalMetadataColumn
+                      refId="Package\Data Flow Task\OLEDB_SRC Oracle.Outputs[OLE DB Source Output].ExternalColumns[LAST_UPDATE_DATE]"
+                      dataType="dbTimeStamp"
+                      name="LAST_UPDATE_DATE" />
+                    <externalMetadataColumn
+                      refId="Package\Data Flow Task\OLEDB_SRC Oracle.Outputs[OLE DB Source Output].ExternalColumns[CREATION_DATE]"
+                      dataType="dbTimeStamp"
+                      name="CREATION_DATE" />
+                  </externalMetadataColumns>
+                </output>
+                <output
+                  refId="Package\Data Flow Task\OLEDB_SRC Oracle.Outputs[OLE DB Source Error Output]"
+                  isErrorOut="true"
+                  name="OLE DB Source Error Output">
+                  <outputColumns>
+                    <outputColumn
+                      refId="Package\Data Flow Task\OLEDB_SRC Oracle.Outputs[OLE DB Source Error Output].Columns[CODE]"
+                      dataType="wstr"
+                      length="150"
+                      lineageId="Package\Data Flow Task\OLEDB_SRC Oracle.Outputs[OLE DB Source Error Output].Columns[CODE]"
+                      name="CODE" />
+                    <outputColumn
+                      refId="Package\Data Flow Task\OLEDB_SRC Oracle.Outputs[OLE DB Source Error Output].Columns[DESCRIPTION]"
+                      dataType="wstr"
+                      length="240"
+                      lineageId="Package\Data Flow Task\OLEDB_SRC Oracle.Outputs[OLE DB Source Error Output].Columns[DESCRIPTION]"
+                      name="DESCRIPTION" />
+                    <outputColumn
+                      refId="Package\Data Flow Task\OLEDB_SRC Oracle.Outputs[OLE DB Source Error Output].Columns[START_DATE_ACTIVE]"
+                      dataType="dbTimeStamp"
+                      lineageId="Package\Data Flow Task\OLEDB_SRC Oracle.Outputs[OLE DB Source Error Output].Columns[START_DATE_ACTIVE]"
+                      name="START_DATE_ACTIVE" />
+                    <outputColumn
+                      refId="Package\Data Flow Task\OLEDB_SRC Oracle.Outputs[OLE DB Source Error Output].Columns[END_DATE_ACTIVE]"
+                      dataType="dbTimeStamp"
+                      lineageId="Package\Data Flow Task\OLEDB_SRC Oracle.Outputs[OLE DB Source Error Output].Columns[END_DATE_ACTIVE]"
+                      name="END_DATE_ACTIVE" />
+                    <outputColumn
+                      refId="Package\Data Flow Task\OLEDB_SRC Oracle.Outputs[OLE DB Source Error Output].Columns[ACCOUNT_TYPE]"
+                      dataType="wstr"
+                      length="1"
+                      lineageId="Package\Data Flow Task\OLEDB_SRC Oracle.Outputs[OLE DB Source Error Output].Columns[ACCOUNT_TYPE]"
+                      name="ACCOUNT_TYPE" />
+                    <outputColumn
+                      refId="Package\Data Flow Task\OLEDB_SRC Oracle.Outputs[OLE DB Source Error Output].Columns[PARENT_CODE]"
+                      dataType="wstr"
+                      length="4000"
+                      lineageId="Package\Data Flow Task\OLEDB_SRC Oracle.Outputs[OLE DB Source Error Output].Columns[PARENT_CODE]"
+                      name="PARENT_CODE" />
+                    <outputColumn
+                      refId="Package\Data Flow Task\OLEDB_SRC Oracle.Outputs[OLE DB Source Error Output].Columns[H1]"
+                      dataType="wstr"
+                      length="1"
+                      lineageId="Package\Data Flow Task\OLEDB_SRC Oracle.Outputs[OLE DB Source Error Output].Columns[H1]"
+                      name="H1" />
+                    <outputColumn
+                      refId="Package\Data Flow Task\OLEDB_SRC Oracle.Outputs[OLE DB Source Error Output].Columns[H2]"
+                      dataType="wstr"
+                      length="1"
+                      lineageId="Package\Data Flow Task\OLEDB_SRC Oracle.Outputs[OLE DB Source Error Output].Columns[H2]"
+                      name="H2" />
+                    <outputColumn
+                      refId="Package\Data Flow Task\OLEDB_SRC Oracle.Outputs[OLE DB Source Error Output].Columns[H3]"
+                      dataType="wstr"
+                      length="1"
+                      lineageId="Package\Data Flow Task\OLEDB_SRC Oracle.Outputs[OLE DB Source Error Output].Columns[H3]"
+                      name="H3" />
+                    <outputColumn
+                      refId="Package\Data Flow Task\OLEDB_SRC Oracle.Outputs[OLE DB Source Error Output].Columns[H4]"
+                      dataType="wstr"
+                      length="1"
+                      lineageId="Package\Data Flow Task\OLEDB_SRC Oracle.Outputs[OLE DB Source Error Output].Columns[H4]"
+                      name="H4" />
+                    <outputColumn
+                      refId="Package\Data Flow Task\OLEDB_SRC Oracle.Outputs[OLE DB Source Error Output].Columns[H5]"
+                      dataType="wstr"
+                      length="1"
+                      lineageId="Package\Data Flow Task\OLEDB_SRC Oracle.Outputs[OLE DB Source Error Output].Columns[H5]"
+                      name="H5" />
+                    <outputColumn
+                      refId="Package\Data Flow Task\OLEDB_SRC Oracle.Outputs[OLE DB Source Error Output].Columns[H6]"
+                      dataType="wstr"
+                      length="1"
+                      lineageId="Package\Data Flow Task\OLEDB_SRC Oracle.Outputs[OLE DB Source Error Output].Columns[H6]"
+                      name="H6" />
+                    <outputColumn
+                      refId="Package\Data Flow Task\OLEDB_SRC Oracle.Outputs[OLE DB Source Error Output].Columns[LAST_UPDATE_DATE]"
+                      dataType="dbTimeStamp"
+                      lineageId="Package\Data Flow Task\OLEDB_SRC Oracle.Outputs[OLE DB Source Error Output].Columns[LAST_UPDATE_DATE]"
+                      name="LAST_UPDATE_DATE" />
+                    <outputColumn
+                      refId="Package\Data Flow Task\OLEDB_SRC Oracle.Outputs[OLE DB Source Error Output].Columns[CREATION_DATE]"
+                      dataType="dbTimeStamp"
+                      lineageId="Package\Data Flow Task\OLEDB_SRC Oracle.Outputs[OLE DB Source Error Output].Columns[CREATION_DATE]"
+                      name="CREATION_DATE" />
+                    <outputColumn
+                      refId="Package\Data Flow Task\OLEDB_SRC Oracle.Outputs[OLE DB Source Error Output].Columns[ErrorCode]"
+                      dataType="i4"
+                      lineageId="Package\Data Flow Task\OLEDB_SRC Oracle.Outputs[OLE DB Source Error Output].Columns[ErrorCode]"
+                      name="ErrorCode"
+                      specialFlags="1" />
+                    <outputColumn
+                      refId="Package\Data Flow Task\OLEDB_SRC Oracle.Outputs[OLE DB Source Error Output].Columns[ErrorColumn]"
+                      dataType="i4"
+                      lineageId="Package\Data Flow Task\OLEDB_SRC Oracle.Outputs[OLE DB Source Error Output].Columns[ErrorColumn]"
+                      name="ErrorColumn"
+                      specialFlags="2" />
+                  </outputColumns>
+                  <externalMetadataColumns />
+                </output>
+              </outputs>
+            </component>
+          </components>
+          <paths>
+            <path
+              refId="Package\Data Flow Task.Paths[Data Conversion Output]"
+              endId="Package\Data Flow Task\OLEDB_DST.Inputs[OLE DB Destination Input]"
+              name="Data Conversion Output"
+              startId="Package\Data Flow Task\Data Conversion.Outputs[Data Conversion Output]" />
+            <path
+              refId="Package\Data Flow Task.Paths[OLE DB Source Output]"
+              endId="Package\Data Flow Task\Data Conversion.Inputs[Data Conversion Input]"
+              name="OLE DB Source Output"
+              startId="Package\Data Flow Task\OLEDB_SRC Oracle.Outputs[OLE DB Source Output]" />
+          </paths>
+        </pipeline>
+      </DTS:ObjectData>
+    </DTS:Executable>
+    <DTS:Executable
+      DTS:refId="Package\EXEC End Package"
+      DTS:CreationName="Microsoft.SqlServer.Dts.Tasks.ExecuteSQLTask.ExecuteSQLTask, Microsoft.SqlServer.SQLTask, Version=11.0.0.0, Culture=neutral, PublicKeyToken=89845dcd8080cc91"
+      DTS:Description="Execute SQL Task"
+      DTS:DTSID="{FB9CF71B-AA4E-4DF3-9BF5-2658B265733A}"
+      DTS:ExecutableType="Microsoft.SqlServer.Dts.Tasks.ExecuteSQLTask.ExecuteSQLTask, Microsoft.SqlServer.SQLTask, Version=11.0.0.0, Culture=neutral, PublicKeyToken=89845dcd8080cc91"
+      DTS:LocaleID="-1"
+      DTS:ObjectName="EXEC End Package"
+      DTS:TaskContact="Execute SQL Task; Microsoft Corporation; SQL Server 2012; © 2007 Microsoft Corporation; All Rights Reserved;http://www.microsoft.com/sql/support/default.asp;1"
+      DTS:ThreadHint="0">
+      <DTS:Variables />
+      <DTS:ObjectData>
+        <SQLTask:SqlTaskData
+          SQLTask:Connection="{F45C0868-1FCC-41D9-9780-D9B41DC87E49}"
+          SQLTask:SqlStatementSource="UPDATE [dbo].[ExecutionTable]&#xA;SET [EndTime] = GetDate()&#xA;, [Status] = 1&#xA;WHERE ExecutionId = ?;" xmlns:SQLTask="www.microsoft.com/sqlserver/dts/tasks/sqltask">
+          <SQLTask:ParameterBinding
+            SQLTask:ParameterName="0"
+            SQLTask:DtsVariableName="User::ExecutionId"
+            SQLTask:ParameterDirection="Input"
+            SQLTask:DataType="3"
+            SQLTask:ParameterSize="-1" />
+        </SQLTask:SqlTaskData>
+      </DTS:ObjectData>
+    </DTS:Executable>
+    <DTS:Executable
+      DTS:refId="Package\EXEC Get ETLCriteriaDate"
+      DTS:CreationName="Microsoft.SqlServer.Dts.Tasks.ExecuteSQLTask.ExecuteSQLTask, Microsoft.SqlServer.SQLTask, Version=11.0.0.0, Culture=neutral, PublicKeyToken=89845dcd8080cc91"
+      DTS:Description="Execute SQL Task"
+      DTS:DTSID="{7FEA0B9E-3B9B-4B47-A11E-07D467A041A7}"
+      DTS:ExecutableType="Microsoft.SqlServer.Dts.Tasks.ExecuteSQLTask.ExecuteSQLTask, Microsoft.SqlServer.SQLTask, Version=11.0.0.0, Culture=neutral, PublicKeyToken=89845dcd8080cc91"
+      DTS:LocaleID="-1"
+      DTS:ObjectName="EXEC Get ETLCriteriaDate"
+      DTS:TaskContact="Execute SQL Task; Microsoft Corporation; SQL Server 2012; © 2007 Microsoft Corporation; All Rights Reserved;http://www.microsoft.com/sql/support/default.asp;1"
+      DTS:ThreadHint="0">
+      <DTS:Variables />
+      <DTS:ObjectData>
+        <SQLTask:SqlTaskData
+          SQLTask:Connection="{F45C0868-1FCC-41D9-9780-D9B41DC87E49}"
+          SQLTask:SqlStatementSource="Select &#xA;Case When &#xA;&#x9;LTrim(RTrim(?))&#xA;&#x9; = '' Then Convert(varchar(8), (GetDate() - 1), 112 )&#xA;Else &#xA;Case When &#xA;&#x9;CharIndex(',', LTrim(RTrim(?)))&#xA;&#x9; &lt;&gt; 0 Then SubString(?, 1, 8)&#xA;Else &#xA;?&#xA;End End as ETLStartDate&#xA;, Case When &#xA;&#x9;LTrim(RTrim(?))&#xA;&#x9; = '' Then Convert(varchar(8), (GetDate() - 1), 112 )&#xA;Else &#xA;Case When &#xA;&#x9;CharIndex(',', LTrim(RTrim(?)))&#xA;&#x9; &lt;&gt; 0 Then SubString(?, 10, 8)&#xA;Else &#xA;?&#xA;End End as ETLEndDate"
+          SQLTask:ResultType="ResultSetType_SingleRow" xmlns:SQLTask="www.microsoft.com/sqlserver/dts/tasks/sqltask">
+          <SQLTask:ResultBinding
+            SQLTask:ResultName="0"
+            SQLTask:DtsVariableName="User::ETLStartDate" />
+          <SQLTask:ResultBinding
+            SQLTask:ResultName="1"
+            SQLTask:DtsVariableName="User::ETLEndDate" />
+          <SQLTask:ParameterBinding
+            SQLTask:ParameterName="0"
+            SQLTask:DtsVariableName="User::ETLCriteriaDate"
+            SQLTask:ParameterDirection="Input"
+            SQLTask:DataType="129"
+            SQLTask:ParameterSize="-1" />
+          <SQLTask:ParameterBinding
+            SQLTask:ParameterName="1"
+            SQLTask:DtsVariableName="User::ETLCriteriaDate"
+            SQLTask:ParameterDirection="Input"
+            SQLTask:DataType="129"
+            SQLTask:ParameterSize="-1" />
+          <SQLTask:ParameterBinding
+            SQLTask:ParameterName="2"
+            SQLTask:DtsVariableName="User::ETLCriteriaDate"
+            SQLTask:ParameterDirection="Input"
+            SQLTask:DataType="129"
+            SQLTask:ParameterSize="-1" />
+          <SQLTask:ParameterBinding
+            SQLTask:ParameterName="3"
+            SQLTask:DtsVariableName="User::ETLCriteriaDate"
+            SQLTask:ParameterDirection="Input"
+            SQLTask:DataType="129"
+            SQLTask:ParameterSize="-1" />
+          <SQLTask:ParameterBinding
+            SQLTask:ParameterName="4"
+            SQLTask:DtsVariableName="User::ETLCriteriaDate"
+            SQLTask:ParameterDirection="Input"
+            SQLTask:DataType="129"
+            SQLTask:ParameterSize="-1" />
+          <SQLTask:ParameterBinding
+            SQLTask:ParameterName="5"
+            SQLTask:DtsVariableName="User::ETLCriteriaDate"
+            SQLTask:ParameterDirection="Input"
+            SQLTask:DataType="129"
+            SQLTask:ParameterSize="-1" />
+          <SQLTask:ParameterBinding
+            SQLTask:ParameterName="6"
+            SQLTask:DtsVariableName="User::ETLCriteriaDate"
+            SQLTask:ParameterDirection="Input"
+            SQLTask:DataType="129"
+            SQLTask:ParameterSize="-1" />
+          <SQLTask:ParameterBinding
+            SQLTask:ParameterName="7"
+            SQLTask:DtsVariableName="User::ETLCriteriaDate"
+            SQLTask:ParameterDirection="Input"
+            SQLTask:DataType="129"
+            SQLTask:ParameterSize="-1" />
+        </SQLTask:SqlTaskData>
+      </DTS:ObjectData>
+    </DTS:Executable>
+    <DTS:Executable
+      DTS:refId="Package\EXEC Get ExecutionId"
+      DTS:CreationName="Microsoft.SqlServer.Dts.Tasks.ExecuteSQLTask.ExecuteSQLTask, Microsoft.SqlServer.SQLTask, Version=11.0.0.0, Culture=neutral, PublicKeyToken=89845dcd8080cc91"
+      DTS:Description="Execute SQL Task"
+      DTS:DTSID="{8797B0FF-2D44-434E-95C5-F0EEA65A89BF}"
+      DTS:ExecutableType="Microsoft.SqlServer.Dts.Tasks.ExecuteSQLTask.ExecuteSQLTask, Microsoft.SqlServer.SQLTask, Version=11.0.0.0, Culture=neutral, PublicKeyToken=89845dcd8080cc91"
+      DTS:LocaleID="-1"
+      DTS:ObjectName="EXEC Get ExecutionId"
+      DTS:TaskContact="Execute SQL Task; Microsoft Corporation; SQL Server 2012; © 2007 Microsoft Corporation; All Rights Reserved;http://www.microsoft.com/sql/support/default.asp;1"
+      DTS:ThreadHint="0">
+      <DTS:Variables />
+      <DTS:ObjectData>
+        <SQLTask:SqlTaskData
+          SQLTask:Connection="{F45C0868-1FCC-41D9-9780-D9B41DC87E49}"
+          SQLTask:SqlStatementSource="Select Max(ExecutionId) as ExecutionId &#xA;From [dbo].[ExecutionTable]&#xA;Where EndTime IS NULL"
+          SQLTask:ResultType="ResultSetType_SingleRow" xmlns:SQLTask="www.microsoft.com/sqlserver/dts/tasks/sqltask">
+          <SQLTask:ResultBinding
+            SQLTask:ResultName="0"
+            SQLTask:DtsVariableName="User::ExecutionId" />
+        </SQLTask:SqlTaskData>
+      </DTS:ObjectData>
+    </DTS:Executable>
+    <DTS:Executable
+      DTS:refId="Package\EXEC Start Package"
+      DTS:CreationName="Microsoft.SqlServer.Dts.Tasks.ExecuteSQLTask.ExecuteSQLTask, Microsoft.SqlServer.SQLTask, Version=11.0.0.0, Culture=neutral, PublicKeyToken=89845dcd8080cc91"
+      DTS:Description="Execute SQL Task"
+      DTS:DTSID="{1523B087-6829-4579-ADF3-2895C8502544}"
+      DTS:ExecutableType="Microsoft.SqlServer.Dts.Tasks.ExecuteSQLTask.ExecuteSQLTask, Microsoft.SqlServer.SQLTask, Version=11.0.0.0, Culture=neutral, PublicKeyToken=89845dcd8080cc91"
+      DTS:LocaleID="-1"
+      DTS:ObjectName="EXEC Start Package"
+      DTS:TaskContact="Execute SQL Task; Microsoft Corporation; SQL Server 2012; © 2007 Microsoft Corporation; All Rights Reserved;http://www.microsoft.com/sql/support/default.asp;1"
+      DTS:ThreadHint="0">
+      <DTS:Variables />
+      <DTS:ObjectData>
+        <SQLTask:SqlTaskData
+          SQLTask:Connection="{F45C0868-1FCC-41D9-9780-D9B41DC87E49}"
+          SQLTask:SqlStatementSource="INSERT INTO [dbo].[ExecutionTable]&#xA;           ([ParentPackageId]&#xA;           ,[PackageId]&#xA;           ,[PackageName]&#xA;           ,[StartTime]&#xA;           ,[EndTime]&#xA;           ,[ComputerName]&#xA;           ,[MachineName]&#xA;           ,[Status]&#xA;           ,[RowSource]&#xA;           ,[RowInsert]&#xA;           ,[RowUpdate]&#xA;           ,[RowDelete]&#xA;           ,[RowError])&#xA;     VALUES&#xA;           (?&#xA;           ,?&#xA;           ,?&#xA;           ,GetDate()&#xA;           ,NULL&#xA;           ,?&#xA;           ,?&#xA;           ,0&#xA;           ,0&#xA;           ,0&#xA;           ,0&#xA;           ,0&#xA;           ,0)" xmlns:SQLTask="www.microsoft.com/sqlserver/dts/tasks/sqltask">
+          <SQLTask:ParameterBinding
+            SQLTask:ParameterName="0"
+            SQLTask:DtsVariableName="User::ParentPackageId"
+            SQLTask:ParameterDirection="Input"
+            SQLTask:DataType="3"
+            SQLTask:ParameterSize="-1" />
+          <SQLTask:ParameterBinding
+            SQLTask:ParameterName="1"
+            SQLTask:DtsVariableName="System::PackageID"
+            SQLTask:ParameterDirection="Input"
+            SQLTask:DataType="129"
+            SQLTask:ParameterSize="-1" />
+          <SQLTask:ParameterBinding
+            SQLTask:ParameterName="2"
+            SQLTask:DtsVariableName="System::PackageName"
+            SQLTask:ParameterDirection="Input"
+            SQLTask:DataType="129"
+            SQLTask:ParameterSize="-1" />
+          <SQLTask:ParameterBinding
+            SQLTask:ParameterName="3"
+            SQLTask:DtsVariableName="System::UserName"
+            SQLTask:ParameterDirection="Input"
+            SQLTask:DataType="129"
+            SQLTask:ParameterSize="-1" />
+          <SQLTask:ParameterBinding
+            SQLTask:ParameterName="4"
+            SQLTask:DtsVariableName="System::MachineName"
+            SQLTask:ParameterDirection="Input"
+            SQLTask:DataType="129"
+            SQLTask:ParameterSize="-1" />
+        </SQLTask:SqlTaskData>
+      </DTS:ObjectData>
+    </DTS:Executable>
+    <DTS:Executable
+      DTS:refId="Package\EXEC Truncate Table"
+      DTS:CreationName="Microsoft.SqlServer.Dts.Tasks.ExecuteSQLTask.ExecuteSQLTask, Microsoft.SqlServer.SQLTask, Version=11.0.0.0, Culture=neutral, PublicKeyToken=89845dcd8080cc91"
+      DTS:Description="Execute SQL Task"
+      DTS:DTSID="{a52cd144-2e62-4578-950d-831f4671a638}"
+      DTS:ExecutableType="Microsoft.SqlServer.Dts.Tasks.ExecuteSQLTask.ExecuteSQLTask, Microsoft.SqlServer.SQLTask, Version=11.0.0.0, Culture=neutral, PublicKeyToken=89845dcd8080cc91"
+      DTS:LocaleID="-1"
+      DTS:ObjectName="EXEC Truncate Table"
+      DTS:TaskContact="Execute SQL Task; Microsoft Corporation; SQL Server 2012; © 2007 Microsoft Corporation; All Rights Reserved;http://www.microsoft.com/sql/support/default.asp;1"
+      DTS:ThreadHint="0">
+      <DTS:Variables />
+      <DTS:ObjectData>
+        <SQLTask:SqlTaskData
+          SQLTask:Connection="{F45C0868-1FCC-41D9-9780-D9B41DC87E49}"
+          SQLTask:SqlStatementSource="Truncate Table Segment2;" xmlns:SQLTask="www.microsoft.com/sqlserver/dts/tasks/sqltask" />
+      </DTS:ObjectData>
+    </DTS:Executable>
+  </DTS:Executables>
+  <DTS:PrecedenceConstraints>
+    <DTS:PrecedenceConstraint
+      DTS:refId="Package.PrecedenceConstraints[Constraint]"
+      DTS:CreationName=""
+      DTS:DTSID="{327C0FBF-7466-4F10-ADBB-5296D7A76A29}"
+      DTS:From="Package\EXEC Start Package"
+      DTS:LogicalAnd="True"
+      DTS:ObjectName="Constraint"
+      DTS:To="Package\EXEC Get ExecutionId" />
+    <DTS:PrecedenceConstraint
+      DTS:refId="Package.PrecedenceConstraints[Constraint 1]"
+      DTS:CreationName=""
+      DTS:DTSID="{F7E32BF0-E569-4D0E-8919-05A08362F4C9}"
+      DTS:From="Package\EXEC Get ExecutionId"
+      DTS:LogicalAnd="True"
+      DTS:ObjectName="Constraint 1"
+      DTS:To="Package\EXEC Get ETLCriteriaDate" />
+    <DTS:PrecedenceConstraint
+      DTS:refId="Package.PrecedenceConstraints[Constraint 2]"
+      DTS:CreationName=""
+      DTS:DTSID="{D4F32AC4-E899-4BE2-99C7-11ECFF8AE664}"
+      DTS:From="Package\EXEC Get ETLCriteriaDate"
+      DTS:LogicalAnd="True"
+      DTS:ObjectName="Constraint 2"
+      DTS:To="Package\EXEC Truncate Table" />
+    <DTS:PrecedenceConstraint
+      DTS:refId="Package.PrecedenceConstraints[Constraint 3]"
+      DTS:CreationName=""
+      DTS:DTSID="{6FBE48C7-F371-4870-9543-CB36278145E0}"
+      DTS:From="Package\Data Flow Task"
+      DTS:LogicalAnd="True"
+      DTS:ObjectName="Constraint 3"
+      DTS:To="Package\EXEC End Package" />
+    <DTS:PrecedenceConstraint
+      DTS:refId="Package.PrecedenceConstraints[Constraint 4]"
+      DTS:CreationName=""
+      DTS:DTSID="{DB5E301C-5F91-4F97-87A9-B92A02EA8163}"
+      DTS:From="Package\EXEC Truncate Table"
+      DTS:LogicalAnd="True"
+      DTS:ObjectName="Constraint 4"
+      DTS:To="Package\Data Flow Task" />
+  </DTS:PrecedenceConstraints>
+  <DTS:DesignTimeProperties><![CDATA[<?xml version="1.0"?>
+<!--This CDATA section contains the layout information of the package. The section includes information such as (x,y) coordinates, width, and height.-->
+<!--If you manually edit this section and make a mistake, you can delete it. -->
+<!--The package will still be able to load normally but the previous layout information will be lost and the designer will automatically re-arrange the elements on the design surface.-->
+<Objects
+  Version="sql11">
+  <!--Each node below will contain properties that do not affect runtime behavior.-->
+  <Package
+    design-time-name="Package">
+    <LayoutInfo>
+      <GraphLayout
+        Capacity="16" xmlns="clr-namespace:Microsoft.SqlServer.IntegrationServices.Designer.Model.Serialization;assembly=Microsoft.SqlServer.IntegrationServices.Graph" xmlns:mssgle="clr-namespace:Microsoft.SqlServer.Graph.LayoutEngine;assembly=Microsoft.SqlServer.Graph" xmlns:assembly="http://schemas.microsoft.com/winfx/2006/xaml">
+        <NodeLayout
+          Size="153,42"
+          Id="Package\Data Flow Task"
+          TopLeft="124,405" />
+        <NodeLayout
+          Size="169,42"
+          Id="Package\EXEC End Package"
+          TopLeft="127,492" />
+        <NodeLayout
+          Size="202,42"
+          Id="Package\EXEC Get ETLCriteriaDate"
+          TopLeft="95,235" />
+        <NodeLayout
+          Size="184,42"
+          Id="Package\EXEC Get ExecutionId"
+          TopLeft="109,147" />
+        <NodeLayout
+          Size="174,42"
+          Id="Package\EXEC Start Package"
+          TopLeft="103,58" />
+        <NodeLayout
+          Size="180,42"
+          Id="Package\EXEC Truncate Table"
+          TopLeft="112,314" />
+        <EdgeLayout
+          Id="Package.PrecedenceConstraints[Constraint]"
+          TopLeft="190,100">
+          <EdgeLayout.Curve>
+            <mssgle:Curve
+              StartConnector="{assembly:Null}"
+              EndConnector="11,47"
+              Start="0,0"
+              End="11,39.5">
+              <mssgle:Curve.Segments>
+                <mssgle:SegmentCollection
+                  Capacity="5">
+                  <mssgle:LineSegment
+                    End="0,19.5" />
+                  <mssgle:CubicBezierSegment
+                    Point1="0,19.5"
+                    Point2="0,23.5"
+                    Point3="4,23.5" />
+                  <mssgle:LineSegment
+                    End="7,23.5" />
+                  <mssgle:CubicBezierSegment
+                    Point1="7,23.5"
+                    Point2="11,23.5"
+                    Point3="11,27.5" />
+                  <mssgle:LineSegment
+                    End="11,39.5" />
+                </mssgle:SegmentCollection>
+              </mssgle:Curve.Segments>
+            </mssgle:Curve>
+          </EdgeLayout.Curve>
+          <EdgeLayout.Labels>
+            <EdgeLabelCollection />
+          </EdgeLayout.Labels>
+        </EdgeLayout>
+        <EdgeLayout
+          Id="Package.PrecedenceConstraints[Constraint 1]"
+          TopLeft="198.5,189">
+          <EdgeLayout.Curve>
+            <mssgle:Curve
+              StartConnector="{assembly:Null}"
+              EndConnector="0,46"
+              Start="0,0"
+              End="0,38.5">
+              <mssgle:Curve.Segments>
+                <mssgle:SegmentCollection
+                  Capacity="5">
+                  <mssgle:LineSegment
+                    End="0,38.5" />
+                </mssgle:SegmentCollection>
+              </mssgle:Curve.Segments>
+            </mssgle:Curve>
+          </EdgeLayout.Curve>
+          <EdgeLayout.Labels>
+            <EdgeLabelCollection />
+          </EdgeLayout.Labels>
+        </EdgeLayout>
+        <EdgeLayout
+          Id="Package.PrecedenceConstraints[Constraint 2]"
+          TopLeft="199,277">
+          <EdgeLayout.Curve>
+            <mssgle:Curve
+              StartConnector="{assembly:Null}"
+              EndConnector="0,37"
+              Start="0,0"
+              End="0,29.5">
+              <mssgle:Curve.Segments>
+                <mssgle:SegmentCollection
+                  Capacity="5">
+                  <mssgle:LineSegment
+                    End="0,29.5" />
+                </mssgle:SegmentCollection>
+              </mssgle:Curve.Segments>
+            </mssgle:Curve>
+          </EdgeLayout.Curve>
+          <EdgeLayout.Labels>
+            <EdgeLabelCollection />
+          </EdgeLayout.Labels>
+        </EdgeLayout>
+        <EdgeLayout
+          Id="Package.PrecedenceConstraints[Constraint 3]"
+          TopLeft="200.5,447">
+          <EdgeLayout.Curve>
+            <mssgle:Curve
+              StartConnector="{assembly:Null}"
+              EndConnector="11,45"
+              Start="0,0"
+              End="11,37.5">
+              <mssgle:Curve.Segments>
+                <mssgle:SegmentCollection
+                  Capacity="5">
+                  <mssgle:LineSegment
+                    End="0,18.5" />
+                  <mssgle:CubicBezierSegment
+                    Point1="0,18.5"
+                    Point2="0,22.5"
+                    Point3="4,22.5" />
+                  <mssgle:LineSegment
+                    End="7,22.5" />
+                  <mssgle:CubicBezierSegment
+                    Point1="7,22.5"
+                    Point2="11,22.5"
+                    Point3="11,26.5" />
+                  <mssgle:LineSegment
+                    End="11,37.5" />
+                </mssgle:SegmentCollection>
+              </mssgle:Curve.Segments>
+            </mssgle:Curve>
+          </EdgeLayout.Curve>
+          <EdgeLayout.Labels>
+            <EdgeLabelCollection />
+          </EdgeLayout.Labels>
+        </EdgeLayout>
+        <EdgeLayout
+          Id="Package.PrecedenceConstraints[Constraint 4]"
+          TopLeft="201.25,356">
+          <EdgeLayout.Curve>
+            <mssgle:Curve
+              StartConnector="{assembly:Null}"
+              EndConnector="0,49"
+              Start="0,0"
+              End="0,41.5">
+              <mssgle:Curve.Segments>
+                <mssgle:SegmentCollection
+                  Capacity="5">
+                  <mssgle:LineSegment
+                    End="0,41.5" />
+                </mssgle:SegmentCollection>
+              </mssgle:Curve.Segments>
+            </mssgle:Curve>
+          </EdgeLayout.Curve>
+          <EdgeLayout.Labels>
+            <EdgeLabelCollection />
+          </EdgeLayout.Labels>
+        </EdgeLayout>
+      </GraphLayout>
+    </LayoutInfo>
+  </Package>
+  <TaskHost
+    design-time-name="Package\Data Flow Task">
+    <LayoutInfo>
+      <GraphLayout
+        Capacity="8" xmlns="clr-namespace:Microsoft.SqlServer.IntegrationServices.Designer.Model.Serialization;assembly=Microsoft.SqlServer.IntegrationServices.Graph" xmlns:mssgle="clr-namespace:Microsoft.SqlServer.Graph.LayoutEngine;assembly=Microsoft.SqlServer.Graph" xmlns:assembly="http://schemas.microsoft.com/winfx/2006/xaml">
+        <NodeLayout
+          Size="171,42"
+          Id="Package\Data Flow Task\OLEDB_SRC Oracle"
+          TopLeft="165,102" />
+        <NodeLayout
+          Size="139,42"
+          Id="Package\Data Flow Task\OLEDB_DST"
+          TopLeft="182,249" />
+        <NodeLayout
+          Size="158,42"
+          Id="Package\Data Flow Task\Data Conversion"
+          TopLeft="393,190" />
+        <EdgeLayout
+          Id="Package\Data Flow Task.Paths[OLE DB Source Output]"
+          TopLeft="250.5,144">
+          <EdgeLayout.Curve>
+            <mssgle:Curve
+              StartConnector="{assembly:Null}"
+              EndConnector="221.5,46"
+              Start="0,0"
+              End="221.5,38.5">
+              <mssgle:Curve.Segments>
+                <mssgle:SegmentCollection
+                  Capacity="5">
+                  <mssgle:LineSegment
+                    End="0,19" />
+                  <mssgle:CubicBezierSegment
+                    Point1="0,19"
+                    Point2="0,23"
+                    Point3="4,23" />
+                  <mssgle:LineSegment
+                    End="217.5,23" />
+                  <mssgle:CubicBezierSegment
+                    Point1="217.5,23"
+                    Point2="221.5,23"
+                    Point3="221.5,27" />
+                  <mssgle:LineSegment
+                    End="221.5,38.5" />
+                </mssgle:SegmentCollection>
+              </mssgle:Curve.Segments>
+            </mssgle:Curve>
+          </EdgeLayout.Curve>
+          <EdgeLayout.Labels>
+            <EdgeLabelCollection />
+          </EdgeLayout.Labels>
+        </EdgeLayout>
+        <EdgeLayout
+          Id="Package\Data Flow Task.Paths[Data Conversion Output]"
+          TopLeft="393,211">
+          <EdgeLayout.Curve>
+            <mssgle:Curve
+              StartConnector="{assembly:Null}"
+              EndConnector="-72,59"
+              Start="0,0"
+              End="-64.5,59">
+              <mssgle:Curve.Segments>
+                <mssgle:SegmentCollection
+                  Capacity="5">
+                  <mssgle:LineSegment
+                    End="-32,0" />
+                  <mssgle:CubicBezierSegment
+                    Point1="-32,0"
+                    Point2="-36,0"
+                    Point3="-36,4" />
+                  <mssgle:LineSegment
+                    End="-36,55" />
+                  <mssgle:CubicBezierSegment
+                    Point1="-36,55"
+                    Point2="-36,59"
+                    Point3="-40,59" />
+                  <mssgle:LineSegment
+                    End="-64.5,59" />
+                </mssgle:SegmentCollection>
+              </mssgle:Curve.Segments>
+            </mssgle:Curve>
+          </EdgeLayout.Curve>
+          <EdgeLayout.Labels>
+            <EdgeLabelCollection />
+          </EdgeLayout.Labels>
+        </EdgeLayout>
+      </GraphLayout>
+    </LayoutInfo>
+  </TaskHost>
+  <PipelineComponentMetadata
+    design-time-name="Package\Data Flow Task\OLEDB_DST">
+    <Properties>
+      <Property>
+        <Name>DataSourceViewID</Name>
+      </Property>
+      <Property>
+        <Name>TableInfoObjectType</Name>
+        <Value
+          type="q2:string">Table</Value>
+      </Property>
+    </Properties>
+  </PipelineComponentMetadata>
+  <PipelineComponentMetadata
+    design-time-name="Package\Data Flow Task\OLEDB_SRC Oracle">
+    <Properties>
+      <Property>
+        <Name>DataSourceViewID</Name>
+      </Property>
+      <Property>
+        <Name>TableInfoObjectType</Name>
+        <Value
+          type="q2:string">View</Value>
+      </Property>
+    </Properties>
+  </PipelineComponentMetadata>
+</Objects>]]></DTS:DesignTimeProperties>
+</DTS:Executable>

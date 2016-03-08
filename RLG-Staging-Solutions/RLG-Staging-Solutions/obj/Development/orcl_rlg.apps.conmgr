@@ -1,0 +1,10 @@
+<?xml version="1.0"?>
+<DTS:ConnectionManager xmlns:DTS="www.microsoft.com/SqlServer/Dts"
+  DTS:ObjectName="orcl_rlg.apps"
+  DTS:DTSID="{BD75C8D0-20DE-41A7-83D6-36CF1D9BCFA2}"
+  DTS:CreationName="OLEDB">
+  <DTS:ObjectData>
+    <DTS:ConnectionManager
+      DTS:ConnectionString="Data Source=orcl_rlg;User ID=apps;Provider=OraOLEDB.Oracle.1;Persist Security Info=True;Locale Identifier=874;" />
+  </DTS:ObjectData>
+</DTS:ConnectionManager>
