@@ -13,8 +13,8 @@
   DTS:ObjectName="FactFinance"
   DTS:PackageType="5"
   DTS:ProtectionLevel="0"
-  DTS:VersionBuild="96"
-  DTS:VersionGUID="{A4551581-244F-4C2F-B557-C0F01734B42D}">
+  DTS:VersionBuild="98"
+  DTS:VersionGUID="{520D59D4-AE37-40C0-8632-15527365BF32}">
   <DTS:Property
     DTS:Name="PackageFormatVersion">6</DTS:Property>
   <DTS:ConnectionManagers>
@@ -780,6 +780,13 @@
                       cachedName="Copy of AMOUNT"
                       externalMetadataColumnId="Package\Data Flow Task\OLEDB_DST.Inputs[OLE DB Destination Input].ExternalColumns[AMOUNT]"
                       lineageId="Package\Data Flow Task\Data Conversion.Outputs[Data Conversion Output].Columns[Copy of AMOUNT]" />
+                    <inputColumn
+                      refId="Package\Data Flow Task\OLEDB_DST.Inputs[OLE DB Destination Input].Columns[BB_AMOUNT]"
+                      cachedDataType="wstr"
+                      cachedLength="38"
+                      cachedName="BB_AMOUNT"
+                      externalMetadataColumnId="Package\Data Flow Task\OLEDB_DST.Inputs[OLE DB Destination Input].ExternalColumns[BEGIN_BALANCE_AMOUNT]"
+                      lineageId="Package\Data Flow Task\OLEDB_SRC Oracle.Outputs[OLE DB Source Output].Columns[BB_AMOUNT]" />
                   </inputColumns>
                   <externalMetadataColumns
                     isUsed="True">
@@ -854,6 +861,11 @@
                       dataType="wstr"
                       length="38"
                       name="AMOUNT" />
+                    <externalMetadataColumn
+                      refId="Package\Data Flow Task\OLEDB_DST.Inputs[OLE DB Destination Input].ExternalColumns[BEGIN_BALANCE_AMOUNT]"
+                      dataType="wstr"
+                      length="38"
+                      name="BEGIN_BALANCE_AMOUNT" />
                   </externalMetadataColumns>
                 </input>
               </inputs>
@@ -1070,6 +1082,36 @@
                       lineageId="Package\Data Flow Task\OLEDB_SRC Oracle.Outputs[OLE DB Source Output].Columns[AMOUNT]"
                       name="AMOUNT"
                       truncationRowDisposition="FailComponent" />
+                    <outputColumn
+                      refId="Package\Data Flow Task\OLEDB_SRC Oracle.Outputs[OLE DB Source Output].Columns[PERIOD_NAME]"
+                      dataType="wstr"
+                      errorOrTruncationOperation="Conversion"
+                      errorRowDisposition="FailComponent"
+                      externalMetadataColumnId="Package\Data Flow Task\OLEDB_SRC Oracle.Outputs[OLE DB Source Output].ExternalColumns[PERIOD_NAME]"
+                      length="15"
+                      lineageId="Package\Data Flow Task\OLEDB_SRC Oracle.Outputs[OLE DB Source Output].Columns[PERIOD_NAME]"
+                      name="PERIOD_NAME"
+                      truncationRowDisposition="FailComponent" />
+                    <outputColumn
+                      refId="Package\Data Flow Task\OLEDB_SRC Oracle.Outputs[OLE DB Source Output].Columns[CODE_COMBINATION_ID]"
+                      dataType="numeric"
+                      errorOrTruncationOperation="Conversion"
+                      errorRowDisposition="FailComponent"
+                      externalMetadataColumnId="Package\Data Flow Task\OLEDB_SRC Oracle.Outputs[OLE DB Source Output].ExternalColumns[CODE_COMBINATION_ID]"
+                      lineageId="Package\Data Flow Task\OLEDB_SRC Oracle.Outputs[OLE DB Source Output].Columns[CODE_COMBINATION_ID]"
+                      name="CODE_COMBINATION_ID"
+                      precision="15"
+                      truncationRowDisposition="FailComponent" />
+                    <outputColumn
+                      refId="Package\Data Flow Task\OLEDB_SRC Oracle.Outputs[OLE DB Source Output].Columns[BB_AMOUNT]"
+                      dataType="wstr"
+                      errorOrTruncationOperation="Conversion"
+                      errorRowDisposition="FailComponent"
+                      externalMetadataColumnId="Package\Data Flow Task\OLEDB_SRC Oracle.Outputs[OLE DB Source Output].ExternalColumns[BB_AMOUNT]"
+                      length="38"
+                      lineageId="Package\Data Flow Task\OLEDB_SRC Oracle.Outputs[OLE DB Source Output].Columns[BB_AMOUNT]"
+                      name="BB_AMOUNT"
+                      truncationRowDisposition="FailComponent" />
                   </outputColumns>
                   <externalMetadataColumns
                     isUsed="True">
@@ -1135,6 +1177,21 @@
                       dataType="wstr"
                       length="38"
                       name="AMOUNT" />
+                    <externalMetadataColumn
+                      refId="Package\Data Flow Task\OLEDB_SRC Oracle.Outputs[OLE DB Source Output].ExternalColumns[PERIOD_NAME]"
+                      dataType="wstr"
+                      length="15"
+                      name="PERIOD_NAME" />
+                    <externalMetadataColumn
+                      refId="Package\Data Flow Task\OLEDB_SRC Oracle.Outputs[OLE DB Source Output].ExternalColumns[CODE_COMBINATION_ID]"
+                      dataType="numeric"
+                      name="CODE_COMBINATION_ID"
+                      precision="15" />
+                    <externalMetadataColumn
+                      refId="Package\Data Flow Task\OLEDB_SRC Oracle.Outputs[OLE DB Source Output].ExternalColumns[BB_AMOUNT]"
+                      dataType="wstr"
+                      length="38"
+                      name="BB_AMOUNT" />
                   </externalMetadataColumns>
                 </output>
                 <output
@@ -1147,6 +1204,12 @@
                       dataType="dbTimeStamp"
                       lineageId="Package\Data Flow Task\OLEDB_SRC Oracle.Outputs[OLE DB Source Error Output].Columns[TRX_DATE]"
                       name="TRX_DATE" />
+                    <outputColumn
+                      refId="Package\Data Flow Task\OLEDB_SRC Oracle.Outputs[OLE DB Source Error Output].Columns[PERIOD_NAME]"
+                      dataType="wstr"
+                      length="15"
+                      lineageId="Package\Data Flow Task\OLEDB_SRC Oracle.Outputs[OLE DB Source Error Output].Columns[PERIOD_NAME]"
+                      name="PERIOD_NAME" />
                     <outputColumn
                       refId="Package\Data Flow Task\OLEDB_SRC Oracle.Outputs[OLE DB Source Error Output].Columns[GL_ACCOUNT_TYPE]"
                       dataType="wstr"
@@ -1202,11 +1265,23 @@
                       lineageId="Package\Data Flow Task\OLEDB_SRC Oracle.Outputs[OLE DB Source Error Output].Columns[CONCATENATED_SEGMENTS]"
                       name="CONCATENATED_SEGMENTS" />
                     <outputColumn
+                      refId="Package\Data Flow Task\OLEDB_SRC Oracle.Outputs[OLE DB Source Error Output].Columns[CODE_COMBINATION_ID]"
+                      dataType="numeric"
+                      lineageId="Package\Data Flow Task\OLEDB_SRC Oracle.Outputs[OLE DB Source Error Output].Columns[CODE_COMBINATION_ID]"
+                      name="CODE_COMBINATION_ID"
+                      precision="15" />
+                    <outputColumn
                       refId="Package\Data Flow Task\OLEDB_SRC Oracle.Outputs[OLE DB Source Error Output].Columns[AMOUNT]"
                       dataType="wstr"
                       length="38"
                       lineageId="Package\Data Flow Task\OLEDB_SRC Oracle.Outputs[OLE DB Source Error Output].Columns[AMOUNT]"
                       name="AMOUNT" />
+                    <outputColumn
+                      refId="Package\Data Flow Task\OLEDB_SRC Oracle.Outputs[OLE DB Source Error Output].Columns[BB_AMOUNT]"
+                      dataType="wstr"
+                      length="38"
+                      lineageId="Package\Data Flow Task\OLEDB_SRC Oracle.Outputs[OLE DB Source Error Output].Columns[BB_AMOUNT]"
+                      name="BB_AMOUNT" />
                     <outputColumn
                       refId="Package\Data Flow Task\OLEDB_SRC Oracle.Outputs[OLE DB Source Error Output].Columns[LAST_UPDATE_DATE]"
                       dataType="dbTimeStamp"
@@ -2974,19 +3049,6 @@
     </LayoutInfo>
   </TaskHost>
   <PipelineComponentMetadata
-    design-time-name="Package\Data Flow Task\OLEDB_DST">
-    <Properties>
-      <Property>
-        <Name>DataSourceViewID</Name>
-      </Property>
-      <Property>
-        <Name>TableInfoObjectType</Name>
-        <Value
-          type="q2:string">Table</Value>
-      </Property>
-    </Properties>
-  </PipelineComponentMetadata>
-  <PipelineComponentMetadata
     design-time-name="Package\Data Flow Task\OLEDB_SRC Oracle">
     <Properties>
       <Property>
@@ -2996,6 +3058,19 @@
         <Name>TableInfoObjectType</Name>
         <Value
           type="q2:string">View</Value>
+      </Property>
+    </Properties>
+  </PipelineComponentMetadata>
+  <PipelineComponentMetadata
+    design-time-name="Package\Data Flow Task\OLEDB_DST">
+    <Properties>
+      <Property>
+        <Name>DataSourceViewID</Name>
+      </Property>
+      <Property>
+        <Name>TableInfoObjectType</Name>
+        <Value
+          type="q2:string">Table</Value>
       </Property>
     </Properties>
   </PipelineComponentMetadata>
@@ -3088,6 +3163,14 @@
     </LayoutInfo>
   </TaskHost>
   <PipelineComponentMetadata
+    design-time-name="Package\DFT Budget\OLEDB_SRC Oracle">
+    <Properties>
+      <Property>
+        <Name>DataSourceViewID</Name>
+      </Property>
+    </Properties>
+  </PipelineComponentMetadata>
+  <PipelineComponentMetadata
     design-time-name="Package\DFT Budget\OLEDB_DST">
     <Properties>
       <Property>
@@ -3097,14 +3180,6 @@
         <Name>TableInfoObjectType</Name>
         <Value
           type="q2:string">Table</Value>
-      </Property>
-    </Properties>
-  </PipelineComponentMetadata>
-  <PipelineComponentMetadata
-    design-time-name="Package\DFT Budget\OLEDB_SRC Oracle">
-    <Properties>
-      <Property>
-        <Name>DataSourceViewID</Name>
       </Property>
     </Properties>
   </PipelineComponentMetadata>
