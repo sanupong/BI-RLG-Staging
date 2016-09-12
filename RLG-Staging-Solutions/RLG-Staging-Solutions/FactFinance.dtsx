@@ -13,8 +13,8 @@
   DTS:ObjectName="FactFinance"
   DTS:PackageType="5"
   DTS:ProtectionLevel="0"
-  DTS:VersionBuild="98"
-  DTS:VersionGUID="{520D59D4-AE37-40C0-8632-15527365BF32}">
+  DTS:VersionBuild="113"
+  DTS:VersionGUID="{DFC03537-61C7-413C-9F4C-F98AD94DB358}">
   <DTS:Property
     DTS:Name="PackageFormatVersion">6</DTS:Property>
   <DTS:ConnectionManagers>
@@ -89,7 +89,7 @@
       DTS:Namespace="User"
       DTS:ObjectName="ETLCriteriaDate">
       <DTS:VariableValue
-        DTS:DataType="8">20090101,20161231</DTS:VariableValue>
+        DTS:DataType="8">20090501,20161231</DTS:VariableValue>
     </DTS:Variable>
     <DTS:Variable
       DTS:CreationName=""
@@ -2660,7 +2660,7 @@
       <DTS:ObjectData>
         <SQLTask:SqlTaskData
           SQLTask:Connection="{C37E7D7C-81E7-48D4-B7C1-3084D263BEB5}"
-          SQLTask:SqlStatementSource="Truncate Table FactFinance;&#xA;Truncate Table FactFinanceBudget;" xmlns:SQLTask="www.microsoft.com/sqlserver/dts/tasks/sqltask">
+          SQLTask:SqlStatementSource="Truncate Table FactFinance;&#xA;Truncate Table FactFinanceBudget;&#xA;Truncate Table GL_Balances;" xmlns:SQLTask="www.microsoft.com/sqlserver/dts/tasks/sqltask">
           <SQLTask:ParameterBinding
             SQLTask:ParameterName="0"
             SQLTask:DtsVariableName="User::ETLStartDate"
@@ -2686,6 +2686,1384 @@
             SQLTask:DataType="129"
             SQLTask:ParameterSize="-1" />
         </SQLTask:SqlTaskData>
+      </DTS:ObjectData>
+    </DTS:Executable>
+    <DTS:Executable
+      DTS:refId="Package\GL_Balances"
+      DTS:CreationName="SSIS.Pipeline.3"
+      DTS:Description="Data Flow Task"
+      DTS:DTSID="{784ED6B7-F748-4726-8320-FE0573CE9F03}"
+      DTS:ExecutableType="SSIS.Pipeline.3"
+      DTS:LocaleID="-1"
+      DTS:ObjectName="GL_Balances"
+      DTS:TaskContact="Performs high-performance data extraction, transformation and loading;Microsoft Corporation; Microsoft SQL Server; (C) 2007 Microsoft Corporation; All Rights Reserved;http://www.microsoft.com/sql/support/default.asp;1">
+      <DTS:Variables />
+      <DTS:ObjectData>
+        <pipeline
+          version="1">
+          <components>
+            <component
+              refId="Package\GL_Balances\Data Conversion"
+              componentClassID="{62B1106C-7DB8-4EC8-ADD6-4C664DFFC54A}"
+              contactInfo="Data Conversion;Microsoft Corporation; Microsoft SQL Server; (C) Microsoft Corporation; All Rights Reserved; http://www.microsoft.com/sql/support;0"
+              description="Data Conversion"
+              name="Data Conversion"
+              usesDispositions="true">
+              <inputs>
+                <input
+                  refId="Package\GL_Balances\Data Conversion.Inputs[Data Conversion Input]"
+                  name="Data Conversion Input">
+                  <inputColumns>
+                    <inputColumn
+                      refId="Package\GL_Balances\Data Conversion.Inputs[Data Conversion Input].Columns[PERIOD_NAME]"
+                      cachedDataType="wstr"
+                      cachedLength="15"
+                      cachedName="PERIOD_NAME"
+                      lineageId="Package\GL_Balances\OLE DB Source.Outputs[OLE DB Source Output].Columns[PERIOD_NAME]" />
+                    <inputColumn
+                      refId="Package\GL_Balances\Data Conversion.Inputs[Data Conversion Input].Columns[PERIOD_YEAR]"
+                      cachedDataType="numeric"
+                      cachedName="PERIOD_YEAR"
+                      cachedPrecision="15"
+                      lineageId="Package\GL_Balances\OLE DB Source.Outputs[OLE DB Source Output].Columns[PERIOD_YEAR]" />
+                    <inputColumn
+                      refId="Package\GL_Balances\Data Conversion.Inputs[Data Conversion Input].Columns[PERIOD_NUM]"
+                      cachedDataType="numeric"
+                      cachedName="PERIOD_NUM"
+                      cachedPrecision="15"
+                      lineageId="Package\GL_Balances\OLE DB Source.Outputs[OLE DB Source Output].Columns[PERIOD_NUM]" />
+                    <inputColumn
+                      refId="Package\GL_Balances\Data Conversion.Inputs[Data Conversion Input].Columns[GL_ACCOUNT_TYPE]"
+                      cachedDataType="wstr"
+                      cachedLength="1"
+                      cachedName="GL_ACCOUNT_TYPE"
+                      lineageId="Package\GL_Balances\OLE DB Source.Outputs[OLE DB Source Output].Columns[GL_ACCOUNT_TYPE]" />
+                    <inputColumn
+                      refId="Package\GL_Balances\Data Conversion.Inputs[Data Conversion Input].Columns[SEGMENT1]"
+                      cachedDataType="wstr"
+                      cachedLength="240"
+                      cachedName="SEGMENT1"
+                      lineageId="Package\GL_Balances\OLE DB Source.Outputs[OLE DB Source Output].Columns[SEGMENT1]" />
+                    <inputColumn
+                      refId="Package\GL_Balances\Data Conversion.Inputs[Data Conversion Input].Columns[SEGMENT2]"
+                      cachedDataType="wstr"
+                      cachedLength="25"
+                      cachedName="SEGMENT2"
+                      lineageId="Package\GL_Balances\OLE DB Source.Outputs[OLE DB Source Output].Columns[SEGMENT2]" />
+                    <inputColumn
+                      refId="Package\GL_Balances\Data Conversion.Inputs[Data Conversion Input].Columns[SEGMENT3]"
+                      cachedDataType="wstr"
+                      cachedLength="25"
+                      cachedName="SEGMENT3"
+                      lineageId="Package\GL_Balances\OLE DB Source.Outputs[OLE DB Source Output].Columns[SEGMENT3]" />
+                    <inputColumn
+                      refId="Package\GL_Balances\Data Conversion.Inputs[Data Conversion Input].Columns[SEGMENT4]"
+                      cachedDataType="wstr"
+                      cachedLength="25"
+                      cachedName="SEGMENT4"
+                      lineageId="Package\GL_Balances\OLE DB Source.Outputs[OLE DB Source Output].Columns[SEGMENT4]" />
+                    <inputColumn
+                      refId="Package\GL_Balances\Data Conversion.Inputs[Data Conversion Input].Columns[SEGMENT5]"
+                      cachedDataType="wstr"
+                      cachedLength="25"
+                      cachedName="SEGMENT5"
+                      lineageId="Package\GL_Balances\OLE DB Source.Outputs[OLE DB Source Output].Columns[SEGMENT5]" />
+                    <inputColumn
+                      refId="Package\GL_Balances\Data Conversion.Inputs[Data Conversion Input].Columns[SEGMENT6]"
+                      cachedDataType="wstr"
+                      cachedLength="25"
+                      cachedName="SEGMENT6"
+                      lineageId="Package\GL_Balances\OLE DB Source.Outputs[OLE DB Source Output].Columns[SEGMENT6]" />
+                    <inputColumn
+                      refId="Package\GL_Balances\Data Conversion.Inputs[Data Conversion Input].Columns[SEGMENT7]"
+                      cachedDataType="wstr"
+                      cachedLength="25"
+                      cachedName="SEGMENT7"
+                      lineageId="Package\GL_Balances\OLE DB Source.Outputs[OLE DB Source Output].Columns[SEGMENT7]" />
+                    <inputColumn
+                      refId="Package\GL_Balances\Data Conversion.Inputs[Data Conversion Input].Columns[CONCATENATED_SEGMENTS]"
+                      cachedDataType="wstr"
+                      cachedLength="181"
+                      cachedName="CONCATENATED_SEGMENTS"
+                      lineageId="Package\GL_Balances\OLE DB Source.Outputs[OLE DB Source Output].Columns[CONCATENATED_SEGMENTS]" />
+                    <inputColumn
+                      refId="Package\GL_Balances\Data Conversion.Inputs[Data Conversion Input].Columns[BEGIN_BALANCE_DR]"
+                      cachedDataType="wstr"
+                      cachedLength="38"
+                      cachedName="BEGIN_BALANCE_DR"
+                      lineageId="Package\GL_Balances\OLE DB Source.Outputs[OLE DB Source Output].Columns[BEGIN_BALANCE_DR]" />
+                    <inputColumn
+                      refId="Package\GL_Balances\Data Conversion.Inputs[Data Conversion Input].Columns[BEGIN_BALANCE_CR]"
+                      cachedDataType="wstr"
+                      cachedLength="38"
+                      cachedName="BEGIN_BALANCE_CR"
+                      lineageId="Package\GL_Balances\OLE DB Source.Outputs[OLE DB Source Output].Columns[BEGIN_BALANCE_CR]" />
+                    <inputColumn
+                      refId="Package\GL_Balances\Data Conversion.Inputs[Data Conversion Input].Columns[PERIOD_NET_DR]"
+                      cachedDataType="wstr"
+                      cachedLength="38"
+                      cachedName="PERIOD_NET_DR"
+                      lineageId="Package\GL_Balances\OLE DB Source.Outputs[OLE DB Source Output].Columns[PERIOD_NET_DR]" />
+                    <inputColumn
+                      refId="Package\GL_Balances\Data Conversion.Inputs[Data Conversion Input].Columns[PERIOD_NET_CR]"
+                      cachedDataType="wstr"
+                      cachedLength="38"
+                      cachedName="PERIOD_NET_CR"
+                      lineageId="Package\GL_Balances\OLE DB Source.Outputs[OLE DB Source Output].Columns[PERIOD_NET_CR]" />
+                    <inputColumn
+                      refId="Package\GL_Balances\Data Conversion.Inputs[Data Conversion Input].Columns[AMOUNT]"
+                      cachedDataType="wstr"
+                      cachedLength="38"
+                      cachedName="AMOUNT"
+                      lineageId="Package\GL_Balances\OLE DB Source.Outputs[OLE DB Source Output].Columns[AMOUNT]" />
+                    <inputColumn
+                      refId="Package\GL_Balances\Data Conversion.Inputs[Data Conversion Input].Columns[TRANS_DATE]"
+                      cachedDataType="wstr"
+                      cachedLength="83"
+                      cachedName="TRANS_DATE"
+                      lineageId="Package\GL_Balances\OLE DB Source.Outputs[OLE DB Source Output].Columns[TRANS_DATE]" />
+                  </inputColumns>
+                  <externalMetadataColumns />
+                </input>
+              </inputs>
+              <outputs>
+                <output
+                  refId="Package\GL_Balances\Data Conversion.Outputs[Data Conversion Output]"
+                  exclusionGroup="1"
+                  name="Data Conversion Output"
+                  synchronousInputId="Package\GL_Balances\Data Conversion.Inputs[Data Conversion Input]">
+                  <outputColumns>
+                    <outputColumn
+                      refId="Package\GL_Balances\Data Conversion.Outputs[Data Conversion Output].Columns[Copy of PERIOD_NAME]"
+                      codePage="874"
+                      dataType="str"
+                      errorOrTruncationOperation="Conversion"
+                      errorRowDisposition="FailComponent"
+                      length="15"
+                      lineageId="Package\GL_Balances\Data Conversion.Outputs[Data Conversion Output].Columns[Copy of PERIOD_NAME]"
+                      name="Copy of PERIOD_NAME"
+                      truncationRowDisposition="FailComponent">
+                      <properties>
+                        <property
+                          containsID="true"
+                          dataType="System.Int32"
+                          description="Specifies the input column used as the source of data for the conversion."
+                          name="SourceInputColumnLineageID">#{Package\GL_Balances\OLE DB Source.Outputs[OLE DB Source Output].Columns[PERIOD_NAME]}</property>
+                        <property
+                          dataType="System.Boolean"
+                          description="Indicates whether the column uses the faster, locale-neutral parsing routines."
+                          name="FastParse">false</property>
+                      </properties>
+                    </outputColumn>
+                    <outputColumn
+                      refId="Package\GL_Balances\Data Conversion.Outputs[Data Conversion Output].Columns[Copy of PERIOD_YEAR]"
+                      codePage="874"
+                      dataType="str"
+                      errorOrTruncationOperation="Conversion"
+                      errorRowDisposition="FailComponent"
+                      length="50"
+                      lineageId="Package\GL_Balances\Data Conversion.Outputs[Data Conversion Output].Columns[Copy of PERIOD_YEAR]"
+                      name="Copy of PERIOD_YEAR"
+                      truncationRowDisposition="FailComponent">
+                      <properties>
+                        <property
+                          containsID="true"
+                          dataType="System.Int32"
+                          description="Specifies the input column used as the source of data for the conversion."
+                          name="SourceInputColumnLineageID">#{Package\GL_Balances\OLE DB Source.Outputs[OLE DB Source Output].Columns[PERIOD_YEAR]}</property>
+                        <property
+                          dataType="System.Boolean"
+                          description="Indicates whether the column uses the faster, locale-neutral parsing routines."
+                          name="FastParse">false</property>
+                      </properties>
+                    </outputColumn>
+                    <outputColumn
+                      refId="Package\GL_Balances\Data Conversion.Outputs[Data Conversion Output].Columns[Copy of PERIOD_NUM]"
+                      codePage="874"
+                      dataType="str"
+                      errorOrTruncationOperation="Conversion"
+                      errorRowDisposition="FailComponent"
+                      length="50"
+                      lineageId="Package\GL_Balances\Data Conversion.Outputs[Data Conversion Output].Columns[Copy of PERIOD_NUM]"
+                      name="Copy of PERIOD_NUM"
+                      truncationRowDisposition="FailComponent">
+                      <properties>
+                        <property
+                          containsID="true"
+                          dataType="System.Int32"
+                          description="Specifies the input column used as the source of data for the conversion."
+                          name="SourceInputColumnLineageID">#{Package\GL_Balances\OLE DB Source.Outputs[OLE DB Source Output].Columns[PERIOD_NUM]}</property>
+                        <property
+                          dataType="System.Boolean"
+                          description="Indicates whether the column uses the faster, locale-neutral parsing routines."
+                          name="FastParse">false</property>
+                      </properties>
+                    </outputColumn>
+                    <outputColumn
+                      refId="Package\GL_Balances\Data Conversion.Outputs[Data Conversion Output].Columns[Copy of GL_ACCOUNT_TYPE]"
+                      codePage="874"
+                      dataType="str"
+                      errorOrTruncationOperation="Conversion"
+                      errorRowDisposition="FailComponent"
+                      length="1"
+                      lineageId="Package\GL_Balances\Data Conversion.Outputs[Data Conversion Output].Columns[Copy of GL_ACCOUNT_TYPE]"
+                      name="Copy of GL_ACCOUNT_TYPE"
+                      truncationRowDisposition="FailComponent">
+                      <properties>
+                        <property
+                          containsID="true"
+                          dataType="System.Int32"
+                          description="Specifies the input column used as the source of data for the conversion."
+                          name="SourceInputColumnLineageID">#{Package\GL_Balances\OLE DB Source.Outputs[OLE DB Source Output].Columns[GL_ACCOUNT_TYPE]}</property>
+                        <property
+                          dataType="System.Boolean"
+                          description="Indicates whether the column uses the faster, locale-neutral parsing routines."
+                          name="FastParse">false</property>
+                      </properties>
+                    </outputColumn>
+                    <outputColumn
+                      refId="Package\GL_Balances\Data Conversion.Outputs[Data Conversion Output].Columns[Copy of SEGMENT1]"
+                      codePage="874"
+                      dataType="str"
+                      errorOrTruncationOperation="Conversion"
+                      errorRowDisposition="FailComponent"
+                      length="240"
+                      lineageId="Package\GL_Balances\Data Conversion.Outputs[Data Conversion Output].Columns[Copy of SEGMENT1]"
+                      name="Copy of SEGMENT1"
+                      truncationRowDisposition="FailComponent">
+                      <properties>
+                        <property
+                          containsID="true"
+                          dataType="System.Int32"
+                          description="Specifies the input column used as the source of data for the conversion."
+                          name="SourceInputColumnLineageID">#{Package\GL_Balances\OLE DB Source.Outputs[OLE DB Source Output].Columns[SEGMENT1]}</property>
+                        <property
+                          dataType="System.Boolean"
+                          description="Indicates whether the column uses the faster, locale-neutral parsing routines."
+                          name="FastParse">false</property>
+                      </properties>
+                    </outputColumn>
+                    <outputColumn
+                      refId="Package\GL_Balances\Data Conversion.Outputs[Data Conversion Output].Columns[Copy of SEGMENT2]"
+                      codePage="874"
+                      dataType="str"
+                      errorOrTruncationOperation="Conversion"
+                      errorRowDisposition="FailComponent"
+                      length="25"
+                      lineageId="Package\GL_Balances\Data Conversion.Outputs[Data Conversion Output].Columns[Copy of SEGMENT2]"
+                      name="Copy of SEGMENT2"
+                      truncationRowDisposition="FailComponent">
+                      <properties>
+                        <property
+                          containsID="true"
+                          dataType="System.Int32"
+                          description="Specifies the input column used as the source of data for the conversion."
+                          name="SourceInputColumnLineageID">#{Package\GL_Balances\OLE DB Source.Outputs[OLE DB Source Output].Columns[SEGMENT2]}</property>
+                        <property
+                          dataType="System.Boolean"
+                          description="Indicates whether the column uses the faster, locale-neutral parsing routines."
+                          name="FastParse">false</property>
+                      </properties>
+                    </outputColumn>
+                    <outputColumn
+                      refId="Package\GL_Balances\Data Conversion.Outputs[Data Conversion Output].Columns[Copy of SEGMENT3]"
+                      codePage="874"
+                      dataType="str"
+                      errorOrTruncationOperation="Conversion"
+                      errorRowDisposition="FailComponent"
+                      length="25"
+                      lineageId="Package\GL_Balances\Data Conversion.Outputs[Data Conversion Output].Columns[Copy of SEGMENT3]"
+                      name="Copy of SEGMENT3"
+                      truncationRowDisposition="FailComponent">
+                      <properties>
+                        <property
+                          containsID="true"
+                          dataType="System.Int32"
+                          description="Specifies the input column used as the source of data for the conversion."
+                          name="SourceInputColumnLineageID">#{Package\GL_Balances\OLE DB Source.Outputs[OLE DB Source Output].Columns[SEGMENT3]}</property>
+                        <property
+                          dataType="System.Boolean"
+                          description="Indicates whether the column uses the faster, locale-neutral parsing routines."
+                          name="FastParse">false</property>
+                      </properties>
+                    </outputColumn>
+                    <outputColumn
+                      refId="Package\GL_Balances\Data Conversion.Outputs[Data Conversion Output].Columns[Copy of SEGMENT4]"
+                      codePage="874"
+                      dataType="str"
+                      errorOrTruncationOperation="Conversion"
+                      errorRowDisposition="FailComponent"
+                      length="25"
+                      lineageId="Package\GL_Balances\Data Conversion.Outputs[Data Conversion Output].Columns[Copy of SEGMENT4]"
+                      name="Copy of SEGMENT4"
+                      truncationRowDisposition="FailComponent">
+                      <properties>
+                        <property
+                          containsID="true"
+                          dataType="System.Int32"
+                          description="Specifies the input column used as the source of data for the conversion."
+                          name="SourceInputColumnLineageID">#{Package\GL_Balances\OLE DB Source.Outputs[OLE DB Source Output].Columns[SEGMENT4]}</property>
+                        <property
+                          dataType="System.Boolean"
+                          description="Indicates whether the column uses the faster, locale-neutral parsing routines."
+                          name="FastParse">false</property>
+                      </properties>
+                    </outputColumn>
+                    <outputColumn
+                      refId="Package\GL_Balances\Data Conversion.Outputs[Data Conversion Output].Columns[Copy of SEGMENT5]"
+                      codePage="874"
+                      dataType="str"
+                      errorOrTruncationOperation="Conversion"
+                      errorRowDisposition="FailComponent"
+                      length="25"
+                      lineageId="Package\GL_Balances\Data Conversion.Outputs[Data Conversion Output].Columns[Copy of SEGMENT5]"
+                      name="Copy of SEGMENT5"
+                      truncationRowDisposition="FailComponent">
+                      <properties>
+                        <property
+                          containsID="true"
+                          dataType="System.Int32"
+                          description="Specifies the input column used as the source of data for the conversion."
+                          name="SourceInputColumnLineageID">#{Package\GL_Balances\OLE DB Source.Outputs[OLE DB Source Output].Columns[SEGMENT5]}</property>
+                        <property
+                          dataType="System.Boolean"
+                          description="Indicates whether the column uses the faster, locale-neutral parsing routines."
+                          name="FastParse">false</property>
+                      </properties>
+                    </outputColumn>
+                    <outputColumn
+                      refId="Package\GL_Balances\Data Conversion.Outputs[Data Conversion Output].Columns[Copy of SEGMENT6]"
+                      codePage="874"
+                      dataType="str"
+                      errorOrTruncationOperation="Conversion"
+                      errorRowDisposition="FailComponent"
+                      length="25"
+                      lineageId="Package\GL_Balances\Data Conversion.Outputs[Data Conversion Output].Columns[Copy of SEGMENT6]"
+                      name="Copy of SEGMENT6"
+                      truncationRowDisposition="FailComponent">
+                      <properties>
+                        <property
+                          containsID="true"
+                          dataType="System.Int32"
+                          description="Specifies the input column used as the source of data for the conversion."
+                          name="SourceInputColumnLineageID">#{Package\GL_Balances\OLE DB Source.Outputs[OLE DB Source Output].Columns[SEGMENT6]}</property>
+                        <property
+                          dataType="System.Boolean"
+                          description="Indicates whether the column uses the faster, locale-neutral parsing routines."
+                          name="FastParse">false</property>
+                      </properties>
+                    </outputColumn>
+                    <outputColumn
+                      refId="Package\GL_Balances\Data Conversion.Outputs[Data Conversion Output].Columns[Copy of SEGMENT7]"
+                      codePage="874"
+                      dataType="str"
+                      errorOrTruncationOperation="Conversion"
+                      errorRowDisposition="FailComponent"
+                      length="25"
+                      lineageId="Package\GL_Balances\Data Conversion.Outputs[Data Conversion Output].Columns[Copy of SEGMENT7]"
+                      name="Copy of SEGMENT7"
+                      truncationRowDisposition="FailComponent">
+                      <properties>
+                        <property
+                          containsID="true"
+                          dataType="System.Int32"
+                          description="Specifies the input column used as the source of data for the conversion."
+                          name="SourceInputColumnLineageID">#{Package\GL_Balances\OLE DB Source.Outputs[OLE DB Source Output].Columns[SEGMENT7]}</property>
+                        <property
+                          dataType="System.Boolean"
+                          description="Indicates whether the column uses the faster, locale-neutral parsing routines."
+                          name="FastParse">false</property>
+                      </properties>
+                    </outputColumn>
+                    <outputColumn
+                      refId="Package\GL_Balances\Data Conversion.Outputs[Data Conversion Output].Columns[Copy of CONCATENATED_SEGMENTS]"
+                      codePage="874"
+                      dataType="str"
+                      errorOrTruncationOperation="Conversion"
+                      errorRowDisposition="FailComponent"
+                      length="181"
+                      lineageId="Package\GL_Balances\Data Conversion.Outputs[Data Conversion Output].Columns[Copy of CONCATENATED_SEGMENTS]"
+                      name="Copy of CONCATENATED_SEGMENTS"
+                      truncationRowDisposition="FailComponent">
+                      <properties>
+                        <property
+                          containsID="true"
+                          dataType="System.Int32"
+                          description="Specifies the input column used as the source of data for the conversion."
+                          name="SourceInputColumnLineageID">#{Package\GL_Balances\OLE DB Source.Outputs[OLE DB Source Output].Columns[CONCATENATED_SEGMENTS]}</property>
+                        <property
+                          dataType="System.Boolean"
+                          description="Indicates whether the column uses the faster, locale-neutral parsing routines."
+                          name="FastParse">false</property>
+                      </properties>
+                    </outputColumn>
+                    <outputColumn
+                      refId="Package\GL_Balances\Data Conversion.Outputs[Data Conversion Output].Columns[Copy of BEGIN_BALANCE_DR]"
+                      dataType="cy"
+                      errorOrTruncationOperation="Conversion"
+                      errorRowDisposition="FailComponent"
+                      lineageId="Package\GL_Balances\Data Conversion.Outputs[Data Conversion Output].Columns[Copy of BEGIN_BALANCE_DR]"
+                      name="Copy of BEGIN_BALANCE_DR"
+                      truncationRowDisposition="FailComponent">
+                      <properties>
+                        <property
+                          containsID="true"
+                          dataType="System.Int32"
+                          description="Specifies the input column used as the source of data for the conversion."
+                          name="SourceInputColumnLineageID">#{Package\GL_Balances\OLE DB Source.Outputs[OLE DB Source Output].Columns[BEGIN_BALANCE_DR]}</property>
+                        <property
+                          dataType="System.Boolean"
+                          description="Indicates whether the column uses the faster, locale-neutral parsing routines."
+                          name="FastParse">false</property>
+                      </properties>
+                    </outputColumn>
+                    <outputColumn
+                      refId="Package\GL_Balances\Data Conversion.Outputs[Data Conversion Output].Columns[Copy of BEGIN_BALANCE_CR]"
+                      dataType="decimal"
+                      errorOrTruncationOperation="Conversion"
+                      errorRowDisposition="FailComponent"
+                      lineageId="Package\GL_Balances\Data Conversion.Outputs[Data Conversion Output].Columns[Copy of BEGIN_BALANCE_CR]"
+                      name="Copy of BEGIN_BALANCE_CR"
+                      truncationRowDisposition="FailComponent">
+                      <properties>
+                        <property
+                          containsID="true"
+                          dataType="System.Int32"
+                          description="Specifies the input column used as the source of data for the conversion."
+                          name="SourceInputColumnLineageID">#{Package\GL_Balances\OLE DB Source.Outputs[OLE DB Source Output].Columns[BEGIN_BALANCE_CR]}</property>
+                        <property
+                          dataType="System.Boolean"
+                          description="Indicates whether the column uses the faster, locale-neutral parsing routines."
+                          name="FastParse">false</property>
+                      </properties>
+                    </outputColumn>
+                    <outputColumn
+                      refId="Package\GL_Balances\Data Conversion.Outputs[Data Conversion Output].Columns[Copy of PERIOD_NET_DR]"
+                      dataType="decimal"
+                      errorOrTruncationOperation="Conversion"
+                      errorRowDisposition="FailComponent"
+                      lineageId="Package\GL_Balances\Data Conversion.Outputs[Data Conversion Output].Columns[Copy of PERIOD_NET_DR]"
+                      name="Copy of PERIOD_NET_DR"
+                      truncationRowDisposition="FailComponent">
+                      <properties>
+                        <property
+                          containsID="true"
+                          dataType="System.Int32"
+                          description="Specifies the input column used as the source of data for the conversion."
+                          name="SourceInputColumnLineageID">#{Package\GL_Balances\OLE DB Source.Outputs[OLE DB Source Output].Columns[PERIOD_NET_DR]}</property>
+                        <property
+                          dataType="System.Boolean"
+                          description="Indicates whether the column uses the faster, locale-neutral parsing routines."
+                          name="FastParse">false</property>
+                      </properties>
+                    </outputColumn>
+                    <outputColumn
+                      refId="Package\GL_Balances\Data Conversion.Outputs[Data Conversion Output].Columns[Copy of PERIOD_NET_CR]"
+                      dataType="decimal"
+                      errorOrTruncationOperation="Conversion"
+                      errorRowDisposition="FailComponent"
+                      lineageId="Package\GL_Balances\Data Conversion.Outputs[Data Conversion Output].Columns[Copy of PERIOD_NET_CR]"
+                      name="Copy of PERIOD_NET_CR"
+                      truncationRowDisposition="FailComponent">
+                      <properties>
+                        <property
+                          containsID="true"
+                          dataType="System.Int32"
+                          description="Specifies the input column used as the source of data for the conversion."
+                          name="SourceInputColumnLineageID">#{Package\GL_Balances\OLE DB Source.Outputs[OLE DB Source Output].Columns[PERIOD_NET_CR]}</property>
+                        <property
+                          dataType="System.Boolean"
+                          description="Indicates whether the column uses the faster, locale-neutral parsing routines."
+                          name="FastParse">false</property>
+                      </properties>
+                    </outputColumn>
+                    <outputColumn
+                      refId="Package\GL_Balances\Data Conversion.Outputs[Data Conversion Output].Columns[Copy of AMOUNT]"
+                      dataType="decimal"
+                      errorOrTruncationOperation="Conversion"
+                      errorRowDisposition="FailComponent"
+                      lineageId="Package\GL_Balances\Data Conversion.Outputs[Data Conversion Output].Columns[Copy of AMOUNT]"
+                      name="Copy of AMOUNT"
+                      truncationRowDisposition="FailComponent">
+                      <properties>
+                        <property
+                          containsID="true"
+                          dataType="System.Int32"
+                          description="Specifies the input column used as the source of data for the conversion."
+                          name="SourceInputColumnLineageID">#{Package\GL_Balances\OLE DB Source.Outputs[OLE DB Source Output].Columns[AMOUNT]}</property>
+                        <property
+                          dataType="System.Boolean"
+                          description="Indicates whether the column uses the faster, locale-neutral parsing routines."
+                          name="FastParse">false</property>
+                      </properties>
+                    </outputColumn>
+                    <outputColumn
+                      refId="Package\GL_Balances\Data Conversion.Outputs[Data Conversion Output].Columns[Copy of TRANS_DATE]"
+                      dataType="dbTimeStamp"
+                      errorOrTruncationOperation="Conversion"
+                      errorRowDisposition="FailComponent"
+                      lineageId="Package\GL_Balances\Data Conversion.Outputs[Data Conversion Output].Columns[Copy of TRANS_DATE]"
+                      name="Copy of TRANS_DATE"
+                      truncationRowDisposition="FailComponent">
+                      <properties>
+                        <property
+                          containsID="true"
+                          dataType="System.Int32"
+                          description="Specifies the input column used as the source of data for the conversion."
+                          name="SourceInputColumnLineageID">#{Package\GL_Balances\OLE DB Source.Outputs[OLE DB Source Output].Columns[TRANS_DATE]}</property>
+                        <property
+                          dataType="System.Boolean"
+                          description="Indicates whether the column uses the faster, locale-neutral parsing routines."
+                          name="FastParse">false</property>
+                      </properties>
+                    </outputColumn>
+                  </outputColumns>
+                  <externalMetadataColumns />
+                </output>
+                <output
+                  refId="Package\GL_Balances\Data Conversion.Outputs[Data Conversion Error Output]"
+                  exclusionGroup="1"
+                  isErrorOut="true"
+                  name="Data Conversion Error Output"
+                  synchronousInputId="Package\GL_Balances\Data Conversion.Inputs[Data Conversion Input]">
+                  <outputColumns>
+                    <outputColumn
+                      refId="Package\GL_Balances\Data Conversion.Outputs[Data Conversion Error Output].Columns[ErrorCode]"
+                      dataType="i4"
+                      lineageId="Package\GL_Balances\Data Conversion.Outputs[Data Conversion Error Output].Columns[ErrorCode]"
+                      name="ErrorCode"
+                      specialFlags="1" />
+                    <outputColumn
+                      refId="Package\GL_Balances\Data Conversion.Outputs[Data Conversion Error Output].Columns[ErrorColumn]"
+                      dataType="i4"
+                      lineageId="Package\GL_Balances\Data Conversion.Outputs[Data Conversion Error Output].Columns[ErrorColumn]"
+                      name="ErrorColumn"
+                      specialFlags="2" />
+                  </outputColumns>
+                  <externalMetadataColumns />
+                </output>
+              </outputs>
+            </component>
+            <component
+              refId="Package\GL_Balances\OLE DB Destination"
+              componentClassID="{4ADA7EAA-136C-4215-8098-D7A7C27FC0D1}"
+              contactInfo="OLE DB Destination;Microsoft Corporation; Microsoft SQL Server; (C) Microsoft Corporation; All Rights Reserved; http://www.microsoft.com/sql/support;4"
+              description="OLE DB Destination"
+              name="OLE DB Destination"
+              usesDispositions="true"
+              version="4">
+              <properties>
+                <property
+                  dataType="System.Int32"
+                  description="The number of seconds before a command times out.  A value of 0 indicates an infinite time-out."
+                  name="CommandTimeout">0</property>
+                <property
+                  dataType="System.String"
+                  description="Specifies the name of the database object used to open a rowset."
+                  name="OpenRowset">[dbo].[GL_BALANCES]</property>
+                <property
+                  dataType="System.String"
+                  description="Specifies the variable that contains the name of the database object used to open a rowset."
+                  name="OpenRowsetVariable"></property>
+                <property
+                  dataType="System.String"
+                  description="The SQL command to be executed."
+                  name="SqlCommand"
+                  UITypeEditor="Microsoft.DataTransformationServices.Controls.ModalMultilineStringEditor, Microsoft.DataTransformationServices.Controls, Version=11.0.0.0, Culture=neutral, PublicKeyToken=89845dcd8080cc91"></property>
+                <property
+                  dataType="System.Int32"
+                  description="Specifies the column code page to use when code page information is unavailable from the data source."
+                  name="DefaultCodePage">874</property>
+                <property
+                  dataType="System.Boolean"
+                  description="Forces the use of the DefaultCodePage property value when describing character data."
+                  name="AlwaysUseDefaultCodePage">false</property>
+                <property
+                  dataType="System.Int32"
+                  description="Specifies the mode used to access the database."
+                  name="AccessMode"
+                  typeConverter="AccessMode">0</property>
+                <property
+                  dataType="System.Boolean"
+                  description="Indicates whether the values supplied for identity columns will be copied to the destination. If false, values for identity columns will be auto-generated at the destination. Applies only if fast load is turned on."
+                  name="FastLoadKeepIdentity">false</property>
+                <property
+                  dataType="System.Boolean"
+                  description="Indicates whether the columns containing null will have null inserted in the destination. If false, columns containing null will have their default values inserted at the destination. Applies only if fast load is turned on."
+                  name="FastLoadKeepNulls">false</property>
+                <property
+                  dataType="System.String"
+                  description="Specifies options to be used with fast load.  Applies only if fast load is turned on."
+                  name="FastLoadOptions"></property>
+                <property
+                  dataType="System.Int32"
+                  description="Specifies when commits are issued during data insertion.  A value of 0 specifies that one commit will be issued at the end of data insertion.  Applies only if fast load is turned on."
+                  name="FastLoadMaxInsertCommitSize">2147483647</property>
+              </properties>
+              <connections>
+                <connection
+                  refId="Package\GL_Balances\OLE DB Destination.Connections[OleDbConnection]"
+                  connectionManagerID="Package.ConnectionManagers[SQL_Staging]"
+                  connectionManagerRefId="Package.ConnectionManagers[SQL_Staging]"
+                  description="The OLE DB runtime connection used to access the database."
+                  name="OleDbConnection" />
+              </connections>
+              <inputs>
+                <input
+                  refId="Package\GL_Balances\OLE DB Destination.Inputs[OLE DB Destination Input]"
+                  errorOrTruncationOperation="Insert"
+                  errorRowDisposition="FailComponent"
+                  hasSideEffects="true"
+                  name="OLE DB Destination Input">
+                  <inputColumns>
+                    <inputColumn
+                      refId="Package\GL_Balances\OLE DB Destination.Inputs[OLE DB Destination Input].Columns[PERIOD_NAME]"
+                      cachedDataType="wstr"
+                      cachedLength="15"
+                      cachedName="PERIOD_NAME"
+                      externalMetadataColumnId="Package\GL_Balances\OLE DB Destination.Inputs[OLE DB Destination Input].ExternalColumns[PERIOD_NAME]"
+                      lineageId="Package\GL_Balances\OLE DB Source.Outputs[OLE DB Source Output].Columns[PERIOD_NAME]" />
+                    <inputColumn
+                      refId="Package\GL_Balances\OLE DB Destination.Inputs[OLE DB Destination Input].Columns[PERIOD_YEAR]"
+                      cachedDataType="numeric"
+                      cachedName="PERIOD_YEAR"
+                      cachedPrecision="15"
+                      externalMetadataColumnId="Package\GL_Balances\OLE DB Destination.Inputs[OLE DB Destination Input].ExternalColumns[PERIOD_YEAR]"
+                      lineageId="Package\GL_Balances\OLE DB Source.Outputs[OLE DB Source Output].Columns[PERIOD_YEAR]" />
+                    <inputColumn
+                      refId="Package\GL_Balances\OLE DB Destination.Inputs[OLE DB Destination Input].Columns[PERIOD_NUM]"
+                      cachedDataType="numeric"
+                      cachedName="PERIOD_NUM"
+                      cachedPrecision="15"
+                      externalMetadataColumnId="Package\GL_Balances\OLE DB Destination.Inputs[OLE DB Destination Input].ExternalColumns[PERIOD_NUM]"
+                      lineageId="Package\GL_Balances\OLE DB Source.Outputs[OLE DB Source Output].Columns[PERIOD_NUM]" />
+                    <inputColumn
+                      refId="Package\GL_Balances\OLE DB Destination.Inputs[OLE DB Destination Input].Columns[GL_ACCOUNT_TYPE]"
+                      cachedDataType="wstr"
+                      cachedLength="1"
+                      cachedName="GL_ACCOUNT_TYPE"
+                      externalMetadataColumnId="Package\GL_Balances\OLE DB Destination.Inputs[OLE DB Destination Input].ExternalColumns[GL_ACCOUNT_TYPE]"
+                      lineageId="Package\GL_Balances\OLE DB Source.Outputs[OLE DB Source Output].Columns[GL_ACCOUNT_TYPE]" />
+                    <inputColumn
+                      refId="Package\GL_Balances\OLE DB Destination.Inputs[OLE DB Destination Input].Columns[SEGMENT1]"
+                      cachedDataType="wstr"
+                      cachedLength="240"
+                      cachedName="SEGMENT1"
+                      externalMetadataColumnId="Package\GL_Balances\OLE DB Destination.Inputs[OLE DB Destination Input].ExternalColumns[SEGMENT1]"
+                      lineageId="Package\GL_Balances\OLE DB Source.Outputs[OLE DB Source Output].Columns[SEGMENT1]" />
+                    <inputColumn
+                      refId="Package\GL_Balances\OLE DB Destination.Inputs[OLE DB Destination Input].Columns[SEGMENT2]"
+                      cachedDataType="wstr"
+                      cachedLength="25"
+                      cachedName="SEGMENT2"
+                      externalMetadataColumnId="Package\GL_Balances\OLE DB Destination.Inputs[OLE DB Destination Input].ExternalColumns[SEGMENT2]"
+                      lineageId="Package\GL_Balances\OLE DB Source.Outputs[OLE DB Source Output].Columns[SEGMENT2]" />
+                    <inputColumn
+                      refId="Package\GL_Balances\OLE DB Destination.Inputs[OLE DB Destination Input].Columns[SEGMENT3]"
+                      cachedDataType="wstr"
+                      cachedLength="25"
+                      cachedName="SEGMENT3"
+                      externalMetadataColumnId="Package\GL_Balances\OLE DB Destination.Inputs[OLE DB Destination Input].ExternalColumns[SEGMENT3]"
+                      lineageId="Package\GL_Balances\OLE DB Source.Outputs[OLE DB Source Output].Columns[SEGMENT3]" />
+                    <inputColumn
+                      refId="Package\GL_Balances\OLE DB Destination.Inputs[OLE DB Destination Input].Columns[SEGMENT4]"
+                      cachedDataType="wstr"
+                      cachedLength="25"
+                      cachedName="SEGMENT4"
+                      externalMetadataColumnId="Package\GL_Balances\OLE DB Destination.Inputs[OLE DB Destination Input].ExternalColumns[SEGMENT4]"
+                      lineageId="Package\GL_Balances\OLE DB Source.Outputs[OLE DB Source Output].Columns[SEGMENT4]" />
+                    <inputColumn
+                      refId="Package\GL_Balances\OLE DB Destination.Inputs[OLE DB Destination Input].Columns[SEGMENT5]"
+                      cachedDataType="wstr"
+                      cachedLength="25"
+                      cachedName="SEGMENT5"
+                      externalMetadataColumnId="Package\GL_Balances\OLE DB Destination.Inputs[OLE DB Destination Input].ExternalColumns[SEGMENT5]"
+                      lineageId="Package\GL_Balances\OLE DB Source.Outputs[OLE DB Source Output].Columns[SEGMENT5]" />
+                    <inputColumn
+                      refId="Package\GL_Balances\OLE DB Destination.Inputs[OLE DB Destination Input].Columns[SEGMENT6]"
+                      cachedDataType="wstr"
+                      cachedLength="25"
+                      cachedName="SEGMENT6"
+                      externalMetadataColumnId="Package\GL_Balances\OLE DB Destination.Inputs[OLE DB Destination Input].ExternalColumns[SEGMENT6]"
+                      lineageId="Package\GL_Balances\OLE DB Source.Outputs[OLE DB Source Output].Columns[SEGMENT6]" />
+                    <inputColumn
+                      refId="Package\GL_Balances\OLE DB Destination.Inputs[OLE DB Destination Input].Columns[SEGMENT7]"
+                      cachedDataType="wstr"
+                      cachedLength="25"
+                      cachedName="SEGMENT7"
+                      externalMetadataColumnId="Package\GL_Balances\OLE DB Destination.Inputs[OLE DB Destination Input].ExternalColumns[SEGMENT7]"
+                      lineageId="Package\GL_Balances\OLE DB Source.Outputs[OLE DB Source Output].Columns[SEGMENT7]" />
+                    <inputColumn
+                      refId="Package\GL_Balances\OLE DB Destination.Inputs[OLE DB Destination Input].Columns[CONCATENATED_SEGMENTS]"
+                      cachedDataType="wstr"
+                      cachedLength="181"
+                      cachedName="CONCATENATED_SEGMENTS"
+                      externalMetadataColumnId="Package\GL_Balances\OLE DB Destination.Inputs[OLE DB Destination Input].ExternalColumns[CONCATENATED_SEGMENTS]"
+                      lineageId="Package\GL_Balances\OLE DB Source.Outputs[OLE DB Source Output].Columns[CONCATENATED_SEGMENTS]" />
+                    <inputColumn
+                      refId="Package\GL_Balances\OLE DB Destination.Inputs[OLE DB Destination Input].Columns[BEGIN_BALANCE_DR]"
+                      cachedDataType="wstr"
+                      cachedLength="38"
+                      cachedName="BEGIN_BALANCE_DR"
+                      externalMetadataColumnId="Package\GL_Balances\OLE DB Destination.Inputs[OLE DB Destination Input].ExternalColumns[BEGIN_BALANCE_DR]"
+                      lineageId="Package\GL_Balances\OLE DB Source.Outputs[OLE DB Source Output].Columns[BEGIN_BALANCE_DR]" />
+                    <inputColumn
+                      refId="Package\GL_Balances\OLE DB Destination.Inputs[OLE DB Destination Input].Columns[BEGIN_BALANCE_CR]"
+                      cachedDataType="wstr"
+                      cachedLength="38"
+                      cachedName="BEGIN_BALANCE_CR"
+                      externalMetadataColumnId="Package\GL_Balances\OLE DB Destination.Inputs[OLE DB Destination Input].ExternalColumns[BEGIN_BALANCE_CR]"
+                      lineageId="Package\GL_Balances\OLE DB Source.Outputs[OLE DB Source Output].Columns[BEGIN_BALANCE_CR]" />
+                    <inputColumn
+                      refId="Package\GL_Balances\OLE DB Destination.Inputs[OLE DB Destination Input].Columns[PERIOD_NET_DR]"
+                      cachedDataType="wstr"
+                      cachedLength="38"
+                      cachedName="PERIOD_NET_DR"
+                      externalMetadataColumnId="Package\GL_Balances\OLE DB Destination.Inputs[OLE DB Destination Input].ExternalColumns[PERIOD_NET_DR]"
+                      lineageId="Package\GL_Balances\OLE DB Source.Outputs[OLE DB Source Output].Columns[PERIOD_NET_DR]" />
+                    <inputColumn
+                      refId="Package\GL_Balances\OLE DB Destination.Inputs[OLE DB Destination Input].Columns[PERIOD_NET_CR]"
+                      cachedDataType="wstr"
+                      cachedLength="38"
+                      cachedName="PERIOD_NET_CR"
+                      externalMetadataColumnId="Package\GL_Balances\OLE DB Destination.Inputs[OLE DB Destination Input].ExternalColumns[PERIOD_NET_CR]"
+                      lineageId="Package\GL_Balances\OLE DB Source.Outputs[OLE DB Source Output].Columns[PERIOD_NET_CR]" />
+                    <inputColumn
+                      refId="Package\GL_Balances\OLE DB Destination.Inputs[OLE DB Destination Input].Columns[AMOUNT]"
+                      cachedDataType="wstr"
+                      cachedLength="38"
+                      cachedName="AMOUNT"
+                      externalMetadataColumnId="Package\GL_Balances\OLE DB Destination.Inputs[OLE DB Destination Input].ExternalColumns[AMOUNT]"
+                      lineageId="Package\GL_Balances\OLE DB Source.Outputs[OLE DB Source Output].Columns[AMOUNT]" />
+                    <inputColumn
+                      refId="Package\GL_Balances\OLE DB Destination.Inputs[OLE DB Destination Input].Columns[TRANS_DATE]"
+                      cachedDataType="wstr"
+                      cachedLength="83"
+                      cachedName="TRANS_DATE"
+                      externalMetadataColumnId="Package\GL_Balances\OLE DB Destination.Inputs[OLE DB Destination Input].ExternalColumns[TRANS_DATE]"
+                      lineageId="Package\GL_Balances\OLE DB Source.Outputs[OLE DB Source Output].Columns[TRANS_DATE]" />
+                  </inputColumns>
+                  <externalMetadataColumns
+                    isUsed="True">
+                    <externalMetadataColumn
+                      refId="Package\GL_Balances\OLE DB Destination.Inputs[OLE DB Destination Input].ExternalColumns[PERIOD_NAME]"
+                      dataType="wstr"
+                      length="25"
+                      name="PERIOD_NAME" />
+                    <externalMetadataColumn
+                      refId="Package\GL_Balances\OLE DB Destination.Inputs[OLE DB Destination Input].ExternalColumns[PERIOD_YEAR]"
+                      dataType="wstr"
+                      length="10"
+                      name="PERIOD_YEAR" />
+                    <externalMetadataColumn
+                      refId="Package\GL_Balances\OLE DB Destination.Inputs[OLE DB Destination Input].ExternalColumns[PERIOD_NUM]"
+                      dataType="wstr"
+                      length="10"
+                      name="PERIOD_NUM" />
+                    <externalMetadataColumn
+                      refId="Package\GL_Balances\OLE DB Destination.Inputs[OLE DB Destination Input].ExternalColumns[GL_ACCOUNT_TYPE]"
+                      dataType="wstr"
+                      length="1"
+                      name="GL_ACCOUNT_TYPE" />
+                    <externalMetadataColumn
+                      refId="Package\GL_Balances\OLE DB Destination.Inputs[OLE DB Destination Input].ExternalColumns[SEGMENT1]"
+                      dataType="wstr"
+                      length="10"
+                      name="SEGMENT1" />
+                    <externalMetadataColumn
+                      refId="Package\GL_Balances\OLE DB Destination.Inputs[OLE DB Destination Input].ExternalColumns[SEGMENT2]"
+                      dataType="wstr"
+                      length="10"
+                      name="SEGMENT2" />
+                    <externalMetadataColumn
+                      refId="Package\GL_Balances\OLE DB Destination.Inputs[OLE DB Destination Input].ExternalColumns[SEGMENT3]"
+                      dataType="wstr"
+                      length="10"
+                      name="SEGMENT3" />
+                    <externalMetadataColumn
+                      refId="Package\GL_Balances\OLE DB Destination.Inputs[OLE DB Destination Input].ExternalColumns[SEGMENT4]"
+                      dataType="wstr"
+                      length="10"
+                      name="SEGMENT4" />
+                    <externalMetadataColumn
+                      refId="Package\GL_Balances\OLE DB Destination.Inputs[OLE DB Destination Input].ExternalColumns[SEGMENT5]"
+                      dataType="wstr"
+                      length="10"
+                      name="SEGMENT5" />
+                    <externalMetadataColumn
+                      refId="Package\GL_Balances\OLE DB Destination.Inputs[OLE DB Destination Input].ExternalColumns[SEGMENT6]"
+                      dataType="wstr"
+                      length="10"
+                      name="SEGMENT6" />
+                    <externalMetadataColumn
+                      refId="Package\GL_Balances\OLE DB Destination.Inputs[OLE DB Destination Input].ExternalColumns[SEGMENT7]"
+                      dataType="wstr"
+                      length="10"
+                      name="SEGMENT7" />
+                    <externalMetadataColumn
+                      refId="Package\GL_Balances\OLE DB Destination.Inputs[OLE DB Destination Input].ExternalColumns[CONCATENATED_SEGMENTS]"
+                      dataType="wstr"
+                      length="181"
+                      name="CONCATENATED_SEGMENTS" />
+                    <externalMetadataColumn
+                      refId="Package\GL_Balances\OLE DB Destination.Inputs[OLE DB Destination Input].ExternalColumns[BEGIN_BALANCE_DR]"
+                      dataType="numeric"
+                      name="BEGIN_BALANCE_DR"
+                      precision="18"
+                      scale="5" />
+                    <externalMetadataColumn
+                      refId="Package\GL_Balances\OLE DB Destination.Inputs[OLE DB Destination Input].ExternalColumns[BEGIN_BALANCE_CR]"
+                      dataType="numeric"
+                      name="BEGIN_BALANCE_CR"
+                      precision="18"
+                      scale="5" />
+                    <externalMetadataColumn
+                      refId="Package\GL_Balances\OLE DB Destination.Inputs[OLE DB Destination Input].ExternalColumns[PERIOD_NET_DR]"
+                      dataType="numeric"
+                      name="PERIOD_NET_DR"
+                      precision="18"
+                      scale="5" />
+                    <externalMetadataColumn
+                      refId="Package\GL_Balances\OLE DB Destination.Inputs[OLE DB Destination Input].ExternalColumns[PERIOD_NET_CR]"
+                      dataType="numeric"
+                      name="PERIOD_NET_CR"
+                      precision="18"
+                      scale="5" />
+                    <externalMetadataColumn
+                      refId="Package\GL_Balances\OLE DB Destination.Inputs[OLE DB Destination Input].ExternalColumns[AMOUNT]"
+                      dataType="numeric"
+                      name="AMOUNT"
+                      precision="18"
+                      scale="5" />
+                    <externalMetadataColumn
+                      refId="Package\GL_Balances\OLE DB Destination.Inputs[OLE DB Destination Input].ExternalColumns[TRANS_DATE]"
+                      dataType="dbTimeStamp"
+                      name="TRANS_DATE" />
+                  </externalMetadataColumns>
+                </input>
+              </inputs>
+              <outputs>
+                <output
+                  refId="Package\GL_Balances\OLE DB Destination.Outputs[OLE DB Destination Error Output]"
+                  exclusionGroup="1"
+                  isErrorOut="true"
+                  name="OLE DB Destination Error Output"
+                  synchronousInputId="Package\GL_Balances\OLE DB Destination.Inputs[OLE DB Destination Input]">
+                  <outputColumns>
+                    <outputColumn
+                      refId="Package\GL_Balances\OLE DB Destination.Outputs[OLE DB Destination Error Output].Columns[ErrorCode]"
+                      dataType="i4"
+                      lineageId="Package\GL_Balances\OLE DB Destination.Outputs[OLE DB Destination Error Output].Columns[ErrorCode]"
+                      name="ErrorCode"
+                      specialFlags="1" />
+                    <outputColumn
+                      refId="Package\GL_Balances\OLE DB Destination.Outputs[OLE DB Destination Error Output].Columns[ErrorColumn]"
+                      dataType="i4"
+                      lineageId="Package\GL_Balances\OLE DB Destination.Outputs[OLE DB Destination Error Output].Columns[ErrorColumn]"
+                      name="ErrorColumn"
+                      specialFlags="2" />
+                  </outputColumns>
+                  <externalMetadataColumns />
+                </output>
+              </outputs>
+            </component>
+            <component
+              refId="Package\GL_Balances\OLE DB Source"
+              componentClassID="{165A526D-D5DE-47FF-96A6-F8274C19826B}"
+              contactInfo="OLE DB Source;Microsoft Corporation; Microsoft SQL Server; (C) Microsoft Corporation; All Rights Reserved; http://www.microsoft.com/sql/support;7"
+              description="OLE DB Source"
+              name="OLE DB Source"
+              usesDispositions="true"
+              version="7">
+              <properties>
+                <property
+                  dataType="System.Int32"
+                  description="The number of seconds before a command times out.  A value of 0 indicates an infinite time-out."
+                  name="CommandTimeout">0</property>
+                <property
+                  dataType="System.String"
+                  description="Specifies the name of the database object used to open a rowset."
+                  name="OpenRowset"></property>
+                <property
+                  dataType="System.String"
+                  description="Specifies the variable that contains the name of the database object used to open a rowset."
+                  name="OpenRowsetVariable"></property>
+                <property
+                  dataType="System.String"
+                  description="The SQL command to be executed."
+                  name="SqlCommand"
+                  UITypeEditor="Microsoft.DataTransformationServices.Controls.ModalMultilineStringEditor, Microsoft.DataTransformationServices.Controls, Version=11.0.0.0, Culture=neutral, PublicKeyToken=89845dcd8080cc91">SELECT     l.PERIOD_NAME, (l.PERIOD_YEAR + 543) as Period_Year, l.PERIOD_NUM,
+                      case
+                      when l.Period_num &lt;13 
+                      then concat(concat(concat(concat(1,'/'),l.Period_Num),'/'),l.Period_Year +543) 
+                      else concat(concat(concat(concat(31,'/'),12),'/'),l.Period_Year+543) 
+                      End as TRANS_DATE,                    
+                      g.GL_ACCOUNT_TYPE, g.Segment1, g.SEGMENT2, g.SEGMENT3, g.SEGMENT4, g.SEGMENT5, 
+                      g.SEGMENT6, g.SEGMENT7, g.CONCATENATED_SEGMENTS, l.BEGIN_BALANCE_DR, l.BEGIN_BALANCE_CR, l.PERIOD_NET_DR, l.PERIOD_NET_CR, 
+                      DECODE(g.GL_ACCOUNT_TYPE, 
+                      'A', NVL(l.BEGIN_BALANCE_DR, 0) - NVL(l.BEGIN_BALANCE_CR, 0), 
+                      'L', NVL(l.BEGIN_BALANCE_CR, 0) - NVL(l.BEGIN_BALANCE_DR, 0), 
+                      'O', NVL(l.BEGIN_BALANCE_CR, 0) - NVL(l.BEGIN_BALANCE_DR, 0), 
+                      'R', NVL(l.BEGIN_BALANCE_DR, 0) - NVL(l.BEGIN_BALANCE_CR, 0), 
+                      'E', NVL(l.BEGIN_BALANCE_CR, 0) - NVL(l.BEGIN_BALANCE_DR, 0)) 
+                      AS amount
+FROM         GL.GL_BALANCES l, GL_CODE_COMBINATIONS_KFV g, XXBI_D_SEGMENT1 c
+WHERE     l.CODE_COMBINATION_ID = g.CODE_COMBINATION_ID AND g.SEGMENT1 = c.CODE AND (1 = 1) AND (l.ACTUAL_FLAG = 'A') AND (g.SEGMENT2 = '322001') AND 
+                      (g.SEGMENT3 = '000')</property>
+                <property
+                  dataType="System.String"
+                  description="The variable that contains the SQL command to be executed."
+                  name="SqlCommandVariable"></property>
+                <property
+                  dataType="System.Int32"
+                  description="Specifies the column code page to use when code page information is unavailable from the data source."
+                  name="DefaultCodePage">874</property>
+                <property
+                  dataType="System.Boolean"
+                  description="Forces the use of the DefaultCodePage property value when describing character data."
+                  name="AlwaysUseDefaultCodePage">false</property>
+                <property
+                  dataType="System.Int32"
+                  description="Specifies the mode used to access the database."
+                  name="AccessMode"
+                  typeConverter="AccessMode">2</property>
+                <property
+                  dataType="System.String"
+                  description="The mappings between the parameters in the SQL command and variables."
+                  name="ParameterMapping"></property>
+              </properties>
+              <connections>
+                <connection
+                  refId="Package\GL_Balances\OLE DB Source.Connections[OleDbConnection]"
+                  connectionManagerID="Package.ConnectionManagers[ORACLE_orcl_rlg.apps]"
+                  connectionManagerRefId="Package.ConnectionManagers[ORACLE_orcl_rlg.apps]"
+                  description="The OLE DB runtime connection used to access the database."
+                  name="OleDbConnection" />
+              </connections>
+              <outputs>
+                <output
+                  refId="Package\GL_Balances\OLE DB Source.Outputs[OLE DB Source Output]"
+                  name="OLE DB Source Output">
+                  <outputColumns>
+                    <outputColumn
+                      refId="Package\GL_Balances\OLE DB Source.Outputs[OLE DB Source Output].Columns[PERIOD_NAME]"
+                      dataType="wstr"
+                      errorOrTruncationOperation="Conversion"
+                      errorRowDisposition="FailComponent"
+                      externalMetadataColumnId="Package\GL_Balances\OLE DB Source.Outputs[OLE DB Source Output].ExternalColumns[PERIOD_NAME]"
+                      length="15"
+                      lineageId="Package\GL_Balances\OLE DB Source.Outputs[OLE DB Source Output].Columns[PERIOD_NAME]"
+                      name="PERIOD_NAME"
+                      truncationRowDisposition="FailComponent" />
+                    <outputColumn
+                      refId="Package\GL_Balances\OLE DB Source.Outputs[OLE DB Source Output].Columns[PERIOD_YEAR]"
+                      dataType="numeric"
+                      errorOrTruncationOperation="Conversion"
+                      errorRowDisposition="FailComponent"
+                      externalMetadataColumnId="Package\GL_Balances\OLE DB Source.Outputs[OLE DB Source Output].ExternalColumns[PERIOD_YEAR]"
+                      lineageId="Package\GL_Balances\OLE DB Source.Outputs[OLE DB Source Output].Columns[PERIOD_YEAR]"
+                      name="PERIOD_YEAR"
+                      precision="15"
+                      truncationRowDisposition="FailComponent" />
+                    <outputColumn
+                      refId="Package\GL_Balances\OLE DB Source.Outputs[OLE DB Source Output].Columns[PERIOD_NUM]"
+                      dataType="numeric"
+                      errorOrTruncationOperation="Conversion"
+                      errorRowDisposition="FailComponent"
+                      externalMetadataColumnId="Package\GL_Balances\OLE DB Source.Outputs[OLE DB Source Output].ExternalColumns[PERIOD_NUM]"
+                      lineageId="Package\GL_Balances\OLE DB Source.Outputs[OLE DB Source Output].Columns[PERIOD_NUM]"
+                      name="PERIOD_NUM"
+                      precision="15"
+                      truncationRowDisposition="FailComponent" />
+                    <outputColumn
+                      refId="Package\GL_Balances\OLE DB Source.Outputs[OLE DB Source Output].Columns[GL_ACCOUNT_TYPE]"
+                      dataType="wstr"
+                      errorOrTruncationOperation="Conversion"
+                      errorRowDisposition="FailComponent"
+                      externalMetadataColumnId="Package\GL_Balances\OLE DB Source.Outputs[OLE DB Source Output].ExternalColumns[GL_ACCOUNT_TYPE]"
+                      length="1"
+                      lineageId="Package\GL_Balances\OLE DB Source.Outputs[OLE DB Source Output].Columns[GL_ACCOUNT_TYPE]"
+                      name="GL_ACCOUNT_TYPE"
+                      truncationRowDisposition="FailComponent" />
+                    <outputColumn
+                      refId="Package\GL_Balances\OLE DB Source.Outputs[OLE DB Source Output].Columns[SEGMENT1]"
+                      dataType="wstr"
+                      errorOrTruncationOperation="Conversion"
+                      errorRowDisposition="FailComponent"
+                      externalMetadataColumnId="Package\GL_Balances\OLE DB Source.Outputs[OLE DB Source Output].ExternalColumns[SEGMENT1]"
+                      length="240"
+                      lineageId="Package\GL_Balances\OLE DB Source.Outputs[OLE DB Source Output].Columns[SEGMENT1]"
+                      name="SEGMENT1"
+                      truncationRowDisposition="FailComponent" />
+                    <outputColumn
+                      refId="Package\GL_Balances\OLE DB Source.Outputs[OLE DB Source Output].Columns[SEGMENT2]"
+                      dataType="wstr"
+                      errorOrTruncationOperation="Conversion"
+                      errorRowDisposition="FailComponent"
+                      externalMetadataColumnId="Package\GL_Balances\OLE DB Source.Outputs[OLE DB Source Output].ExternalColumns[SEGMENT2]"
+                      length="25"
+                      lineageId="Package\GL_Balances\OLE DB Source.Outputs[OLE DB Source Output].Columns[SEGMENT2]"
+                      name="SEGMENT2"
+                      truncationRowDisposition="FailComponent" />
+                    <outputColumn
+                      refId="Package\GL_Balances\OLE DB Source.Outputs[OLE DB Source Output].Columns[SEGMENT3]"
+                      dataType="wstr"
+                      errorOrTruncationOperation="Conversion"
+                      errorRowDisposition="FailComponent"
+                      externalMetadataColumnId="Package\GL_Balances\OLE DB Source.Outputs[OLE DB Source Output].ExternalColumns[SEGMENT3]"
+                      length="25"
+                      lineageId="Package\GL_Balances\OLE DB Source.Outputs[OLE DB Source Output].Columns[SEGMENT3]"
+                      name="SEGMENT3"
+                      truncationRowDisposition="FailComponent" />
+                    <outputColumn
+                      refId="Package\GL_Balances\OLE DB Source.Outputs[OLE DB Source Output].Columns[SEGMENT4]"
+                      dataType="wstr"
+                      errorOrTruncationOperation="Conversion"
+                      errorRowDisposition="FailComponent"
+                      externalMetadataColumnId="Package\GL_Balances\OLE DB Source.Outputs[OLE DB Source Output].ExternalColumns[SEGMENT4]"
+                      length="25"
+                      lineageId="Package\GL_Balances\OLE DB Source.Outputs[OLE DB Source Output].Columns[SEGMENT4]"
+                      name="SEGMENT4"
+                      truncationRowDisposition="FailComponent" />
+                    <outputColumn
+                      refId="Package\GL_Balances\OLE DB Source.Outputs[OLE DB Source Output].Columns[SEGMENT5]"
+                      dataType="wstr"
+                      errorOrTruncationOperation="Conversion"
+                      errorRowDisposition="FailComponent"
+                      externalMetadataColumnId="Package\GL_Balances\OLE DB Source.Outputs[OLE DB Source Output].ExternalColumns[SEGMENT5]"
+                      length="25"
+                      lineageId="Package\GL_Balances\OLE DB Source.Outputs[OLE DB Source Output].Columns[SEGMENT5]"
+                      name="SEGMENT5"
+                      truncationRowDisposition="FailComponent" />
+                    <outputColumn
+                      refId="Package\GL_Balances\OLE DB Source.Outputs[OLE DB Source Output].Columns[SEGMENT6]"
+                      dataType="wstr"
+                      errorOrTruncationOperation="Conversion"
+                      errorRowDisposition="FailComponent"
+                      externalMetadataColumnId="Package\GL_Balances\OLE DB Source.Outputs[OLE DB Source Output].ExternalColumns[SEGMENT6]"
+                      length="25"
+                      lineageId="Package\GL_Balances\OLE DB Source.Outputs[OLE DB Source Output].Columns[SEGMENT6]"
+                      name="SEGMENT6"
+                      truncationRowDisposition="FailComponent" />
+                    <outputColumn
+                      refId="Package\GL_Balances\OLE DB Source.Outputs[OLE DB Source Output].Columns[SEGMENT7]"
+                      dataType="wstr"
+                      errorOrTruncationOperation="Conversion"
+                      errorRowDisposition="FailComponent"
+                      externalMetadataColumnId="Package\GL_Balances\OLE DB Source.Outputs[OLE DB Source Output].ExternalColumns[SEGMENT7]"
+                      length="25"
+                      lineageId="Package\GL_Balances\OLE DB Source.Outputs[OLE DB Source Output].Columns[SEGMENT7]"
+                      name="SEGMENT7"
+                      truncationRowDisposition="FailComponent" />
+                    <outputColumn
+                      refId="Package\GL_Balances\OLE DB Source.Outputs[OLE DB Source Output].Columns[CONCATENATED_SEGMENTS]"
+                      dataType="wstr"
+                      errorOrTruncationOperation="Conversion"
+                      errorRowDisposition="FailComponent"
+                      externalMetadataColumnId="Package\GL_Balances\OLE DB Source.Outputs[OLE DB Source Output].ExternalColumns[CONCATENATED_SEGMENTS]"
+                      length="181"
+                      lineageId="Package\GL_Balances\OLE DB Source.Outputs[OLE DB Source Output].Columns[CONCATENATED_SEGMENTS]"
+                      name="CONCATENATED_SEGMENTS"
+                      truncationRowDisposition="FailComponent" />
+                    <outputColumn
+                      refId="Package\GL_Balances\OLE DB Source.Outputs[OLE DB Source Output].Columns[BEGIN_BALANCE_DR]"
+                      dataType="wstr"
+                      errorOrTruncationOperation="Conversion"
+                      errorRowDisposition="FailComponent"
+                      externalMetadataColumnId="Package\GL_Balances\OLE DB Source.Outputs[OLE DB Source Output].ExternalColumns[BEGIN_BALANCE_DR]"
+                      length="38"
+                      lineageId="Package\GL_Balances\OLE DB Source.Outputs[OLE DB Source Output].Columns[BEGIN_BALANCE_DR]"
+                      name="BEGIN_BALANCE_DR"
+                      truncationRowDisposition="FailComponent" />
+                    <outputColumn
+                      refId="Package\GL_Balances\OLE DB Source.Outputs[OLE DB Source Output].Columns[BEGIN_BALANCE_CR]"
+                      dataType="wstr"
+                      errorOrTruncationOperation="Conversion"
+                      errorRowDisposition="FailComponent"
+                      externalMetadataColumnId="Package\GL_Balances\OLE DB Source.Outputs[OLE DB Source Output].ExternalColumns[BEGIN_BALANCE_CR]"
+                      length="38"
+                      lineageId="Package\GL_Balances\OLE DB Source.Outputs[OLE DB Source Output].Columns[BEGIN_BALANCE_CR]"
+                      name="BEGIN_BALANCE_CR"
+                      truncationRowDisposition="FailComponent" />
+                    <outputColumn
+                      refId="Package\GL_Balances\OLE DB Source.Outputs[OLE DB Source Output].Columns[PERIOD_NET_DR]"
+                      dataType="wstr"
+                      errorOrTruncationOperation="Conversion"
+                      errorRowDisposition="FailComponent"
+                      externalMetadataColumnId="Package\GL_Balances\OLE DB Source.Outputs[OLE DB Source Output].ExternalColumns[PERIOD_NET_DR]"
+                      length="38"
+                      lineageId="Package\GL_Balances\OLE DB Source.Outputs[OLE DB Source Output].Columns[PERIOD_NET_DR]"
+                      name="PERIOD_NET_DR"
+                      truncationRowDisposition="FailComponent" />
+                    <outputColumn
+                      refId="Package\GL_Balances\OLE DB Source.Outputs[OLE DB Source Output].Columns[PERIOD_NET_CR]"
+                      dataType="wstr"
+                      errorOrTruncationOperation="Conversion"
+                      errorRowDisposition="FailComponent"
+                      externalMetadataColumnId="Package\GL_Balances\OLE DB Source.Outputs[OLE DB Source Output].ExternalColumns[PERIOD_NET_CR]"
+                      length="38"
+                      lineageId="Package\GL_Balances\OLE DB Source.Outputs[OLE DB Source Output].Columns[PERIOD_NET_CR]"
+                      name="PERIOD_NET_CR"
+                      truncationRowDisposition="FailComponent" />
+                    <outputColumn
+                      refId="Package\GL_Balances\OLE DB Source.Outputs[OLE DB Source Output].Columns[AMOUNT]"
+                      dataType="wstr"
+                      errorOrTruncationOperation="Conversion"
+                      errorRowDisposition="FailComponent"
+                      externalMetadataColumnId="Package\GL_Balances\OLE DB Source.Outputs[OLE DB Source Output].ExternalColumns[AMOUNT]"
+                      length="38"
+                      lineageId="Package\GL_Balances\OLE DB Source.Outputs[OLE DB Source Output].Columns[AMOUNT]"
+                      name="AMOUNT"
+                      truncationRowDisposition="FailComponent" />
+                    <outputColumn
+                      refId="Package\GL_Balances\OLE DB Source.Outputs[OLE DB Source Output].Columns[TRANS_DATE]"
+                      dataType="wstr"
+                      errorOrTruncationOperation="Conversion"
+                      errorRowDisposition="FailComponent"
+                      externalMetadataColumnId="Package\GL_Balances\OLE DB Source.Outputs[OLE DB Source Output].ExternalColumns[TRANS_DATE]"
+                      length="83"
+                      lineageId="Package\GL_Balances\OLE DB Source.Outputs[OLE DB Source Output].Columns[TRANS_DATE]"
+                      name="TRANS_DATE"
+                      truncationRowDisposition="FailComponent" />
+                  </outputColumns>
+                  <externalMetadataColumns
+                    isUsed="True">
+                    <externalMetadataColumn
+                      refId="Package\GL_Balances\OLE DB Source.Outputs[OLE DB Source Output].ExternalColumns[PERIOD_NAME]"
+                      dataType="wstr"
+                      length="15"
+                      name="PERIOD_NAME" />
+                    <externalMetadataColumn
+                      refId="Package\GL_Balances\OLE DB Source.Outputs[OLE DB Source Output].ExternalColumns[PERIOD_YEAR]"
+                      dataType="wstr"
+                      length="38"
+                      name="PERIOD_YEAR" />
+                    <externalMetadataColumn
+                      refId="Package\GL_Balances\OLE DB Source.Outputs[OLE DB Source Output].ExternalColumns[PERIOD_NUM]"
+                      dataType="numeric"
+                      name="PERIOD_NUM"
+                      precision="15" />
+                    <externalMetadataColumn
+                      refId="Package\GL_Balances\OLE DB Source.Outputs[OLE DB Source Output].ExternalColumns[GL_ACCOUNT_TYPE]"
+                      dataType="wstr"
+                      length="1"
+                      name="GL_ACCOUNT_TYPE" />
+                    <externalMetadataColumn
+                      refId="Package\GL_Balances\OLE DB Source.Outputs[OLE DB Source Output].ExternalColumns[SEGMENT1]"
+                      dataType="wstr"
+                      length="25"
+                      name="SEGMENT1" />
+                    <externalMetadataColumn
+                      refId="Package\GL_Balances\OLE DB Source.Outputs[OLE DB Source Output].ExternalColumns[SEGMENT2]"
+                      dataType="wstr"
+                      length="25"
+                      name="SEGMENT2" />
+                    <externalMetadataColumn
+                      refId="Package\GL_Balances\OLE DB Source.Outputs[OLE DB Source Output].ExternalColumns[SEGMENT3]"
+                      dataType="wstr"
+                      length="25"
+                      name="SEGMENT3" />
+                    <externalMetadataColumn
+                      refId="Package\GL_Balances\OLE DB Source.Outputs[OLE DB Source Output].ExternalColumns[SEGMENT4]"
+                      dataType="wstr"
+                      length="25"
+                      name="SEGMENT4" />
+                    <externalMetadataColumn
+                      refId="Package\GL_Balances\OLE DB Source.Outputs[OLE DB Source Output].ExternalColumns[SEGMENT5]"
+                      dataType="wstr"
+                      length="25"
+                      name="SEGMENT5" />
+                    <externalMetadataColumn
+                      refId="Package\GL_Balances\OLE DB Source.Outputs[OLE DB Source Output].ExternalColumns[SEGMENT6]"
+                      dataType="wstr"
+                      length="25"
+                      name="SEGMENT6" />
+                    <externalMetadataColumn
+                      refId="Package\GL_Balances\OLE DB Source.Outputs[OLE DB Source Output].ExternalColumns[SEGMENT7]"
+                      dataType="wstr"
+                      length="25"
+                      name="SEGMENT7" />
+                    <externalMetadataColumn
+                      refId="Package\GL_Balances\OLE DB Source.Outputs[OLE DB Source Output].ExternalColumns[CONCATENATED_SEGMENTS]"
+                      dataType="wstr"
+                      length="181"
+                      name="CONCATENATED_SEGMENTS" />
+                    <externalMetadataColumn
+                      refId="Package\GL_Balances\OLE DB Source.Outputs[OLE DB Source Output].ExternalColumns[BEGIN_BALANCE_DR]"
+                      dataType="wstr"
+                      length="38"
+                      name="BEGIN_BALANCE_DR" />
+                    <externalMetadataColumn
+                      refId="Package\GL_Balances\OLE DB Source.Outputs[OLE DB Source Output].ExternalColumns[BEGIN_BALANCE_CR]"
+                      dataType="wstr"
+                      length="38"
+                      name="BEGIN_BALANCE_CR" />
+                    <externalMetadataColumn
+                      refId="Package\GL_Balances\OLE DB Source.Outputs[OLE DB Source Output].ExternalColumns[PERIOD_NET_DR]"
+                      dataType="wstr"
+                      length="38"
+                      name="PERIOD_NET_DR" />
+                    <externalMetadataColumn
+                      refId="Package\GL_Balances\OLE DB Source.Outputs[OLE DB Source Output].ExternalColumns[PERIOD_NET_CR]"
+                      dataType="wstr"
+                      length="38"
+                      name="PERIOD_NET_CR" />
+                    <externalMetadataColumn
+                      refId="Package\GL_Balances\OLE DB Source.Outputs[OLE DB Source Output].ExternalColumns[AMOUNT]"
+                      dataType="wstr"
+                      length="38"
+                      name="AMOUNT" />
+                    <externalMetadataColumn
+                      refId="Package\GL_Balances\OLE DB Source.Outputs[OLE DB Source Output].ExternalColumns[TRANS_DATE]"
+                      dataType="wstr"
+                      length="83"
+                      name="TRANS_DATE" />
+                  </externalMetadataColumns>
+                </output>
+                <output
+                  refId="Package\GL_Balances\OLE DB Source.Outputs[OLE DB Source Error Output]"
+                  isErrorOut="true"
+                  name="OLE DB Source Error Output">
+                  <outputColumns>
+                    <outputColumn
+                      refId="Package\GL_Balances\OLE DB Source.Outputs[OLE DB Source Error Output].Columns[PERIOD_NAME]"
+                      dataType="wstr"
+                      length="15"
+                      lineageId="Package\GL_Balances\OLE DB Source.Outputs[OLE DB Source Error Output].Columns[PERIOD_NAME]"
+                      name="PERIOD_NAME" />
+                    <outputColumn
+                      refId="Package\GL_Balances\OLE DB Source.Outputs[OLE DB Source Error Output].Columns[PERIOD_YEAR]"
+                      dataType="wstr"
+                      length="38"
+                      lineageId="Package\GL_Balances\OLE DB Source.Outputs[OLE DB Source Error Output].Columns[PERIOD_YEAR]"
+                      name="PERIOD_YEAR" />
+                    <outputColumn
+                      refId="Package\GL_Balances\OLE DB Source.Outputs[OLE DB Source Error Output].Columns[PERIOD_NUM]"
+                      dataType="numeric"
+                      lineageId="Package\GL_Balances\OLE DB Source.Outputs[OLE DB Source Error Output].Columns[PERIOD_NUM]"
+                      name="PERIOD_NUM"
+                      precision="15" />
+                    <outputColumn
+                      refId="Package\GL_Balances\OLE DB Source.Outputs[OLE DB Source Error Output].Columns[TRANS_DATE]"
+                      dataType="wstr"
+                      length="83"
+                      lineageId="Package\GL_Balances\OLE DB Source.Outputs[OLE DB Source Error Output].Columns[TRANS_DATE]"
+                      name="TRANS_DATE" />
+                    <outputColumn
+                      refId="Package\GL_Balances\OLE DB Source.Outputs[OLE DB Source Error Output].Columns[GL_ACCOUNT_TYPE]"
+                      dataType="wstr"
+                      length="1"
+                      lineageId="Package\GL_Balances\OLE DB Source.Outputs[OLE DB Source Error Output].Columns[GL_ACCOUNT_TYPE]"
+                      name="GL_ACCOUNT_TYPE" />
+                    <outputColumn
+                      refId="Package\GL_Balances\OLE DB Source.Outputs[OLE DB Source Error Output].Columns[SEGMENT1]"
+                      dataType="wstr"
+                      length="25"
+                      lineageId="Package\GL_Balances\OLE DB Source.Outputs[OLE DB Source Error Output].Columns[SEGMENT1]"
+                      name="SEGMENT1" />
+                    <outputColumn
+                      refId="Package\GL_Balances\OLE DB Source.Outputs[OLE DB Source Error Output].Columns[SEGMENT2]"
+                      dataType="wstr"
+                      length="25"
+                      lineageId="Package\GL_Balances\OLE DB Source.Outputs[OLE DB Source Error Output].Columns[SEGMENT2]"
+                      name="SEGMENT2" />
+                    <outputColumn
+                      refId="Package\GL_Balances\OLE DB Source.Outputs[OLE DB Source Error Output].Columns[SEGMENT3]"
+                      dataType="wstr"
+                      length="25"
+                      lineageId="Package\GL_Balances\OLE DB Source.Outputs[OLE DB Source Error Output].Columns[SEGMENT3]"
+                      name="SEGMENT3" />
+                    <outputColumn
+                      refId="Package\GL_Balances\OLE DB Source.Outputs[OLE DB Source Error Output].Columns[SEGMENT4]"
+                      dataType="wstr"
+                      length="25"
+                      lineageId="Package\GL_Balances\OLE DB Source.Outputs[OLE DB Source Error Output].Columns[SEGMENT4]"
+                      name="SEGMENT4" />
+                    <outputColumn
+                      refId="Package\GL_Balances\OLE DB Source.Outputs[OLE DB Source Error Output].Columns[SEGMENT5]"
+                      dataType="wstr"
+                      length="25"
+                      lineageId="Package\GL_Balances\OLE DB Source.Outputs[OLE DB Source Error Output].Columns[SEGMENT5]"
+                      name="SEGMENT5" />
+                    <outputColumn
+                      refId="Package\GL_Balances\OLE DB Source.Outputs[OLE DB Source Error Output].Columns[SEGMENT6]"
+                      dataType="wstr"
+                      length="25"
+                      lineageId="Package\GL_Balances\OLE DB Source.Outputs[OLE DB Source Error Output].Columns[SEGMENT6]"
+                      name="SEGMENT6" />
+                    <outputColumn
+                      refId="Package\GL_Balances\OLE DB Source.Outputs[OLE DB Source Error Output].Columns[SEGMENT7]"
+                      dataType="wstr"
+                      length="25"
+                      lineageId="Package\GL_Balances\OLE DB Source.Outputs[OLE DB Source Error Output].Columns[SEGMENT7]"
+                      name="SEGMENT7" />
+                    <outputColumn
+                      refId="Package\GL_Balances\OLE DB Source.Outputs[OLE DB Source Error Output].Columns[CONCATENATED_SEGMENTS]"
+                      dataType="wstr"
+                      length="181"
+                      lineageId="Package\GL_Balances\OLE DB Source.Outputs[OLE DB Source Error Output].Columns[CONCATENATED_SEGMENTS]"
+                      name="CONCATENATED_SEGMENTS" />
+                    <outputColumn
+                      refId="Package\GL_Balances\OLE DB Source.Outputs[OLE DB Source Error Output].Columns[BEGIN_BALANCE_DR]"
+                      dataType="wstr"
+                      length="38"
+                      lineageId="Package\GL_Balances\OLE DB Source.Outputs[OLE DB Source Error Output].Columns[BEGIN_BALANCE_DR]"
+                      name="BEGIN_BALANCE_DR" />
+                    <outputColumn
+                      refId="Package\GL_Balances\OLE DB Source.Outputs[OLE DB Source Error Output].Columns[BEGIN_BALANCE_CR]"
+                      dataType="wstr"
+                      length="38"
+                      lineageId="Package\GL_Balances\OLE DB Source.Outputs[OLE DB Source Error Output].Columns[BEGIN_BALANCE_CR]"
+                      name="BEGIN_BALANCE_CR" />
+                    <outputColumn
+                      refId="Package\GL_Balances\OLE DB Source.Outputs[OLE DB Source Error Output].Columns[PERIOD_NET_DR]"
+                      dataType="wstr"
+                      length="38"
+                      lineageId="Package\GL_Balances\OLE DB Source.Outputs[OLE DB Source Error Output].Columns[PERIOD_NET_DR]"
+                      name="PERIOD_NET_DR" />
+                    <outputColumn
+                      refId="Package\GL_Balances\OLE DB Source.Outputs[OLE DB Source Error Output].Columns[PERIOD_NET_CR]"
+                      dataType="wstr"
+                      length="38"
+                      lineageId="Package\GL_Balances\OLE DB Source.Outputs[OLE DB Source Error Output].Columns[PERIOD_NET_CR]"
+                      name="PERIOD_NET_CR" />
+                    <outputColumn
+                      refId="Package\GL_Balances\OLE DB Source.Outputs[OLE DB Source Error Output].Columns[AMOUNT]"
+                      dataType="wstr"
+                      length="38"
+                      lineageId="Package\GL_Balances\OLE DB Source.Outputs[OLE DB Source Error Output].Columns[AMOUNT]"
+                      name="AMOUNT" />
+                    <outputColumn
+                      refId="Package\GL_Balances\OLE DB Source.Outputs[OLE DB Source Error Output].Columns[ErrorCode]"
+                      dataType="i4"
+                      lineageId="Package\GL_Balances\OLE DB Source.Outputs[OLE DB Source Error Output].Columns[ErrorCode]"
+                      name="ErrorCode"
+                      specialFlags="1" />
+                    <outputColumn
+                      refId="Package\GL_Balances\OLE DB Source.Outputs[OLE DB Source Error Output].Columns[ErrorColumn]"
+                      dataType="i4"
+                      lineageId="Package\GL_Balances\OLE DB Source.Outputs[OLE DB Source Error Output].Columns[ErrorColumn]"
+                      name="ErrorColumn"
+                      specialFlags="2" />
+                  </outputColumns>
+                  <externalMetadataColumns />
+                </output>
+              </outputs>
+            </component>
+          </components>
+          <paths>
+            <path
+              refId="Package\GL_Balances.Paths[Data Conversion Output]"
+              endId="Package\GL_Balances\OLE DB Destination.Inputs[OLE DB Destination Input]"
+              name="Data Conversion Output"
+              startId="Package\GL_Balances\Data Conversion.Outputs[Data Conversion Output]" />
+            <path
+              refId="Package\GL_Balances.Paths[OLE DB Source Output]"
+              endId="Package\GL_Balances\Data Conversion.Inputs[Data Conversion Input]"
+              name="OLE DB Source Output"
+              startId="Package\GL_Balances\OLE DB Source.Outputs[OLE DB Source Output]" />
+          </paths>
+        </pipeline>
       </DTS:ObjectData>
     </DTS:Executable>
   </DTS:Executables>
@@ -2717,11 +4095,11 @@
     <DTS:PrecedenceConstraint
       DTS:refId="Package.PrecedenceConstraints[Constraint 3]"
       DTS:CreationName=""
-      DTS:DTSID="{48A0C3C9-55AE-48CB-9755-CBB1470CC4DB}"
+      DTS:DTSID="{6FE71CBC-45B3-4AE8-8C5B-9DF79895C58A}"
       DTS:From="Package\Data Flow Task"
       DTS:LogicalAnd="True"
       DTS:ObjectName="Constraint 3"
-      DTS:To="Package\DFT Budget" />
+      DTS:To="Package\GL_Balances" />
     <DTS:PrecedenceConstraint
       DTS:refId="Package.PrecedenceConstraints[Constraint 4]"
       DTS:CreationName=""
@@ -2746,6 +4124,14 @@
       DTS:LogicalAnd="True"
       DTS:ObjectName="Constraint 6"
       DTS:To="Package\EXEC End Package" />
+    <DTS:PrecedenceConstraint
+      DTS:refId="Package.PrecedenceConstraints[Constraint 7]"
+      DTS:CreationName=""
+      DTS:DTSID="{7232A1BB-C53D-473A-A62A-CA67C8604B23}"
+      DTS:From="Package\GL_Balances"
+      DTS:LogicalAnd="True"
+      DTS:ObjectName="Constraint 7"
+      DTS:To="Package\DFT Budget" />
   </DTS:PrecedenceConstraints>
   <DTS:DesignTimeProperties><![CDATA[<?xml version="1.0"?>
 <!--This CDATA section contains the layout information of the package. The section includes information such as (x,y) coordinates, width, and height.-->
@@ -2758,7 +4144,7 @@
     design-time-name="Package">
     <LayoutInfo>
       <GraphLayout
-        Capacity="16" xmlns="clr-namespace:Microsoft.SqlServer.IntegrationServices.Designer.Model.Serialization;assembly=Microsoft.SqlServer.IntegrationServices.Graph" xmlns:mssgle="clr-namespace:Microsoft.SqlServer.Graph.LayoutEngine;assembly=Microsoft.SqlServer.Graph" xmlns:assembly="http://schemas.microsoft.com/winfx/2006/xaml">
+        Capacity="32" xmlns="clr-namespace:Microsoft.SqlServer.IntegrationServices.Designer.Model.Serialization;assembly=Microsoft.SqlServer.IntegrationServices.Graph" xmlns:mssgle="clr-namespace:Microsoft.SqlServer.Graph.LayoutEngine;assembly=Microsoft.SqlServer.Graph" xmlns:assembly="http://schemas.microsoft.com/winfx/2006/xaml">
         <NodeLayout
           Size="153,42"
           Id="Package\Data Flow Task"
@@ -2791,6 +4177,10 @@
           Size="176,42"
           Id="Package\EXEC Truncate Data"
           TopLeft="110,368" />
+        <NodeLayout
+          Size="140,42"
+          Id="Package\GL_Balances"
+          TopLeft="380,470" />
         <EdgeLayout
           Id="Package.PrecedenceConstraints[Constraint]"
           TopLeft="190,100">
@@ -2871,18 +4261,30 @@
         </EdgeLayout>
         <EdgeLayout
           Id="Package.PrecedenceConstraints[Constraint 3]"
-          TopLeft="192.5,476">
+          TopLeft="269,455">
           <EdgeLayout.Curve>
             <mssgle:Curve
               StartConnector="{assembly:Null}"
-              EndConnector="0,30"
+              EndConnector="111,36"
               Start="0,0"
-              End="0,22.5">
+              End="103.5,36">
               <mssgle:Curve.Segments>
                 <mssgle:SegmentCollection
                   Capacity="5">
                   <mssgle:LineSegment
-                    End="0,22.5" />
+                    End="51.5,0" />
+                  <mssgle:CubicBezierSegment
+                    Point1="51.5,0"
+                    Point2="55.5,0"
+                    Point3="55.5,4" />
+                  <mssgle:LineSegment
+                    End="55.5,32" />
+                  <mssgle:CubicBezierSegment
+                    Point1="55.5,32"
+                    Point2="55.5,36"
+                    Point3="59.5,36" />
+                  <mssgle:LineSegment
+                    End="103.5,36" />
                 </mssgle:SegmentCollection>
               </mssgle:Curve.Segments>
             </mssgle:Curve>
@@ -2957,6 +4359,40 @@
             <EdgeLabelCollection />
           </EdgeLayout.Labels>
         </EdgeLayout>
+        <EdgeLayout
+          Id="Package.PrecedenceConstraints[Constraint 7]"
+          TopLeft="380,496.666666666667">
+          <EdgeLayout.Curve>
+            <mssgle:Curve
+              StartConnector="{assembly:Null}"
+              EndConnector="-119,30.3333333333333"
+              Start="0,0"
+              End="-111.5,30.3333333333333">
+              <mssgle:Curve.Segments>
+                <mssgle:SegmentCollection
+                  Capacity="5">
+                  <mssgle:LineSegment
+                    End="-46.2201834862385,0" />
+                  <mssgle:CubicBezierSegment
+                    Point1="-46.2201834862385,0"
+                    Point2="-50.2201834862385,0"
+                    Point3="-50.2201834862385,4" />
+                  <mssgle:LineSegment
+                    End="-50.2201834862385,26.3333333333333" />
+                  <mssgle:CubicBezierSegment
+                    Point1="-50.2201834862385,26.3333333333333"
+                    Point2="-50.2201834862385,30.3333333333333"
+                    Point3="-54.2201834862385,30.3333333333333" />
+                  <mssgle:LineSegment
+                    End="-111.5,30.3333333333333" />
+                </mssgle:SegmentCollection>
+              </mssgle:Curve.Segments>
+            </mssgle:Curve>
+          </EdgeLayout.Curve>
+          <EdgeLayout.Labels>
+            <EdgeLabelCollection />
+          </EdgeLayout.Labels>
+        </EdgeLayout>
       </GraphLayout>
     </LayoutInfo>
   </Package>
@@ -2966,10 +4402,6 @@
       <GraphLayout
         Capacity="8" xmlns="clr-namespace:Microsoft.SqlServer.IntegrationServices.Designer.Model.Serialization;assembly=Microsoft.SqlServer.IntegrationServices.Graph" xmlns:mssgle="clr-namespace:Microsoft.SqlServer.Graph.LayoutEngine;assembly=Microsoft.SqlServer.Graph" xmlns:assembly="http://schemas.microsoft.com/winfx/2006/xaml">
         <NodeLayout
-          Size="171,42"
-          Id="Package\Data Flow Task\OLEDB_SRC Oracle"
-          TopLeft="165,102" />
-        <NodeLayout
           Size="139,42"
           Id="Package\Data Flow Task\OLEDB_DST"
           TopLeft="182,249" />
@@ -2977,6 +4409,10 @@
           Size="158,42"
           Id="Package\Data Flow Task\Data Conversion"
           TopLeft="357,201" />
+        <NodeLayout
+          Size="171,42"
+          Id="Package\Data Flow Task\OLEDB_SRC Oracle"
+          TopLeft="165,102" />
         <EdgeLayout
           Id="Package\Data Flow Task.Paths[OLE DB Source Output]"
           TopLeft="250.5,144">
@@ -3049,19 +4485,6 @@
     </LayoutInfo>
   </TaskHost>
   <PipelineComponentMetadata
-    design-time-name="Package\Data Flow Task\OLEDB_SRC Oracle">
-    <Properties>
-      <Property>
-        <Name>DataSourceViewID</Name>
-      </Property>
-      <Property>
-        <Name>TableInfoObjectType</Name>
-        <Value
-          type="q2:string">View</Value>
-      </Property>
-    </Properties>
-  </PipelineComponentMetadata>
-  <PipelineComponentMetadata
     design-time-name="Package\Data Flow Task\OLEDB_DST">
     <Properties>
       <Property>
@@ -3074,23 +4497,36 @@
       </Property>
     </Properties>
   </PipelineComponentMetadata>
+  <PipelineComponentMetadata
+    design-time-name="Package\Data Flow Task\OLEDB_SRC Oracle">
+    <Properties>
+      <Property>
+        <Name>DataSourceViewID</Name>
+      </Property>
+      <Property>
+        <Name>TableInfoObjectType</Name>
+        <Value
+          type="q2:string">View</Value>
+      </Property>
+    </Properties>
+  </PipelineComponentMetadata>
   <TaskHost
     design-time-name="Package\DFT Budget">
     <LayoutInfo>
       <GraphLayout
-        Capacity="8" xmlns="clr-namespace:Microsoft.SqlServer.IntegrationServices.Designer.Model.Serialization;assembly=Microsoft.SqlServer.IntegrationServices.Graph" xmlns:mssgle="clr-namespace:Microsoft.SqlServer.Graph.LayoutEngine;assembly=Microsoft.SqlServer.Graph" xmlns:assembly="http://schemas.microsoft.com/winfx/2006/xaml">
+        Capacity="8" xmlns="clr-namespace:Microsoft.SqlServer.IntegrationServices.Designer.Model.Serialization;assembly=Microsoft.SqlServer.IntegrationServices.Graph" xmlns:mssgle="clr-namespace:Microsoft.SqlServer.Graph.LayoutEngine;assembly=Microsoft.SqlServer.Graph" xmlns:assembly="http://schemas.microsoft.com/winfx/2006/xaml" xmlns:mssgm="clr-namespace:Microsoft.SqlServer.Graph.Model;assembly=Microsoft.SqlServer.Graph">
         <NodeLayout
           Size="171,42"
           Id="Package\DFT Budget\OLEDB_SRC Oracle"
           TopLeft="165,102" />
         <NodeLayout
-          Size="139,42"
-          Id="Package\DFT Budget\OLEDB_DST"
-          TopLeft="182,249" />
-        <NodeLayout
           Size="158,42"
           Id="Package\DFT Budget\Data Conversion"
           TopLeft="419,182" />
+        <NodeLayout
+          Size="139,42"
+          Id="Package\DFT Budget\OLEDB_DST"
+          TopLeft="182,249" />
         <EdgeLayout
           Id="Package\DFT Budget.Paths[OLE DB Source Output]"
           TopLeft="250.5,144">
@@ -3122,7 +4558,9 @@
             </mssgle:Curve>
           </EdgeLayout.Curve>
           <EdgeLayout.Labels>
-            <EdgeLabelCollection />
+            <mssgm:EdgeLabel
+              BoundingBox="0,0,0,0"
+              RelativePosition="Any" />
           </EdgeLayout.Labels>
         </EdgeLayout>
         <EdgeLayout
@@ -3156,7 +4594,9 @@
             </mssgle:Curve>
           </EdgeLayout.Curve>
           <EdgeLayout.Labels>
-            <EdgeLabelCollection />
+            <mssgm:EdgeLabel
+              BoundingBox="0,0,0,0"
+              RelativePosition="Any" />
           </EdgeLayout.Labels>
         </EdgeLayout>
       </GraphLayout>
@@ -3180,6 +4620,115 @@
         <Name>TableInfoObjectType</Name>
         <Value
           type="q2:string">Table</Value>
+      </Property>
+    </Properties>
+  </PipelineComponentMetadata>
+  <TaskHost
+    design-time-name="Package\GL_Balances">
+    <LayoutInfo>
+      <GraphLayout
+        Capacity="8" xmlns="clr-namespace:Microsoft.SqlServer.IntegrationServices.Designer.Model.Serialization;assembly=Microsoft.SqlServer.IntegrationServices.Graph" xmlns:mssgle="clr-namespace:Microsoft.SqlServer.Graph.LayoutEngine;assembly=Microsoft.SqlServer.Graph" xmlns:assembly="http://schemas.microsoft.com/winfx/2006/xaml">
+        <NodeLayout
+          Size="173,42"
+          Id="Package\GL_Balances\OLE DB Destination"
+          TopLeft="222,300" />
+        <NodeLayout
+          Size="158,42"
+          Id="Package\GL_Balances\Data Conversion"
+          TopLeft="453,196" />
+        <NodeLayout
+          Size="152,42"
+          Id="Package\GL_Balances\OLE DB Source"
+          TopLeft="216,125" />
+        <EdgeLayout
+          Id="Package\GL_Balances.Paths[OLE DB Source Output]"
+          TopLeft="292,167">
+          <EdgeLayout.Curve>
+            <mssgle:Curve
+              StartConnector="{assembly:Null}"
+              EndConnector="240,29"
+              Start="0,0"
+              End="240,21.5">
+              <mssgle:Curve.Segments>
+                <mssgle:SegmentCollection
+                  Capacity="5">
+                  <mssgle:LineSegment
+                    End="0,10.5" />
+                  <mssgle:CubicBezierSegment
+                    Point1="0,10.5"
+                    Point2="0,14.5"
+                    Point3="4,14.5" />
+                  <mssgle:LineSegment
+                    End="236,14.5" />
+                  <mssgle:CubicBezierSegment
+                    Point1="236,14.5"
+                    Point2="240,14.5"
+                    Point3="240,18.5" />
+                  <mssgle:LineSegment
+                    End="240,21.5" />
+                </mssgle:SegmentCollection>
+              </mssgle:Curve.Segments>
+            </mssgle:Curve>
+          </EdgeLayout.Curve>
+          <EdgeLayout.Labels>
+            <EdgeLabelCollection />
+          </EdgeLayout.Labels>
+        </EdgeLayout>
+        <EdgeLayout
+          Id="Package\GL_Balances.Paths[Data Conversion Output]"
+          TopLeft="532,238">
+          <EdgeLayout.Curve>
+            <mssgle:Curve
+              StartConnector="{assembly:Null}"
+              EndConnector="-223.5,62"
+              Start="0,0"
+              End="-223.5,54.5">
+              <mssgle:Curve.Segments>
+                <mssgle:SegmentCollection
+                  Capacity="5">
+                  <mssgle:LineSegment
+                    End="0,27" />
+                  <mssgle:CubicBezierSegment
+                    Point1="0,27"
+                    Point2="0,31"
+                    Point3="-4,31" />
+                  <mssgle:LineSegment
+                    End="-219.5,31" />
+                  <mssgle:CubicBezierSegment
+                    Point1="-219.5,31"
+                    Point2="-223.5,31"
+                    Point3="-223.5,35" />
+                  <mssgle:LineSegment
+                    End="-223.5,54.5" />
+                </mssgle:SegmentCollection>
+              </mssgle:Curve.Segments>
+            </mssgle:Curve>
+          </EdgeLayout.Curve>
+          <EdgeLayout.Labels>
+            <EdgeLabelCollection />
+          </EdgeLayout.Labels>
+        </EdgeLayout>
+      </GraphLayout>
+    </LayoutInfo>
+  </TaskHost>
+  <PipelineComponentMetadata
+    design-time-name="Package\GL_Balances\OLE DB Destination">
+    <Properties>
+      <Property>
+        <Name>DataSourceViewID</Name>
+      </Property>
+      <Property>
+        <Name>TableInfoObjectType</Name>
+        <Value
+          type="q2:string">Table</Value>
+      </Property>
+    </Properties>
+  </PipelineComponentMetadata>
+  <PipelineComponentMetadata
+    design-time-name="Package\GL_Balances\OLE DB Source">
+    <Properties>
+      <Property>
+        <Name>DataSourceViewID</Name>
       </Property>
     </Properties>
   </PipelineComponentMetadata>
