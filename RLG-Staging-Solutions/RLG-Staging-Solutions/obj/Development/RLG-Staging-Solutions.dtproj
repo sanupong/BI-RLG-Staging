@@ -1605,10 +1605,10 @@
                 <SSIS:Property SSIS:Name="Name">FactFinance</SSIS:Property>
                 <SSIS:Property SSIS:Name="VersionMajor">1</SSIS:Property>
                 <SSIS:Property SSIS:Name="VersionMinor">0</SSIS:Property>
-                <SSIS:Property SSIS:Name="VersionBuild">112</SSIS:Property>
+                <SSIS:Property SSIS:Name="VersionBuild">121</SSIS:Property>
                 <SSIS:Property SSIS:Name="VersionComments">
                 </SSIS:Property>
-                <SSIS:Property SSIS:Name="VersionGUID">{21298EED-74F7-41AF-AF04-E8D4C94DC656}</SSIS:Property>
+                <SSIS:Property SSIS:Name="VersionGUID">{3653379C-77ED-41EC-B502-98F73C30F31A}</SSIS:Property>
                 <SSIS:Property SSIS:Name="PackageFormatVersion">6</SSIS:Property>
                 <SSIS:Property SSIS:Name="Description">
                 </SSIS:Property>

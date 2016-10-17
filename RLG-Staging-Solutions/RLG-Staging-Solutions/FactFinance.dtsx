@@ -13,8 +13,8 @@
   DTS:ObjectName="FactFinance"
   DTS:PackageType="5"
   DTS:ProtectionLevel="0"
-  DTS:VersionBuild="113"
-  DTS:VersionGUID="{DFC03537-61C7-413C-9F4C-F98AD94DB358}">
+  DTS:VersionBuild="121"
+  DTS:VersionGUID="{3653379C-77ED-41EC-B502-98F73C30F31A}">
   <DTS:Property
     DTS:Name="PackageFormatVersion">6</DTS:Property>
   <DTS:ConnectionManagers>
@@ -3594,7 +3594,7 @@
                   name="SqlCommand"
                   UITypeEditor="Microsoft.DataTransformationServices.Controls.ModalMultilineStringEditor, Microsoft.DataTransformationServices.Controls, Version=11.0.0.0, Culture=neutral, PublicKeyToken=89845dcd8080cc91">SELECT     l.PERIOD_NAME, (l.PERIOD_YEAR + 543) as Period_Year, l.PERIOD_NUM,
                       case
-                      when l.Period_num &lt;13 
+                      when l.Period_num &lt;12 
                       then concat(concat(concat(concat(1,'/'),l.Period_Num),'/'),l.Period_Year +543) 
                       else concat(concat(concat(concat(31,'/'),12),'/'),l.Period_Year+543) 
                       End as TRANS_DATE,                    
@@ -3608,8 +3608,8 @@
                       'E', NVL(l.BEGIN_BALANCE_CR, 0) - NVL(l.BEGIN_BALANCE_DR, 0)) 
                       AS amount
 FROM         GL.GL_BALANCES l, GL_CODE_COMBINATIONS_KFV g, XXBI_D_SEGMENT1 c
-WHERE     l.CODE_COMBINATION_ID = g.CODE_COMBINATION_ID AND g.SEGMENT1 = c.CODE AND (1 = 1) AND (l.ACTUAL_FLAG = 'A') AND (g.SEGMENT2 = '322001') AND 
-                      (g.SEGMENT3 = '000')</property>
+WHERE     l.CODE_COMBINATION_ID = g.CODE_COMBINATION_ID AND g.SEGMENT1 = c.CODE AND (1 = 1) AND (l.ACTUAL_FLAG = 'A') AND (g.SEGMENT2 = '322001') and (l.period_num &lt;&gt; 13)
+order by l.period_year, l.period_num asc</property>
                 <property
                   dataType="System.String"
                   description="The variable that contains the SQL command to be executed."
@@ -4400,7 +4400,7 @@ WHERE     l.CODE_COMBINATION_ID = g.CODE_COMBINATION_ID AND g.SEGMENT1 = c.CODE 
     design-time-name="Package\Data Flow Task">
     <LayoutInfo>
       <GraphLayout
-        Capacity="8" xmlns="clr-namespace:Microsoft.SqlServer.IntegrationServices.Designer.Model.Serialization;assembly=Microsoft.SqlServer.IntegrationServices.Graph" xmlns:mssgle="clr-namespace:Microsoft.SqlServer.Graph.LayoutEngine;assembly=Microsoft.SqlServer.Graph" xmlns:assembly="http://schemas.microsoft.com/winfx/2006/xaml">
+        Capacity="8" xmlns="clr-namespace:Microsoft.SqlServer.IntegrationServices.Designer.Model.Serialization;assembly=Microsoft.SqlServer.IntegrationServices.Graph" xmlns:mssgle="clr-namespace:Microsoft.SqlServer.Graph.LayoutEngine;assembly=Microsoft.SqlServer.Graph" xmlns:assembly="http://schemas.microsoft.com/winfx/2006/xaml" xmlns:mssgm="clr-namespace:Microsoft.SqlServer.Graph.Model;assembly=Microsoft.SqlServer.Graph">
         <NodeLayout
           Size="139,42"
           Id="Package\Data Flow Task\OLEDB_DST"
@@ -4444,7 +4444,9 @@ WHERE     l.CODE_COMBINATION_ID = g.CODE_COMBINATION_ID AND g.SEGMENT1 = c.CODE 
             </mssgle:Curve>
           </EdgeLayout.Curve>
           <EdgeLayout.Labels>
-            <EdgeLabelCollection />
+            <mssgm:EdgeLabel
+              BoundingBox="0,0,0,0"
+              RelativePosition="Any" />
           </EdgeLayout.Labels>
         </EdgeLayout>
         <EdgeLayout
@@ -4478,7 +4480,9 @@ WHERE     l.CODE_COMBINATION_ID = g.CODE_COMBINATION_ID AND g.SEGMENT1 = c.CODE 
             </mssgle:Curve>
           </EdgeLayout.Curve>
           <EdgeLayout.Labels>
-            <EdgeLabelCollection />
+            <mssgm:EdgeLabel
+              BoundingBox="0,0,0,0"
+              RelativePosition="Any" />
           </EdgeLayout.Labels>
         </EdgeLayout>
       </GraphLayout>
@@ -4641,40 +4645,6 @@ WHERE     l.CODE_COMBINATION_ID = g.CODE_COMBINATION_ID AND g.SEGMENT1 = c.CODE 
           Id="Package\GL_Balances\OLE DB Source"
           TopLeft="216,125" />
         <EdgeLayout
-          Id="Package\GL_Balances.Paths[OLE DB Source Output]"
-          TopLeft="292,167">
-          <EdgeLayout.Curve>
-            <mssgle:Curve
-              StartConnector="{assembly:Null}"
-              EndConnector="240,29"
-              Start="0,0"
-              End="240,21.5">
-              <mssgle:Curve.Segments>
-                <mssgle:SegmentCollection
-                  Capacity="5">
-                  <mssgle:LineSegment
-                    End="0,10.5" />
-                  <mssgle:CubicBezierSegment
-                    Point1="0,10.5"
-                    Point2="0,14.5"
-                    Point3="4,14.5" />
-                  <mssgle:LineSegment
-                    End="236,14.5" />
-                  <mssgle:CubicBezierSegment
-                    Point1="236,14.5"
-                    Point2="240,14.5"
-                    Point3="240,18.5" />
-                  <mssgle:LineSegment
-                    End="240,21.5" />
-                </mssgle:SegmentCollection>
-              </mssgle:Curve.Segments>
-            </mssgle:Curve>
-          </EdgeLayout.Curve>
-          <EdgeLayout.Labels>
-            <EdgeLabelCollection />
-          </EdgeLayout.Labels>
-        </EdgeLayout>
-        <EdgeLayout
           Id="Package\GL_Balances.Paths[Data Conversion Output]"
           TopLeft="532,238">
           <EdgeLayout.Curve>
@@ -4700,6 +4670,40 @@ WHERE     l.CODE_COMBINATION_ID = g.CODE_COMBINATION_ID AND g.SEGMENT1 = c.CODE 
                     Point3="-223.5,35" />
                   <mssgle:LineSegment
                     End="-223.5,54.5" />
+                </mssgle:SegmentCollection>
+              </mssgle:Curve.Segments>
+            </mssgle:Curve>
+          </EdgeLayout.Curve>
+          <EdgeLayout.Labels>
+            <EdgeLabelCollection />
+          </EdgeLayout.Labels>
+        </EdgeLayout>
+        <EdgeLayout
+          Id="Package\GL_Balances.Paths[OLE DB Source Output]"
+          TopLeft="292,167">
+          <EdgeLayout.Curve>
+            <mssgle:Curve
+              StartConnector="{assembly:Null}"
+              EndConnector="240,29"
+              Start="0,0"
+              End="240,21.5">
+              <mssgle:Curve.Segments>
+                <mssgle:SegmentCollection
+                  Capacity="5">
+                  <mssgle:LineSegment
+                    End="0,10.5" />
+                  <mssgle:CubicBezierSegment
+                    Point1="0,10.5"
+                    Point2="0,14.5"
+                    Point3="4,14.5" />
+                  <mssgle:LineSegment
+                    End="236,14.5" />
+                  <mssgle:CubicBezierSegment
+                    Point1="236,14.5"
+                    Point2="240,14.5"
+                    Point3="240,18.5" />
+                  <mssgle:LineSegment
+                    End="240,21.5" />
                 </mssgle:SegmentCollection>
               </mssgle:Curve.Segments>
             </mssgle:Curve>
